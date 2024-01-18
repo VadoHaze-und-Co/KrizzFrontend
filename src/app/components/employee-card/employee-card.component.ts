@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {EmployeeInitialsComponent} from "../employee-initials/employee-initials.component";
-import {Employee} from "../../Employee";
+import {Employee} from "../../rest-objects/employee";
 import {DataService} from "../../services/data-service";
 
 @Component({

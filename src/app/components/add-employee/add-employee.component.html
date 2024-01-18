@@ -1,1 +1,16 @@
-<p>add-employee works!</p>
+<app-add-qualification *ngIf="dataService.createQualificationDialog"></app-add-qualification>
+<div class="background" (click)="clickBackground()">
+  <div class="qualification-list" (click)="clickForeground()">
+    <ng-container *ngIf="!dataService.createEmployeeDialog; then editing else adding">
+    </ng-container>
+    <ng-template #editing>
+      <div class="head-line">Mitarbeiter bearbeiten</div>
+    </ng-template>
+    <ng-template #adding>
+      <div class="head-line">Mitarbeiter hinzufügen</div>
+    </ng-template>
+    <div class="close-button"><span class="material-icons" style="font-size: 24px; cursor: pointer" (click)="close()">close</span></div>
+    <div class="separator"><div class="separator-line"></div></div>
+    <app-qualification-card style="position: relative" [selectable]="true"></app-qualification-card>
+  </div>
+</div>

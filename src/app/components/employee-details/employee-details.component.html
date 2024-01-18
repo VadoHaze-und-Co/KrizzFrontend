@@ -1,3 +1,6 @@
+<ng-container *ngIf="dataService.editEmployeeDialog !== undefined">
+  <app-add-employee [employee]="dataService.editEmployeeDialog!"></app-add-employee>
+</ng-container>
 <div class="background" (click)="clickBackground()">
   <div class="outer-container" (click)="clickForeground()">
     <div class="close-button"><span class="material-icons" style="font-size: 24px; cursor: pointer" (click)="close()">close</span></div>
@@ -26,7 +29,7 @@
     <app-qualification-card class="qualification-card" [qualifications]="employee?.skills"></app-qualification-card>
     <div class="buttons">
       <div class="button" style="float: left"><span class="material-icons" style="font-size: 24px">delete</span></div>
-      <div class="button" style="float: right"><span class="material-icons" style="font-size: 24px; float:right;">edit</span></div>
+      <div class="button" (click)="dataService.editEmployeeDialog = employee" style="float: right"><span class="material-icons" style="font-size: 24px; float:right;">edit</span></div>
     </div>
   </div>
 </div>

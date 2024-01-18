@@ -2,7 +2,7 @@
   <div class="outer-container" (click)="clickForeground()">
     <div class="close-button"><span class="material-icons" style="font-size: 24px; cursor: pointer" (click)="close()">close</span></div>
     <div class="head-line">Neue Qualifikation</div>
-    <div class="text-field"><input [ngModel]="addQualification" type="text" class="input" placeholder="Neue Qualifikation"></div>
-    <div class="add-button"><div class="add-button-text">Erstellen</div></div>
+    <div class="text-field"><input [(ngModel)]="dataService.addQualification" type="text" class="input" placeholder="Qualifikation"></div>
+    <div class="add-button"><div class="add-button-text" (click)="add()">Erstellen</div></div>
   </div>
 </div>

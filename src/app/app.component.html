@@ -5,10 +5,16 @@
     <button (click)="dataService.qualificationListDialog = true">
       list
     </button>
+    <button (click)="dataService.createEmployeeDialog = true" style="float: right; position: relative">
+      add
+    </button>
   </div> <!-- NAVBAR -->
 
   <ng-container *ngIf="dataService.qualificationListDialog">
     <app-qualification-list></app-qualification-list>
+  </ng-container>
+  <ng-container *ngIf="dataService.createEmployeeDialog">
+    <app-add-employee></app-add-employee>
   </ng-container>
   <ng-container *ngIf="dataService.createQualificationDialog">
     <app-add-qualification></app-add-qualification>

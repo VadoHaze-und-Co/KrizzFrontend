@@ -6,13 +6,14 @@ import {RestService} from "./services/rest-service";
 import {QualificationListComponent} from "./components/qualification-list/qualification-list.component";
 import {AddQualificationComponent} from "./components/add-qualification/add-qualification.component";
 import {EmployeeDetailsComponent} from "./components/employee-details/employee-details.component";
-import {Employee} from "./Employee";
+import {Employee} from "./rest-objects/employee";
 import {DataService} from "./services/data-service";
+import {AddEmployeeComponent} from "./components/add-employee/add-employee.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, EmployeeListComponent, QualificationCardComponent, RestService, QualificationListComponent, AddQualificationComponent, EmployeeDetailsComponent],
+  imports: [CommonModule, EmployeeListComponent, QualificationCardComponent, RestService, QualificationListComponent, AddQualificationComponent, EmployeeDetailsComponent, AddEmployeeComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -22,4 +23,6 @@ export class AppComponent {
 
   constructor(public restService: RestService, public dataService: DataService) {
   }
+
+  protected readonly Employee = Employee;
 }

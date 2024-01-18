@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {FormsModule} from "@angular/forms";
 import {Data} from "@angular/router";
 import {DataService} from "../../services/data-service";
+import {RestService} from "../../services/rest-service";
 
 @Component({
   selector: 'app-add-qualification',
@@ -13,9 +14,7 @@ import {DataService} from "../../services/data-service";
 })
 export class AddQualificationComponent {
 
-  public addQualification = "";
-
-  constructor(public dataService: DataService) {
+  constructor(public dataService: DataService, public restService: RestService) {
   }
 
   public close() {
@@ -31,5 +30,11 @@ export class AddQualificationComponent {
   }
   clickForeground() {
     this.clickInside = true;
+  }
+
+  public add() {
+    this.restService.addQualification();
+    this.close();
+
   }
 }

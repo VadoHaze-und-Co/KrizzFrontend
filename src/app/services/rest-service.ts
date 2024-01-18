@@ -1,11 +1,12 @@
 import {Injectable, NgModule} from "@angular/core";
 import {Observable, of} from "rxjs";
-import {Employee} from "../Employee";
-import {Qualification} from "../qualification";
+import {Employee} from "../rest-objects/employee";
+import {Qualification} from "../rest-objects/qualification";
 import {HttpClient, HttpClientModule, HttpHeaders} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
-import {EmployeeQualification} from "../employee-qualification";
+import {EmployeeQualification} from "../rest-objects/employee-qualification";
 import {DataService} from "./data-service";
+import {Token} from "../rest-objects/token";
 
 @NgModule({
   imports: [CommonModule, HttpClientModule],
@@ -13,84 +14,113 @@ import {DataService} from "./data-service";
 })
 @Injectable({ providedIn: "root" })
 export class RestService {
-  bearer = "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIzUFQ0dldiNno5MnlQWk1EWnBqT1U0RjFVN0lwNi1ELUlqQWVGczJPbGU0In0.eyJleHAiOjE3MDU2MDQ3MzEsImlhdCI6MTcwNTYwMTEzMSwianRpIjoiZjdjNGZjZWMtNzE3Zi00OWI0LTlkYjMtOGRkNTdkYTFlZTk3IiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay5zenV0LmRldi9hdXRoL3JlYWxtcy9zenV0IiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjU1NDZjZDIxLTk4NTQtNDMyZi1hNDY3LTRkZTNlZWRmNTg4OSIsInR5cCI6IkJlYXJlciIsImF6cCI6ImVtcGxveWVlLW1hbmFnZW1lbnQtc2VydmljZSIsInNlc3Npb25fc3RhdGUiOiIyODdiODI5Yi01ZDc0LTQ2YTktYjQ0OC1jN2NmZTJmMDU4NzkiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly9sb2NhbGhvc3Q6NDIwMCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsicHJvZHVjdF9vd25lciIsIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1zenV0IiwidW1hX2F1dGhvcml6YXRpb24iLCJ1c2VyIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInByZWZlcnJlZF91c2VybmFtZSI6InVzZXIifQ.SxDKhy8x8iKdvFEBtfcGpvdMzroEglyyRUE5cxKx_ydDIeuxr0hSEvx4fpGUlZsktzMI_Aqro7CeBghJRQieVoqUAuxy4VgpQmo55uMldJib2OgRTrRziH1cpX8xmGzsDg4h9Bo7Ug8d50-eNgFom9pyTY5tceCeeQlk1DInnXZSsZQ3ViXqGeyjY52RB6Fea-dcBItBLaOm_xqmzk1InxIo_OcOUa77ouNHBn0cz--A6_l2rbuwYEpSQESrVjiSyCQUb9PSoZkRRujpf-Ql0a6AFJlC_XgVIlkJghccUOaH9JOADEzBzVcn0SHCsJ5ZdTnaM3V29MM7PhyYu72uaQ";
-  employees$: Observable<Employee[]>;
-  qualifications$: Observable<Qualification[]>;
+  bearer = "";
+  option: {headers: HttpHeaders} | undefined;
+
+  public token(run: () => void) {
+    this.http.post<Token>('http://authproxy.szut.dev',
+      `grant_type=password&client_id=employee-management-service&username=user&password=test`,
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+      }
+    ).subscribe(token=> {
+      this.bearer = token.access_token!;
+      this.option = {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Authorization', `Bearer ${this.bearer}`)
+      };
+      run();
+    });
+  }
 
   constructor(public http: HttpClient, public dataService: DataService) {
-    this.employees$ = of([]);
-    this.qualifications$ = of([]);
-    this.fetchEmployeeData();
-    this.fetchQualificationData();
   }
 
   fetchEmployeeData() {
-    this.employees$ = this.http.get<Employee[]>('https://employee.szut.dev/employees', {
-      headers: new HttpHeaders()
-        .set('Content-Type', 'application/json')
-        .set('Authorization', `Bearer ${this.bearer}`)
-    });
-    this.employees$.subscribe(data => {
+    this.http.get<Employee[]>('https://employee.szut.dev/employees', this.option).subscribe(data => {
       this.dataService.employees = data
         .map(employee => new Employee(employee.id, employee.lastName, employee.firstName, employee.street, employee.postcode, employee.city, employee.phone))
         .sort((e1,e2)=> e1.employeeFullName().localeCompare(e2.employeeFullName()));
-    });
+    }, error => this.token(() => this.fetchEmployeeData()));
   }
 
-  fetchQualificationData() {
-    this.qualifications$ = this.http.get<Qualification[]>('https://employee.szut.dev/qualifications', {
-      headers: new HttpHeaders()
-        .set('Content-Type', 'application/json')
-        .set('Authorization', `Bearer ${this.bearer}`)
-    });
-    this.qualifications$.subscribe(data => {
+  fetchQualificationData(func?: () => void) {
+    this.http.get<Qualification[]>('https://employee.szut.dev/qualifications', this.option).subscribe(data => {
       this.dataService.qualifications = data
         .filter(q => q.skill !== undefined)
         .sort((a,b) => a.skill!.localeCompare(b.skill!)!);
-    })
+      if (func !== undefined) {
+        func();
+      }
+    }, error => this.token(() => this.fetchQualificationData()))
   }
 
   public fetchQualificationsForEmployee(employee: Employee) {
-    this.http.get<EmployeeQualification>('https://employee.szut.dev/employees/' + employee.id + '/qualifications', {
-      headers: new HttpHeaders()
-        .set('Content-Type', 'application/json')
-        .set('Authorization', `Bearer ${this.bearer}`)
-    }).subscribe(employeeData => {
+    this.http.get<EmployeeQualification>('https://employee.szut.dev/employees/' + employee.id + '/qualifications',
+      this.option).subscribe(employeeData => {
       let skills: string[] = employeeData.skillSet?.map(skill => skill.skill) || [];
       skills = skills.sort((a,b)=>a.localeCompare(b));
       employee.skills = skills;
-    });
+    }, error => this.token(() => this.fetchQualificationsForEmployee(employee)));
   }
 
-  public addQualification(name: string) {
+  public _addQualification(name: string) {
     this.http.post('https://employee.szut.dev/qualifications',
-      `{"skill":"` + name + `"}`,
-      { headers: new HttpHeaders()
-        .set('Content-Type', 'application/json')
-        .set('Authorization', `Bearer ${this.bearer}`)}
-    ).subscribe(data => {
+      `{"skill":"` + name + `"}`, this.option).subscribe(data => {
       this.fetchQualificationData();
-    });
+    }, error => this.token(() => this._addQualification(name)));
   }
 
-  public deleteQualification(id: number) {
-    this.http.delete('https://employee.szut.dev/qualifications/' + id, {
-      headers: new HttpHeaders()
-        .set('Content-Type', 'application/json')
-        .set('Authorization', `Bearer ${this.bearer}`)}
-    ).subscribe(data => {
+  public _deleteQualification(id: number) {
+    this.http.delete('https://employee.szut.dev/qualifications/' + id, this.option).subscribe(data => {
       this.fetchQualificationData();
-    });
+    }, error => this.token(() => this._deleteQualification(id)));
   }
 
-  public editQualification(id: number, name: string) {
+  public _editQualification(id: number, name: string) {
     this.http.put('https://employee.szut.dev/qualifications/' + id,
-      `{"skill":"` + name + `"}`,
-      { headers: new HttpHeaders()
-          .set('Content-Type', 'application/json')
-          .set('Authorization', `Bearer ${this.bearer}`)}
-    ).subscribe(data => {
+      `{"skill":"` + name + `"}`, this.option).subscribe(data => {
       this.fetchQualificationData();
+    }, error => this.token(() => this._editQualification(id, name)));
+  }
+
+  public addQualification() {
+    // TODO: error message
+    let name = this.dataService.createQualificationDialog ? this.dataService.addQualification : this.dataService.addNewText;
+    if (name.length == 0) {
+      console.log("error: name cannot be empty")
+      return;
+    }
+    if (this.dataService.qualifications.filter(q => q.skill!.toLowerCase() == name.toLowerCase()).length >= 1) {
+      console.log("error: name already exists")
+      return;
+    }
+    this._addQualification(name);
+    this.dataService.addNewText = this.dataService.addQualification = "";
+  }
+
+  public deleteQualification(qualification: Qualification) {
+    this._deleteQualification(qualification.id!);
+  }
+
+  public editQualification(qualification: Qualification) {
+    // TODO: error message
+    if (this.dataService.qualificationEdit !== undefined) {
+      console.log("You are editing something")
+      return;
+    }
+    this.dataService.qualificationEdit = { name: qualification.skill!, id: qualification.id! };
+  }
+
+  public saveQualification() {
+    this.dataService.qualifications.filter(q => q.id == this.dataService.qualificationEdit?.id).forEach(q => {
+      let name = this.dataService.qualificationEdit!.name;
+      if (name != q.skill) {
+        this._editQualification(q.id!, name);
+      }
     });
+    this.dataService.qualificationEdit = undefined;
   }
 }

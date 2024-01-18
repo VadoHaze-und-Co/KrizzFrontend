@@ -2,8 +2,8 @@
   <div class="qualification-list" (click)="clickForeground()">
     <div class="close-button"><span class="material-icons" style="font-size: 24px; cursor: pointer" (click)="close()">close</span></div>
     <div class="head-line">
-      <input type="text" [(ngModel)]="addNewText" placeholder="Neue Qualifikation" class="input">
-      <div class="add-button" (click)="add()"><div style="cursor: pointer">+</div></div>
+      <input type="text" [(ngModel)]="dataService.addNewText" placeholder="Neue Qualifikation" class="input">
+      <div class="add-button" (click)="restService.addQualification()"><div style="cursor: pointer">+</div></div>
     </div>
     <div class="separator"><div class="separator-line"></div></div>
     <div class="outer-list">
@@ -27,16 +27,16 @@
               </ng-container>
               <div style="width: 20px;">
                 <ng-template #editNameB>
-                  <span class="material-icons" style="font-size: 16px; cursor: pointer" (click)="save()">save</span>
+                  <span class="material-icons" style="font-size: 16px; cursor: pointer" (click)="restService.saveQualification()">save</span>
                 </ng-template>
                 <ng-template #fixNameB>
-                  <span class="material-icons" style="font-size: 16px; cursor: pointer" (click)="edit(qualification)">edit</span>
+                  <span class="material-icons" style="font-size: 16px; cursor: pointer" (click)="restService.editQualification(qualification)">edit</span>
                 </ng-template>
               </div>
             </td>
             <td style="; width: 20px;" colspan="20px">
               <div style="width: 20px;">
-                <span class="material-icons" style="font-size: 16px; cursor: pointer" (click)="delete(qualification)">delete</span>
+                <span class="material-icons" style="font-size: 16px; cursor: pointer" (click)="restService.deleteQualification(qualification)">delete</span>
               </div>
             </td>
           </tr>

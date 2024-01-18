@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Employee } from "../../Employee";
+import { Employee } from "../../rest-objects/employee";
 import { EmployeeInitialsComponent } from "../employee-initials/employee-initials.component";
 import { EmployeeCardComponent } from "../employee-card/employee-card.component";
 import {RestService} from "../../services/rest-service";

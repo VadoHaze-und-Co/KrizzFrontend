@@ -1,6 +1,6 @@
-import {Employee} from "../Employee";
+import {Employee} from "../rest-objects/employee";
 import {Injectable} from "@angular/core";
-import {Qualification} from "../qualification";
+import {Qualification} from "../rest-objects/qualification";
 
 @Injectable({ providedIn: "root" })
 export class DataService {
@@ -12,4 +12,10 @@ export class DataService {
   public employeeDetails: Employee | undefined;
   public qualificationListDialog = false;
   public qualificationEdit: {name: string, id: number} | undefined;
+
+  public addNewText = "";
+  public addQualification = "";
+
+  public createEmployeeDialog = false;
+  public editEmployeeDialog : Employee | undefined;
 }
