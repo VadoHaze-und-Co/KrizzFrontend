@@ -4,6 +4,7 @@ import {FormsModule} from "@angular/forms";
 import {Data} from "@angular/router";
 import {DataService} from "../../services/data-service";
 import {RestService} from "../../services/rest-service";
+import {Employee} from "../../rest-objects/employee";
 
 @Component({
   selector: 'app-add-qualification',

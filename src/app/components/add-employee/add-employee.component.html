@@ -1,16 +1,53 @@
 <app-add-qualification *ngIf="dataService.createQualificationDialog"></app-add-qualification>
 <div class="background" (click)="clickBackground()">
   <div class="qualification-list" (click)="clickForeground()">
-    <ng-container *ngIf="!dataService.createEmployeeDialog; then editing else adding">
+    <ng-container *ngIf="!dataService.createEmployeeDialog; then editing else creating">
     </ng-container>
     <ng-template #editing>
       <div class="head-line">Mitarbeiter bearbeiten</div>
     </ng-template>
-    <ng-template #adding>
+    <ng-template #creating>
       <div class="head-line">Mitarbeiter hinzufügen</div>
     </ng-template>
     <div class="close-button"><span class="material-icons" style="font-size: 24px; cursor: pointer" (click)="close()">close</span></div>
-    <div class="separator"><div class="separator-line"></div></div>
-    <app-qualification-card style="position: relative" [selectable]="true"></app-qualification-card>
+    <div style="height: 20px"></div>
+    <ng-container *ngIf="!dataService.createEmployeeDialog; then editing1 else creating1">
+    </ng-container>
+    <ng-template #creating1>
+      <div style="" class="text-field centered"><input [(ngModel)]="dataService.creatingEmployee.firstName" type="text" class="input" placeholder="Vorname"></div>
+      <div style="height: 10px"></div>
+      <div style="" class="text-field centered"><input [(ngModel)]="dataService.creatingEmployee.lastName" type="text" class="input" placeholder="Nachname"></div>
+      <div style="height: 10px"></div>
+      <div style="" class="text-field centered"><input [(ngModel)]="dataService.creatingEmployee.street" type="text" class="input" placeholder="Straße"></div>
+      <div style="height: 10px"></div>
+      <div style="" class="text-field centered"><input [(ngModel)]="dataService.creatingEmployee.city" type="text" class="input" placeholder="Stadt"></div>
+      <div style="height: 10px"></div>
+      <div style="" class="text-field centered"><input [(ngModel)]="dataService.creatingEmployee.postcode" type="text" class="input" placeholder="PLZ"></div>
+      <div style="height: 10px"></div>
+      <div style="" class="text-field centered"><input [(ngModel)]="dataService.creatingEmployee.phone" type="text" class="input" placeholder="Telefonnummer"></div>
+      <div style="height: 10px"></div>
+      <div class="separator"><div class="separator-line"></div></div>
+      <app-qualification-card style="position: relative" [selectable]="true"></app-qualification-card>
+      <div style="height: 15px"></div>
+      <div class="add-button"><div class="add-button-text" (click)="save()">Erstellen</div></div>
+    </ng-template>
+    <ng-template #editing1>
+      <div style="" class="text-field centered"><input [(ngModel)]="dataService.editingEmployee!.firstName" type="text" class="input" placeholder="Vorname"></div>
+      <div style="height: 10px"></div>
+      <div style="" class="text-field centered"><input [(ngModel)]="dataService.editingEmployee!.lastName" type="text" class="input" placeholder="Nachname"></div>
+      <div style="height: 10px"></div>
+      <div style="" class="text-field centered"><input [(ngModel)]="dataService.editingEmployee!.street" type="text" class="input" placeholder="Straße"></div>
+      <div style="height: 10px"></div>
+      <div style="" class="text-field centered"><input [(ngModel)]="dataService.editingEmployee!.city" type="text" class="input" placeholder="Stadt"></div>
+      <div style="height: 10px"></div>
+      <div style="" class="text-field centered"><input [(ngModel)]="dataService.editingEmployee!.postcode" type="text" class="input" placeholder="PLZ"></div>
+      <div style="height: 10px"></div>
+      <div style="" class="text-field centered"><input [(ngModel)]="dataService.editingEmployee!.phone" type="text" class="input" placeholder="Telefonnummer"></div>
+      <div style="height: 10px"></div>
+      <div class="separator"><div class="separator-line"></div></div>
+      <app-qualification-card style="position: relative" [selectable]="true"></app-qualification-card>
+      <div style="height: 15px"></div>
+      <div class="add-button"><div class="add-button-text" (click)="save()">Speichern</div></div>
+    </ng-template>
   </div>
 </div>

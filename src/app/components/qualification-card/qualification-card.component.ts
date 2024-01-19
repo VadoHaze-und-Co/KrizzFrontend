@@ -23,6 +23,9 @@ export class QualificationCardComponent {
   }
 
   public containsSkill(qualification: Qualification) {
-    return this.dataService.editEmployeeDialog !== undefined && this.dataService.editEmployeeDialog!.skills.filter(q => q == qualification.skill).length > 0;
+    if (!this.dataService.createEmployeeDialog) {
+      return this.dataService.editingEmployee!.skills.filter(q => q == qualification.skill).length > 0;
+    }
+    return this.dataService.creatingEmployee.skills.filter(q => q == qualification.skill).length > 0;
   }
 }

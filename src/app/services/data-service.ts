@@ -17,7 +17,10 @@ export class DataService {
   public addQualification = "";
 
   public createEmployeeDialog = false;
-  public editEmployeeDialog : Employee | undefined;
+  //public editEmployeeDialog : Employee | undefined;
+
+  public creatingEmployee = new Employee(-1, "Testname", "Aaron", "Street", "12434", "Brementown", "+2145342659");
+  public editingEmployee: Employee | undefined;
 
   public selectedQualifications() {
     let qualifications: Qualification[] = [];
@@ -31,4 +34,5 @@ export class DataService {
     }
     return qualifications;
   }
+
 }

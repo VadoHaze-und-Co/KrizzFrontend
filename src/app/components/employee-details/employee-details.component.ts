@@ -27,6 +27,11 @@ export class EmployeeDetailsComponent {
     });
   }
 
+  public delete() {
+    this.restService.deleteEmployee(this.employee!.id!);
+    this.close();
+  }
+
   public close() {
     this.dataService.employeeDetails = undefined;
   }

@@ -7,6 +7,7 @@ import {CommonModule} from "@angular/common";
 import {EmployeeQualification} from "../rest-objects/employee-qualification";
 import {DataService} from "./data-service";
 import {Token} from "../rest-objects/token";
+import {CreateEmployee} from "../rest-objects/create-employee";
 
 @NgModule({
   imports: [CommonModule, HttpClientModule],
@@ -17,13 +18,14 @@ export class RestService {
   bearer = "";
   option: {headers: HttpHeaders} | undefined;
 
+  constructor(public http: HttpClient, public dataService: DataService) {
+    this.token(() => {});
+  }
+
   public token(run: () => void) {
     this.http.post<Token>('http://authproxy.szut.dev',
       `grant_type=password&client_id=employee-management-service&username=user&password=test`,
-      {
-        headers: new HttpHeaders()
-          .set('Content-Type', 'application/x-www-form-urlencoded')
-      }
+      { headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded') }
     ).subscribe(token=> {
       this.bearer = token.access_token!;
       this.option = {
@@ -33,9 +35,6 @@ export class RestService {
       };
       run();
     });
-  }
-
-  constructor(public http: HttpClient, public dataService: DataService) {
   }
 
   fetchEmployeeData(func?: () => void) {
@@ -127,13 +126,13 @@ export class RestService {
   }
 
   public deleteQualification(qualification: Qualification) {
-    this.fetchEmployeeData(() => this.dataService.employees.forEach(e => {
+    this.dataService.employees.forEach(e => {
       this.fetchQualificationsForEmployee(e, () => {
         if (e.skills.includes(qualification.skill!)) {
           this.removeQualificationFromEmployee(qualification, e);
         }
       });
-    }));
+    });
     setTimeout(() => this._deleteQualification(qualification.id!), 10);
   }
 
@@ -156,11 +155,31 @@ export class RestService {
     this.dataService.qualificationEdit = undefined;
   }
 
+  public editEmployee() {
+    let e = new CreateEmployee(this.dataService.editingEmployee!, this.dataService.selectedQualifications());
+    this.http.put('https://employee.szut.dev/employees/' + this.dataService.editingEmployee!.id!, e, this.option).subscribe(data => {
+      this.fetchEmployeeData();
+    }, error => this.token(() => {}));
+  }
+
   public addQualificationToEmployee(qualification: Qualification, employee: Employee, func?: () => void) {
     this._addQualificationToEmployee(qualification.skill!, employee.id!, func);
   }
 
   public removeQualificationFromEmployee(qualification: Qualification, employee: Employee, func?: () => void) {
     this._removeQualificationFromEmployee(qualification.skill!, employee.id!, func);
+  }
+
+  public createEmployee() {
+    let e = new CreateEmployee(this.dataService.creatingEmployee, this.dataService.selectedQualifications());
+    this.http.post('https://employee.szut.dev/employees/', e, this.option).subscribe(data => {
+      this.fetchEmployeeData();
+    }, error => this.token(() => {}));
+  }
+
+  public deleteEmployee(id: number) {
+    this.http.delete('https://employee.szut.dev/employees/' + id, this.option).subscribe(data => {
+      this.fetchEmployeeData();
+    }, error => this.token(() => this.deleteEmployee(id)));
   }
 }

@@ -35,9 +35,9 @@
 
 .text-field {
   position: relative;
-  top: 30px;
   left: 50%;
   transform: translate(-50%, 0);
+  top: 30px;
   border-radius: 10px;
   background-color: lightgray;
   width: 200px;
@@ -69,14 +69,14 @@
   top: 40px;
   left: 50%;
   transform: translate(-50%, 0);
-  background-color: #9191f3;
+  background-color: darkgray;
   text-align: center;
   border-radius: 10px;
   transition: 0.5s;
 }
 
 .add-button:hover {
-  background-color: #6868dc;
+  background-color: gray;
 }
 
 .add-button-text {

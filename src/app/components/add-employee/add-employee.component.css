@@ -11,7 +11,7 @@
   top: 50%;
   transform: translate(-50%,-50%);
   width: 260px;
-  height: 320px;
+  height: 410px;
   background-color: white;
   border-radius: 20px;
 }
@@ -47,4 +47,53 @@
   height: 20px;
   transform: translate(0, 5px);
   text-align: center;
+}
+
+.text-field {
+  position: relative;
+  border-radius: 10px;
+  background-color: lightgray;
+}
+
+.centered {
+  width: 200px;
+  height: 20px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.input {
+  background-color: transparent;
+  position: relative;
+  float: left;
+  border: none;
+  width: 185px;
+  height: 20px;
+  font-family: "Tahoma", sans-serif;
+  font-size: 16px;
+  left: 5px;
+  bottom: 2px;
+}
+
+.add-button {
+  cursor: pointer;
+  position: relative;
+  width: 100px;
+  height: 20px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-color: darkgray;
+  text-align: center;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
+.add-button:hover {
+  background-color: gray;
+}
+
+.add-button-text {
+  font-family: "Tahoma", sans-serif;
+  font-size: 16px;
+  margin-top: 2px;
 }
