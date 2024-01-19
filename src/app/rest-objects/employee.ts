@@ -10,10 +10,15 @@ export class Employee {
               public phone?: string) {
   }
 
-  public employeeFullName(): string  {
+  public employeeFullName(len?: number): string {
+    if (len === undefined) {
+      len = 28;
+    }
     let s = this.firstName + " " + this.lastName;
-    if (s.length >= 28) {
-      return s.substring(0, 27) + "...";
+    if (len != -1) {
+      if (s.length >= len) {
+        return s.substring(0, len - 1) + "...";
+      }
     }
     return s;
   }

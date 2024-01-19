@@ -5,9 +5,25 @@
   </div>
   <div class="qualification-list">
     <div class="inner-list">
-      <div class="qualification" *ngFor="let qualification of qualifications">
-        <input type="checkbox" class="selectButton" *ngIf="selectable">{{qualification}}
-      </div>
+      <ng-container *ngIf="selectable; then all else mine">
+      </ng-container>
+      <ng-template #all>
+        <div class="qualification" *ngFor="let qualification of dataService.qualifications">
+          <ng-container *ngIf="containsSkill(qualification); then selected else unselected"></ng-container>
+          <ng-template #selected>
+            <input type="checkbox" class="select-button" checked name="{{qualification.id}}">
+          </ng-template>
+          <ng-template #unselected>
+            <input type="checkbox" class="select-button" name="{{qualification.id}}">
+          </ng-template>
+          {{qualification.skill}}
+        </div>
+      </ng-template>
+      <ng-template #mine>
+        <div class="qualification" *ngFor="let qualification of this.dataService.employeeDetails?.skills">
+          {{qualification}}
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>

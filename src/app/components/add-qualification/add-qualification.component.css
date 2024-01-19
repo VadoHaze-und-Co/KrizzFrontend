@@ -69,14 +69,14 @@
   top: 40px;
   left: 50%;
   transform: translate(-50%, 0);
-  background-color: lightgray;
+  background-color: #9191f3;
   text-align: center;
   border-radius: 10px;
   transition: 0.5s;
 }
 
 .add-button:hover {
-  background-color: darkgray;
+  background-color: #6868dc;
 }
 
 .add-button-text {

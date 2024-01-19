@@ -5,7 +5,7 @@
   <div class="outer-container" (click)="clickForeground()">
     <div class="close-button"><span class="material-icons" style="font-size: 24px; cursor: pointer" (click)="close()">close</span></div>
     <div><app-employee-initials class="initials" [employee]="employee" [big]="true"></app-employee-initials></div>
-    <div class="name-text"><div>{{employee?.employeeFullName()}}</div></div>
+    <div class="name-text"><div>{{employee?.employeeFullName(-1)}}</div></div>
     <div class="separator" style="top: 160px"><div class="separator-line"></div></div>
     <div class="detail-infos">
       <div>
@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="separator" style="top: 160px"><div class="separator-line"></div></div>
-    <app-qualification-card class="qualification-card" [qualifications]="employee?.skills"></app-qualification-card>
+    <app-qualification-card class="qualification-card"></app-qualification-card>
     <div class="buttons">
       <div class="button" style="float: left"><span class="material-icons" style="font-size: 24px">delete</span></div>
       <div class="button" (click)="dataService.editEmployeeDialog = employee" style="float: right"><span class="material-icons" style="font-size: 24px; float:right;">edit</span></div>

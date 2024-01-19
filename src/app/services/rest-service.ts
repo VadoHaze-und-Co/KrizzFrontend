@@ -38,11 +38,15 @@ export class RestService {
   constructor(public http: HttpClient, public dataService: DataService) {
   }
 
-  fetchEmployeeData() {
+  fetchEmployeeData(func?: () => void) {
     this.http.get<Employee[]>('https://employee.szut.dev/employees', this.option).subscribe(data => {
       this.dataService.employees = data
         .map(employee => new Employee(employee.id, employee.lastName, employee.firstName, employee.street, employee.postcode, employee.city, employee.phone))
         .sort((e1,e2)=> e1.employeeFullName().localeCompare(e2.employeeFullName()));
+      if (func !== undefined) {
+        func();
+      }
+      this.dataService.employees.forEach(e=>this.fetchQualificationsForEmployee(e));
     }, error => this.token(() => this.fetchEmployeeData()));
   }
 
@@ -57,13 +61,34 @@ export class RestService {
     }, error => this.token(() => this.fetchQualificationData()))
   }
 
-  public fetchQualificationsForEmployee(employee: Employee) {
+  public fetchQualificationsForEmployee(employee: Employee, func?: () => void) {
     this.http.get<EmployeeQualification>('https://employee.szut.dev/employees/' + employee.id + '/qualifications',
       this.option).subscribe(employeeData => {
       let skills: string[] = employeeData.skillSet?.map(skill => skill.skill) || [];
       skills = skills.sort((a,b)=>a.localeCompare(b));
       employee.skills = skills;
+      if (func !== undefined) {
+        func();
+      }
     }, error => this.token(() => this.fetchQualificationsForEmployee(employee)));
+  }
+
+  public _addQualificationToEmployee(qualificationName: string, employeeId: number, func?: () => void) {
+    this.http.post('https://employee.szut.dev/employees/' + employeeId + '/qualifications',
+      `{"skill":"` + qualificationName + `"}`, this.option).subscribe(data => {
+      if (func !== undefined) {
+        func();
+      }
+    }, error => this.token(() => this._addQualificationToEmployee(qualificationName, employeeId)));
+  }
+
+  public _removeQualificationFromEmployee(qualificationName: string, employeeId: number, func?: () => void) {
+    this.http.delete('https://employee.szut.dev/employees/' + employeeId + '/qualifications',
+      { headers: this.option?.headers, body: {skill: qualificationName}}).subscribe(data => {
+      if (func !== undefined) {
+        func();
+      }
+    }, error => this.token(() => this._removeQualificationFromEmployee(qualificationName, employeeId)));
   }
 
   public _addQualification(name: string) {
@@ -102,13 +127,20 @@ export class RestService {
   }
 
   public deleteQualification(qualification: Qualification) {
-    this._deleteQualification(qualification.id!);
+    this.fetchEmployeeData(() => this.dataService.employees.forEach(e => {
+      this.fetchQualificationsForEmployee(e, () => {
+        if (e.skills.includes(qualification.skill!)) {
+          this.removeQualificationFromEmployee(qualification, e);
+        }
+      });
+    }));
+    setTimeout(() => this._deleteQualification(qualification.id!), 10);
   }
 
   public editQualification(qualification: Qualification) {
     // TODO: error message
     if (this.dataService.qualificationEdit !== undefined) {
-      console.log("You are editing something")
+      console.log("You are already editing something")
       return;
     }
     this.dataService.qualificationEdit = { name: qualification.skill!, id: qualification.id! };
@@ -122,5 +154,13 @@ export class RestService {
       }
     });
     this.dataService.qualificationEdit = undefined;
+  }
+
+  public addQualificationToEmployee(qualification: Qualification, employee: Employee, func?: () => void) {
+    this._addQualificationToEmployee(qualification.skill!, employee.id!, func);
+  }
+
+  public removeQualificationFromEmployee(qualification: Qualification, employee: Employee, func?: () => void) {
+    this._removeQualificationFromEmployee(qualification.skill!, employee.id!, func);
   }
 }

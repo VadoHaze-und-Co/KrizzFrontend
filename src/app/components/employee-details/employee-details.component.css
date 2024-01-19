@@ -35,7 +35,7 @@
   position: relative;
   transform: translate(-50%, 0);
   left: 50%;
-  overflow: hidden scroll;
+  overflow: hidden auto;
   text-align: center;
   width: 240px;
   height: 45px;

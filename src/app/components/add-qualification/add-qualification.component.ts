@@ -35,6 +35,6 @@ export class AddQualificationComponent {
   public add() {
     this.restService.addQualification();
     this.close();
-
+    this.restService.fetchQualificationData();
   }
 }

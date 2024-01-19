@@ -17,11 +17,12 @@ import {DataService} from "../../services/data-service";
 export class QualificationCardComponent {
 
   @Input() public selectable: boolean = false;
-  @Input() public qualifications: string[] | undefined;
 
   constructor(public restService: RestService, public dataService: DataService) {
-    restService.fetchQualificationData(() => this.qualifications = dataService.qualifications.filter(q => q.skill !== undefined).map(q => q.skill!));
+    this.restService.fetchQualificationData();
   }
 
-  protected readonly dateTimestampProvider = dateTimestampProvider;
+  public containsSkill(qualification: Qualification) {
+    return this.dataService.editEmployeeDialog !== undefined && this.dataService.editEmployeeDialog!.skills.filter(q => q == qualification.skill).length > 0;
+  }
 }
