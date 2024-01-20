@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import {EmployeeInitialsComponent} from "../employee-initials/employee-initials.component";
 import {Employee} from "../../../rest-objects/employee";
 import {DataService} from "../../../services/data-service";
-import {EmployeeFormComponent} from "../../dialogs/add-employee/employee-form.component";
-import {QualificationCardComponent} from "../qualification-card/qualification-card.component";
+import {EmployeeDetailsComponent} from "../../dialogs/employee-details/employee-details.component";
 
 @Component({
   selector: 'app-employee-card',
@@ -22,6 +21,6 @@ export class EmployeeCardComponent {
 
   public click() {
     this.dataService.employeeDetails = this.employee!;
-    this.dataService.dialogs.push(EmployeeFormComponent);
+    this.dataService.dialogs.push(EmployeeDetailsComponent);
   }
 }

@@ -22,4 +22,10 @@ export class Employee {
     }
     return s;
   }
+
+  public clone() {
+    let e = new Employee(this.id, this.lastName, this.firstName, this.street, this.postcode, this.city, this.phone);
+    e.skills = this.skills.map(q=>q);
+    return e;
+  }
 }

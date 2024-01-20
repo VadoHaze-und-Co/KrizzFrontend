@@ -6,7 +6,7 @@ import {Dialog} from "../dialog";
 import {Employee} from "../../../rest-objects/employee";
 import {RestService} from "../../../services/rest-service";
 import {DataService} from "../../../services/data-service";
-import {EmployeeFormComponent} from "../add-employee/employee-form.component";
+import {EditEmployeeComponent, EmployeeFormComponent} from "../add-employee/employee-form.component";
 
 @Component({
   selector: 'app-employee-details',
@@ -17,8 +17,6 @@ import {EmployeeFormComponent} from "../add-employee/employee-form.component";
 })
 export class EmployeeDetailsComponent extends Dialog {
 
-  @Input() public employee!: Employee | undefined;
-
   constructor(public override restService: RestService, public override dataService: DataService) {
     super(restService, dataService);
     setTimeout(() => {
@@ -27,10 +25,13 @@ export class EmployeeDetailsComponent extends Dialog {
     });
   }
 
+  public get employee() {
+    return this.dataService.employeeDetails!;
+  }
+
   public edit() {
-    this.dataService.dialogs.push(EmployeeFormComponent);
-    console.log(this.dataService.dialogs)
     this.dataService.editingEmployee = this.employee!;
+    this.dataService.dialogs.push(EditEmployeeComponent);
   }
 
   public delete() {

@@ -1,32 +1,31 @@
-<div class="background" (click)="clickBackground()">
-  <div class="outer-container" (click)="clickForeground()">
+
+  <div class="outer-container" (click)="dataService.clickForeground()">
     <div class="close-button"><span class="material-icons" style="font-size: 24px; cursor: pointer" (click)="close()">close</span></div>
-    <div><app-employee-initials class="initials" [employee]="employee" [big]="true"></app-employee-initials></div>
-    <div class="name-text"><div>{{employee?.employeeFullName(-1)}}</div></div>
+    <div><app-employee-initials class="initials" [employee]="this.dataService.employeeDetails" [big]="true"></app-employee-initials></div>
+    <div class="name-text"><div>{{this.dataService.employeeDetails.employeeFullName(-1)}}</div></div>
     <div class="separator" style="top: 160px"><div class="separator-line"></div></div>
     <div class="detail-infos">
       <div>
         <div class="info-field">ID</div>
-        <div class="info">{{employee?.id}}</div>
+        <div class="info">{{this.dataService.employeeDetails.id}}</div>
       </div>
       <div>
         <div class="info-field">Str</div>
-        <div class="info">{{employee?.street}}</div>
+        <div class="info">{{this.dataService.employeeDetails.street}}</div>
       </div>
       <div>
         <div class="info-field">PLZ/City</div>
-        <div class="info">{{employee?.postcode + ', ' + employee?.city}}</div>
+        <div class="info">{{this.dataService.employeeDetails.postcode + ', ' + this.dataService.employeeDetails.city}}</div>
       </div>
       <div>
         <div class="info-field">Phone</div>
-        <div class="info">{{employee?.phone}}</div>
+        <div class="info">{{this.dataService.employeeDetails.phone}}</div>
       </div>
     </div>
     <div class="separator" style="top: 160px"><div class="separator-line"></div></div>
-<!--    <app-qualification-card class="qualification-card"></app-qualification-card>-->
+    <app-qualification-card class="qualification-card"></app-qualification-card>
     <div class="buttons">
       <div class="button" (click)="delete()" style="float: left; color: red"><span class="material-icons" style="font-size: 24px">delete</span></div>
       <div class="button" (click)="edit()" style="float: right"><span class="material-icons" style="font-size: 24px; float:right;">edit</span></div>
     </div>
   </div>
-</div>

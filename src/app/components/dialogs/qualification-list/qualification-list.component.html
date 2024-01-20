@@ -1,8 +1,8 @@
-<div class="background" (click)="clickBackground()">
-  <div class="qualification-list" (click)="clickForeground()">
+
+  <div class="qualification-list" (click)="dataService.clickForeground()">
     <div class="close-button"><span class="material-icons" style="font-size: 24px; cursor: pointer" (click)="close()">close</span></div>
     <div class="head-line">
-      <input type="text" [(ngModel)]="dataService.addNewText" placeholder="Neue Qualifikation" class="input">
+      <input type="text" [(ngModel)]="dataService.addQualificationText" placeholder="Neue Qualifikation" class="input">
       <div class="add-button" (click)="restService.addQualification()"><div style="cursor: pointer">+</div></div>
     </div>
     <div class="separator"><div class="separator-line"></div></div>
@@ -48,4 +48,3 @@
       </div>
     </div>
   </div>
-</div>

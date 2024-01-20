@@ -21,6 +21,6 @@ export class AddQualificationComponent extends Dialog {
   public submit() {
     this.restService.addQualification();
     this.close();
-    this.restService.fetchQualificationData();
+    //this.restService.fetchQualificationData();
   }
 }

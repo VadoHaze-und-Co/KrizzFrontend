@@ -2,12 +2,9 @@ import {Component, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Qualification} from "../../../rest-objects/qualification";
 import {RestService} from "../../../services/rest-service";
-import {Observable, of} from "rxjs";
-import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
-import {dateTimestampProvider} from "rxjs/internal/scheduler/dateTimestampProvider";
 import {DataService} from "../../../services/data-service";
 import {AddQualificationComponent} from "../../dialogs/add-qualification/add-qualification.component";
-import {Dialog} from "../../dialogs/dialog";
+import {Employee} from "../../../rest-objects/employee";
 
 @Component({
   selector: 'app-qualification-card',
@@ -16,21 +13,17 @@ import {Dialog} from "../../dialogs/dialog";
   templateUrl: './qualification-card.component.html',
   styleUrl: './qualification-card.component.css'
 })
-export class QualificationCardComponent extends Dialog {
+export class QualificationCardComponent {
 
   @Input() public selectable: boolean = false;
+  @Input() public employee: Employee | undefined;
 
-  constructor(public override restService: RestService, public override dataService: DataService) {
-    super(restService, dataService)
+  constructor(public restService: RestService, public dataService: DataService) {
     this.restService.fetchQualificationData();
   }
 
   public containsSkill(qualification: Qualification) {
-    return true;
-    // if (!this.dataService.createEmployeeDialog) {
-    //   return this.dataService.editingEmployee!.skills.filter(q => q == qualification.skill).length > 0;
-    // }
-    // return this.dataService.creatingEmployee.skills.filter(q => q == qualification.skill).length > 0;
+    return this.employee?.skills.includes(qualification.skill!);
   }
 
   protected readonly AddQualificationComponent = AddQualificationComponent;

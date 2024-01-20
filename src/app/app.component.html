@@ -5,12 +5,16 @@
     <button (click)="dataService.dialogs.push(QualificationListComponent)">
       list
     </button>
-    <button (click)="dataService.dialogs.push(EmployeeFormComponent)" style="float: right; position: relative">
+    <button (click)="dataService.dialogs.push(AddEmployeeComponent)" style="float: right; position: relative">
       add
     </button>
   </div> <!-- NAVBAR -->
-
-  <ng-container *ngIf="dataService.dialogToRender() !== undefined">
-    <ng-container *ngComponentOutlet="dataService.dialogToRender()!"></ng-container>
+  <ng-container *ngFor="let dialog of dataService.backgroundDialogs()">
+      <ng-container *ngComponentOutlet="dialog"></ng-container>
+  </ng-container>
+  <ng-container *ngIf="dataService.foregroundDialog() !== undefined">
+    <div class="background" (click)="dataService.clickBackground(dataService.foregroundDialog()!)">
+    <ng-container *ngComponentOutlet="dataService.foregroundDialog()!"></ng-container>
+    </div>
   </ng-container>
 </div>

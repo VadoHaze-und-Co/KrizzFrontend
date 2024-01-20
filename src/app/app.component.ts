@@ -7,8 +7,9 @@ import {DataService} from "./services/data-service";
 import {QualificationListComponent} from "./components/dialogs/qualification-list/qualification-list.component";
 import {AddQualificationComponent} from "./components/dialogs/add-qualification/add-qualification.component";
 import {EmployeeDetailsComponent} from "./components/dialogs/employee-details/employee-details.component";
-import {Component, ViewContainerRef} from "@angular/core";
-import {EmployeeFormComponent} from "./components/dialogs/add-employee/employee-form.component";
+import {Component, Injectable, Type, ViewContainerRef} from "@angular/core";
+import {AddEmployeeComponent, EmployeeFormComponent} from "./components/dialogs/add-employee/employee-form.component";
+import {Dialog} from "./components/dialogs/dialog";
 
 @Component({
   selector: 'app-root',
@@ -28,5 +29,5 @@ export class AppComponent {
 
   protected readonly AddQualificationComponent = AddQualificationComponent;
   protected readonly QualificationListComponent = QualificationListComponent;
-  protected readonly EmployeeFormComponent = EmployeeFormComponent;
+  protected readonly AddEmployeeComponent = AddEmployeeComponent;
 }

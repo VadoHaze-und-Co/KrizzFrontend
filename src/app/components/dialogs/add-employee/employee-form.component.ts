@@ -8,6 +8,36 @@ import {Employee} from "../../../rest-objects/employee";
 import {Qualification} from "../../../rest-objects/qualification";
 import {RestService} from "../../../services/rest-service";
 import {DataService} from "../../../services/data-service";
+import {AppComponent} from "../../../app.component";
+import {EmployeeDetailsComponent} from "../employee-details/employee-details.component";
+
+@Component({
+  selector: 'app-employee-form',
+  standalone: true,
+  imports: [CommonModule, QualificationCardComponent, AddQualificationComponent, FormsModule],
+  templateUrl: './employee-form.component.html',
+  styleUrl: './employee-form.component.css'
+})
+export class EmployeeFormComponent extends Dialog {
+
+  public editing = false;
+  public employee!: Employee;
+
+  constructor(public override restService: RestService, public override dataService: DataService) {
+    super(restService, dataService);
+  }
+
+  public submit() {
+    let e = this.employee.clone();
+    this.close();
+    setTimeout(() => {
+      this.dataService.employeeDetails = e;
+      if (this.editing) {
+        this.dataService.dialogs.push(EmployeeDetailsComponent)
+      }
+    }, 10);
+  }
+}
 
 @Component({
   selector: 'app-add-employee',
@@ -16,55 +46,40 @@ import {DataService} from "../../../services/data-service";
   templateUrl: './employee-form.component.html',
   styleUrl: './employee-form.component.css'
 })
-export class EmployeeFormComponent extends Dialog {
-
-  @Input() public editing = false;
-  @Input() public employee: Employee | undefined;
+export class AddEmployeeComponent extends EmployeeFormComponent {
+  public override editing = false;
+  public override employee = this.dataService.creatingEmployee.clone();
 
   constructor(public override restService: RestService, public override dataService: DataService) {
     super(restService, dataService);
-    setTimeout(() => {
-      while (this.employee === undefined) {}
-      this.dataService.editingEmployee = new Employee(this.employee?.id, this.employee?.lastName, this.employee?.firstName, this.employee?.street, this.employee?.postcode, this.employee?.city, this.employee?.phone);
-      this.dataService.editingEmployee.skills = this.employee?.skills!;
-    });
   }
 
-  public save() {
-    let employee = this.dataService.editingEmployee!;
-    if (this.editing) {
-      this.saveEdit(employee);
-    } else {
-      this.saveCreate();
-    }
-    this.close();
-  }
-
-  private saveEdit(employee: Employee) {
-    let addedQ:Qualification[] = [];
-    let removedQ:Qualification[] = [];
-    let qualifications = this.dataService.selectedQualifications();
-    let employeeQ:string[] = [];
-    if (employee !== undefined) {
-      employeeQ = employee.skills;
-    }
-    this.dataService.qualifications.forEach(q => {
-      if (qualifications.includes(q) && !employeeQ.includes(q.skill!)) {
-        addedQ.push(q);
-      }
-      if (!qualifications.includes(q) && employeeQ.includes(q.skill!)) {
-        removedQ.push(q);
-      }
-    });
-    addedQ.forEach(q => this.restService.addQualificationToEmployee(q, employee));
-    removedQ.forEach(q => this.restService.removeQualificationFromEmployee(q, employee));
-    employee.skills = qualifications.map(q => q.skill!);
-    this.restService.editEmployee();
-    this.dataService.employeeDetails = this.dataService.editingEmployee;
-  }
-
-  private saveCreate() {
+  public override submit() {
+    this.dataService.creatingEmployee = this.dataService.creatingEmployeeS.clone();
     this.restService.createEmployee();
-    this.dataService.creatingEmployee = new Employee(0, "", "", "", "", "", "")
+    super.submit();
+  }
+}
+
+@Component({
+  selector: 'app-edit-employee',
+  standalone: true,
+  imports: [CommonModule, QualificationCardComponent, AddQualificationComponent, FormsModule],
+  templateUrl: './employee-form.component.html',
+  styleUrl: './employee-form.component.css'
+})
+export class EditEmployeeComponent extends EmployeeFormComponent {
+  public override editing = true;
+  public override employee = this.dataService.editingEmployee.clone();
+
+  constructor(public override restService: RestService, public override dataService: DataService) {
+    super(restService, dataService);
+  }
+
+  public override submit() {
+    this.employee.skills = this.dataService.selectedQualifications().map(q => q.skill!);
+    this.dataService.editingEmployee = this.employee;
+    this.restService.editEmployee();
+    super.submit();
   }
 }

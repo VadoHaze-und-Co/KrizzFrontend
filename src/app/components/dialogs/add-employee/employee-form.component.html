@@ -1,53 +1,37 @@
-<app-add-qualification *ngIf="dataService.createQualificationDialog"></app-add-qualification>
-<div class="background" (click)="clickBackground()">
-  <div class="qualification-list" (click)="clickForeground()">
-    <ng-container *ngIf="editing; then editing else creating">
+
+  <div class="qualification-list" (click)="dataService.clickForeground()">
+    <ng-container *ngIf="editing; then editing2 else creating2">
     </ng-container>
-    <ng-template #editing>
+    <ng-template #editing2>
       <div class="head-line">Mitarbeiter bearbeiten</div>
     </ng-template>
-    <ng-template #creating>
+    <ng-template #creating2>
       <div class="head-line">Mitarbeiter hinzufügen</div>
     </ng-template>
     <div class="close-button"><span class="material-icons" style="font-size: 24px; cursor: pointer" (click)="close()">close</span></div>
     <div style="height: 20px"></div>
-    <ng-container *ngIf="editing; then editing1 else creating1">
+      <div style="" class="text-field centered"><input [(ngModel)]="employee.firstName" type="text" class="input" placeholder="Vorname"></div>
+      <div style="height: 10px"></div>
+      <div style="" class="text-field centered"><input [(ngModel)]="employee.lastName" type="text" class="input" placeholder="Nachname"></div>
+      <div style="height: 10px"></div>
+      <div style="" class="text-field centered"><input [(ngModel)]="employee.street" type="text" class="input" placeholder="Straße"></div>
+      <div style="height: 10px"></div>
+      <div style="" class="text-field centered"><input [(ngModel)]="employee.city" type="text" class="input" placeholder="Stadt"></div>
+      <div style="height: 10px"></div>
+      <div style="" class="text-field centered"><input [(ngModel)]="employee.postcode" type="text" class="input" placeholder="PLZ"></div>
+      <div style="height: 10px"></div>
+      <div style="" class="text-field centered"><input [(ngModel)]="employee.phone" type="text" class="input" placeholder="Telefonnummer"></div>
+      <div style="height: 10px"></div>
+      <div class="separator"><div class="separator-line"></div></div>
+      <app-qualification-card style="position: relative" [selectable]="true" [employee]="employee"></app-qualification-card>
+      <div style="height: 15px"></div>
+
+    <ng-container *ngIf="editing; then edit else create">
     </ng-container>
-    <ng-template #creating1>
-      <div style="" class="text-field centered"><input [(ngModel)]="dataService.creatingEmployee.firstName" type="text" class="input" placeholder="Vorname"></div>
-      <div style="height: 10px"></div>
-      <div style="" class="text-field centered"><input [(ngModel)]="dataService.creatingEmployee.lastName" type="text" class="input" placeholder="Nachname"></div>
-      <div style="height: 10px"></div>
-      <div style="" class="text-field centered"><input [(ngModel)]="dataService.creatingEmployee.street" type="text" class="input" placeholder="Straße"></div>
-      <div style="height: 10px"></div>
-      <div style="" class="text-field centered"><input [(ngModel)]="dataService.creatingEmployee.city" type="text" class="input" placeholder="Stadt"></div>
-      <div style="height: 10px"></div>
-      <div style="" class="text-field centered"><input [(ngModel)]="dataService.creatingEmployee.postcode" type="text" class="input" placeholder="PLZ"></div>
-      <div style="height: 10px"></div>
-      <div style="" class="text-field centered"><input [(ngModel)]="dataService.creatingEmployee.phone" type="text" class="input" placeholder="Telefonnummer"></div>
-      <div style="height: 10px"></div>
-      <div class="separator"><div class="separator-line"></div></div>
-      <app-qualification-card style="position: relative" [selectable]="true"></app-qualification-card>
-      <div style="height: 15px"></div>
-      <div class="add-button"><div class="add-button-text" (click)="save()">Erstellen</div></div>
+    <ng-template #edit>
+      <div class="add-button"><div class="add-button-text" (click)="submit()">Speichern</div></div>
     </ng-template>
-    <ng-template #editing1>
-      <div style="" class="text-field centered"><input [(ngModel)]="dataService.editingEmployee.firstName" type="text" class="input" placeholder="Vorname"></div>
-      <div style="height: 10px"></div>
-      <div style="" class="text-field centered"><input [(ngModel)]="dataService.editingEmployee.lastName" type="text" class="input" placeholder="Nachname"></div>
-      <div style="height: 10px"></div>
-      <div style="" class="text-field centered"><input [(ngModel)]="dataService.editingEmployee.street" type="text" class="input" placeholder="Straße"></div>
-      <div style="height: 10px"></div>
-      <div style="" class="text-field centered"><input [(ngModel)]="dataService.editingEmployee!.city" type="text" class="input" placeholder="Stadt"></div>
-      <div style="height: 10px"></div>
-      <div style="" class="text-field centered"><input [(ngModel)]="dataService.editingEmployee!.postcode" type="text" class="input" placeholder="PLZ"></div>
-      <div style="height: 10px"></div>
-      <div style="" class="text-field centered"><input [(ngModel)]="dataService.editingEmployee!.phone" type="text" class="input" placeholder="Telefonnummer"></div>
-      <div style="height: 10px"></div>
-      <div class="separator"><div class="separator-line"></div></div>
-      <app-qualification-card style="position: relative" [selectable]="true"></app-qualification-card>
-      <div style="height: 15px"></div>
-      <div class="add-button"><div class="add-button-text" (click)="save()">Speichern</div></div>
+    <ng-template #create>
+      <div class="add-button"><div class="add-button-text" (click)="submit()">Erstellen</div></div>
     </ng-template>
   </div>
-</div>
