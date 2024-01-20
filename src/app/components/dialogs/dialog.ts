@@ -1,15 +1,13 @@
-import {RestService} from "../../services/rest-service";
-import {DataService} from "../../services/data-service";
-import {AppComponent} from "../../app.component";
+import {FunctionService} from "../../services/function-service";
 
 export class Dialog {
 
-  constructor(public restService: RestService, public dataService: DataService) {
-    dataService.clickInside = dataService.backgroundDialogs().length > 0;
+  constructor(public functionService: FunctionService) {
+    functionService.restService.dataService.clickInside = functionService.restService.dataService.backgroundDialogs().length > 0;
   }
 
   public close() {
-    this.dataService.dialogs = this.dataService.dialogs.filter(dialog => !(this instanceof dialog));
+    this.functionService.restService.dataService.dialogs = this.functionService.restService.dataService.dialogs.filter(dialog => !(this instanceof dialog));
   }
 }
 

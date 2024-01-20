@@ -1,8 +1,7 @@
 <div class="outerEmployeeContainer">
   <div [style.width]="getGoodWidth() + 'px'" class="innerEmployeeContainer">
-    <ng-container *ngFor="let employee of dataService.employees">
+    <ng-container *ngFor="let employee of functionService.dataService.employees">
       <app-employee-card [employee]="employee"></app-employee-card>
     </ng-container>
   </div>
 </div>
-<app-default-popup *ngIf="selectedEmployee" [employeeData]="selectedEmployee" (closeForm)="closeEmployeeForm()" class="default-popup"></app-default-popup>

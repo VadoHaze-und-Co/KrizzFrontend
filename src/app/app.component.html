@@ -2,19 +2,19 @@
   <app-employee-list class="employee-list" [style.height]="(window.innerHeight - 130) + 'px'"></app-employee-list>
   <div class="search-bar" style=""></div> <!-- SEARCH -->
   <div class="nav-bar">
-    <button (click)="dataService.dialogs.push(QualificationListComponent)">
+    <button (click)="functionService.dataService.dialogs.push(QualificationListComponent)">
       list
     </button>
-    <button (click)="dataService.dialogs.push(AddEmployeeComponent)" style="float: right; position: relative">
+    <button (click)="functionService.dataService.dialogs.push(AddEmployeeComponent)" style="float: right; position: relative">
       add
     </button>
   </div> <!-- NAVBAR -->
-  <ng-container *ngFor="let dialog of dataService.backgroundDialogs()">
+  <ng-container *ngFor="let dialog of functionService.dataService.backgroundDialogs()">
       <ng-container *ngComponentOutlet="dialog"></ng-container>
   </ng-container>
-  <ng-container *ngIf="dataService.foregroundDialog() !== undefined">
-    <div class="background" (click)="dataService.clickBackground(dataService.foregroundDialog()!)">
-    <ng-container *ngComponentOutlet="dataService.foregroundDialog()!"></ng-container>
+  <ng-container *ngIf="functionService.dataService.foregroundDialog() !== undefined">
+    <div class="background" (click)="functionService.dataService.clickBackground(functionService.dataService.foregroundDialog()!)">
+    <ng-container *ngComponentOutlet="functionService.dataService.foregroundDialog()!"></ng-container>
     </div>
   </ng-container>
 </div>

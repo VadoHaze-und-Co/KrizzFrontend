@@ -1,26 +1,26 @@
 
-  <div class="qualification-list" (click)="dataService.clickForeground()">
+  <div class="qualification-list" (click)="functionService.restService.dataService.clickForeground()">
     <div class="close-button"><span class="material-icons" style="font-size: 24px; cursor: pointer" (click)="close()">close</span></div>
     <div class="head-line">
-      <input type="text" [(ngModel)]="dataService.addQualificationText" placeholder="Neue Qualifikation" class="input">
-      <div class="add-button" (click)="restService.addQualification()"><div style="cursor: pointer">+</div></div>
+      <input type="text" [(ngModel)]="functionService.restService.dataService.addQualificationText" placeholder="Neue Qualifikation" class="input">
+      <div class="add-button" (click)="functionService.addQualification()"><div style="cursor: pointer">+</div></div>
     </div>
     <div class="separator"><div class="separator-line"></div></div>
     <div class="outer-list">
       <div class="inner-list">
         <table>
-          <tr class="list-row" *ngFor="let qualification of dataService.qualifications">
-            <ng-container *ngIf="dataService.qualificationEdit?.id == qualification.id; then editing else fixName"/>
+          <tr class="list-row" *ngFor="let qualification of functionService.restService.dataService.qualifications">
+            <ng-container *ngIf="functionService.restService.dataService.qualificationEdit?.id == qualification.id; then editing else fixName"/>
 
             <ng-template #editing> <!-- EDITING -->
               <td colspan="130px">
                 <div style="width: 130px">
-                  <input class="edit-input" type="text" [(ngModel)]="dataService.qualificationEdit!.name">
+                  <input class="edit-input" type="text" [(ngModel)]="functionService.restService.dataService.qualificationEdit!.name">
                 </div>
               </td>
               <td colspan="20px">
                 <div style="width: 20px;">
-                  <span class="material-icons" style="font-size: 16px; cursor: pointer" (click)="restService.saveQualification()">save</span>
+                  <span class="material-icons" style="font-size: 16px; cursor: pointer" (click)="functionService.saveQualification()">save</span>
                 </div>
               </td>
             </ng-template>
@@ -33,14 +33,14 @@
               </td>
               <td colspan="20px">
                 <div style="width: 20px;">
-                  <span class="material-icons" style="font-size: 16px; cursor: pointer" (click)="restService.editQualification(qualification)">edit</span>
+                  <span class="material-icons" style="font-size: 16px; cursor: pointer" (click)="functionService.editQualification(qualification)">edit</span>
                 </div>
               </td>
             </ng-template>
 
             <td style="; width: 20px;" colspan="20px">
               <div style="width: 20px;">
-                <span class="material-icons" style="font-size: 16px; cursor: pointer; color: red" (click)="restService.deleteQualification(qualification)">delete</span>
+                <span class="material-icons" style="font-size: 16px; cursor: pointer; color: red" (click)="functionService.deleteQualification(qualification)">delete</span>
               </div>
             </td>
           </tr>

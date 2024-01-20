@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormsModule} from "@angular/forms";
-import {RestService} from "../../../services/rest-service";
-import {DataService} from "../../../services/data-service";
 import {Dialog} from "../dialog";
+import {FunctionService} from "../../../services/function-service";
 
 @Component({
   selector: 'app-qualification-list',
@@ -14,8 +13,8 @@ import {Dialog} from "../dialog";
 })
 export class QualificationListComponent extends Dialog {
 
-  constructor(public override restService: RestService, public override dataService: DataService) {
-    super(restService, dataService);
-    restService.fetchQualificationData();
+  constructor(public override functionService: FunctionService) {
+    super(functionService);
+    functionService.restService.loadQualifications();
   }
 }

@@ -5,11 +5,8 @@ import {FormsModule} from "@angular/forms";
 import {Dialog} from "../dialog";
 import {QualificationCardComponent} from "../../parts/qualification-card/qualification-card.component";
 import {Employee} from "../../../rest-objects/employee";
-import {Qualification} from "../../../rest-objects/qualification";
-import {RestService} from "../../../services/rest-service";
-import {DataService} from "../../../services/data-service";
-import {AppComponent} from "../../../app.component";
 import {EmployeeDetailsComponent} from "../employee-details/employee-details.component";
+import {FunctionService} from "../../../services/function-service";
 
 @Component({
   selector: 'app-employee-form',
@@ -23,19 +20,17 @@ export class EmployeeFormComponent extends Dialog {
   public editing = false;
   public employee!: Employee;
 
-  constructor(public override restService: RestService, public override dataService: DataService) {
-    super(restService, dataService);
+  constructor(public override functionService: FunctionService) {
+    super(functionService);
   }
 
   public submit() {
-    let e = this.employee.clone();
     this.close();
-    setTimeout(() => {
-      this.dataService.employeeDetails = e;
-      if (this.editing) {
-        this.dataService.dialogs.push(EmployeeDetailsComponent)
-      }
-    }, 10);
+    if (this.editing) {
+      this.functionService.restService.dataService.dialogs.push(EmployeeDetailsComponent);
+    }
+    this.functionService.restService.dataService.employeeDetails = this.employee.clone();
+    setTimeout(() => this.functionService.restService.loadEmployees(), 10);
   }
 }
 
@@ -48,15 +43,15 @@ export class EmployeeFormComponent extends Dialog {
 })
 export class AddEmployeeComponent extends EmployeeFormComponent {
   public override editing = false;
-  public override employee = this.dataService.creatingEmployee.clone();
+  public override employee = this.functionService.restService.dataService.creatingEmployee.clone();
 
-  constructor(public override restService: RestService, public override dataService: DataService) {
-    super(restService, dataService);
+  constructor(public override functionService: FunctionService) {
+    super(functionService);
   }
 
   public override submit() {
-    this.dataService.creatingEmployee = this.dataService.creatingEmployeeS.clone();
-    this.restService.createEmployee();
+    this.functionService.restService.dataService.creatingEmployee = this.functionService.restService.dataService.creatingEmployeeS.clone();
+    this.functionService.restService.createEmployee();
     super.submit();
   }
 }
@@ -70,16 +65,16 @@ export class AddEmployeeComponent extends EmployeeFormComponent {
 })
 export class EditEmployeeComponent extends EmployeeFormComponent {
   public override editing = true;
-  public override employee = this.dataService.editingEmployee.clone();
+  public override employee = this.functionService.restService.dataService.editingEmployee.clone();
 
-  constructor(public override restService: RestService, public override dataService: DataService) {
-    super(restService, dataService);
+  constructor(public override functionService: FunctionService) {
+    super(functionService);
   }
 
   public override submit() {
-    this.employee.skills = this.dataService.selectedQualifications().map(q => q.skill!);
-    this.dataService.editingEmployee = this.employee;
-    this.restService.editEmployee();
+    this.employee.skills = this.functionService.restService.dataService.selectedQualifications().map(q => q.skill!);
+    this.functionService.restService.dataService.editingEmployee = this.employee;
+    this.functionService.restService.editEmployee();
     super.submit();
   }
 }

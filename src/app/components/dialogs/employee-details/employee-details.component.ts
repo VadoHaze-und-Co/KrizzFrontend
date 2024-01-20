@@ -1,12 +1,10 @@
-import {Component, HostListener, Input, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {EmployeeInitialsComponent} from "../../parts/employee-initials/employee-initials.component";
 import {QualificationCardComponent} from "../../parts/qualification-card/qualification-card.component";
 import {Dialog} from "../dialog";
-import {Employee} from "../../../rest-objects/employee";
-import {RestService} from "../../../services/rest-service";
-import {DataService} from "../../../services/data-service";
 import {EditEmployeeComponent, EmployeeFormComponent} from "../add-employee/employee-form.component";
+import {FunctionService} from "../../../services/function-service";
 
 @Component({
   selector: 'app-employee-details',
@@ -17,25 +15,25 @@ import {EditEmployeeComponent, EmployeeFormComponent} from "../add-employee/empl
 })
 export class EmployeeDetailsComponent extends Dialog {
 
-  constructor(public override restService: RestService, public override dataService: DataService) {
-    super(restService, dataService);
+  constructor(public override functionService: FunctionService) {
+    super(functionService);
     setTimeout(() => {
       while (this.employee === undefined) {}
-      restService.fetchQualificationsForEmployee(this.employee!);
+      functionService.restService.loadQualificationsForEmployee(this.employee!);
     });
   }
 
   public get employee() {
-    return this.dataService.employeeDetails!;
+    return this.functionService.restService.dataService.employeeDetails!;
   }
 
   public edit() {
-    this.dataService.editingEmployee = this.employee!;
-    this.dataService.dialogs.push(EditEmployeeComponent);
+    this.functionService.restService.dataService.editingEmployee = this.employee!;
+    this.functionService.restService.dataService.dialogs.push(EditEmployeeComponent);
   }
 
   public delete() {
-    this.restService.deleteEmployee(this.employee!.id!);
+    this.functionService.restService.deleteEmployee(this.employee!.id!);
     this.close();
   }
 }

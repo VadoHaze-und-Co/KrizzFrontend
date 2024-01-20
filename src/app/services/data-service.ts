@@ -3,7 +3,7 @@ import {Injectable, Type} from "@angular/core";
 import {Qualification} from "../rest-objects/qualification";
 import {Dialog} from "../components/dialogs/dialog";
 
-@Injectable({ providedIn: "root" })
+@Injectable({providedIn: "root"})
 export class DataService {
 
   public employees: Employee[] = [];
@@ -50,7 +50,8 @@ export class DataService {
     if (!this.clickInside) {
       this.addQualificationText = "";
       this.dialogs = this.dialogs.filter(dialog => type != dialog);
-    }
+      this.clickInside = true;
+    } else
     this.clickInside = false;
   }
 

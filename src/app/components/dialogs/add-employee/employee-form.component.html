@@ -1,5 +1,5 @@
 
-  <div class="qualification-list" (click)="dataService.clickForeground()">
+  <div class="qualification-list" (click)="functionService.restService.dataService.clickForeground()">
     <ng-container *ngIf="editing; then editing2 else creating2">
     </ng-container>
     <ng-template #editing2>
