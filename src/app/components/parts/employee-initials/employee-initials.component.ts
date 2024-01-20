@@ -1,6 +1,6 @@
 import {Component, Inject, Input} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {Employee} from "../../rest-objects/employee";
+import {Employee} from "../../../rest-objects/employee";
 
 @Component({
   selector: 'app-employee-initials',

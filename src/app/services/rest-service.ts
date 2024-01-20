@@ -50,14 +50,15 @@ export class RestService {
   }
 
   fetchQualificationData(func?: () => void) {
-    this.http.get<Qualification[]>('https://employee.szut.dev/qualifications', this.option).subscribe(data => {
-      this.dataService.qualifications = data
-        .filter(q => q.skill !== undefined)
-        .sort((a,b) => a.skill!.localeCompare(b.skill!)!);
-      if (func !== undefined) {
-        func();
-      }
-    }, error => this.token(() => this.fetchQualificationData()))
+    this.dataService.qualifications = [new Qualification("skil", 1)]
+    // this.http.get<Qualification[]>('https://employee.szut.dev/qualifications', this.option).subscribe(data => {
+    //   this.dataService.qualifications = data
+    //     .filter(q => q.skill !== undefined)
+    //     .sort((a,b) => a.skill!.localeCompare(b.skill!)!);
+    //   if (func !== undefined) {
+    //     func();
+    //   }
+    // }, error => this.token(() => this.fetchQualificationData()))
   }
 
   public fetchQualificationsForEmployee(employee: Employee, func?: () => void) {

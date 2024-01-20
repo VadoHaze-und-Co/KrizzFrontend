@@ -1,6 +1,7 @@
 import {Employee} from "../rest-objects/employee";
-import {Injectable} from "@angular/core";
+import {Injectable, Type} from "@angular/core";
 import {Qualification} from "../rest-objects/qualification";
+import {Dialog} from "../components/dialogs/dialog";
 
 @Injectable({ providedIn: "root" })
 export class DataService {
@@ -8,19 +9,19 @@ export class DataService {
   public employees: Employee[] = [];
   public qualifications: Qualification[] = [];
 
+  public dialogs: Type<Dialog>[] = [];
+
   public createQualificationDialog = false;
-  public employeeDetails: Employee | undefined;
   public qualificationListDialog = false;
   public qualificationEdit: {name: string, id: number} | undefined;
 
   public addNewText = "";
   public addQualification = "";
 
-  public createEmployeeDialog = false;
-  //public editEmployeeDialog : Employee | undefined;
-
-  public creatingEmployee = new Employee(-1, "Testname", "Aaron", "Street", "12434", "Brementown", "+2145342659");
-  public editingEmployee: Employee | undefined;
+  public creatingEmployeeS = new Employee(-1, "Testname", "Aaron", "Street", "12434", "Brementown", "+2145342659");
+  public creatingEmployee = this.creatingEmployeeS;
+  public editingEmployee: Employee = this.creatingEmployeeS;
+  public employeeDetails: Employee = this.creatingEmployeeS;
 
   public selectedQualifications() {
     let qualifications: Qualification[] = [];
@@ -35,4 +36,7 @@ export class DataService {
     return qualifications;
   }
 
+  public dialogToRender() {
+    return this.dialogs.length > 0 ? this.dialogs[this.dialogs.length - 1] : undefined;
+  }
 }

@@ -2,29 +2,15 @@
   <app-employee-list class="employee-list" [style.height]="(window.innerHeight - 130) + 'px'"></app-employee-list>
   <div class="search-bar" style=""></div> <!-- SEARCH -->
   <div class="nav-bar">
-    <button (click)="dataService.qualificationListDialog = true">
+    <button (click)="dataService.dialogs.push(QualificationListComponent)">
       list
     </button>
-    <button (click)="dataService.createEmployeeDialog = true" style="float: right; position: relative">
+    <button (click)="dataService.dialogs.push(EmployeeFormComponent)" style="float: right; position: relative">
       add
     </button>
   </div> <!-- NAVBAR -->
 
-  <ng-container *ngIf="dataService.qualificationListDialog">
-    <app-qualification-list></app-qualification-list>
+  <ng-container *ngIf="dataService.dialogToRender() !== undefined">
+    <ng-container *ngComponentOutlet="dataService.dialogToRender()!"></ng-container>
   </ng-container>
-  <ng-container *ngIf="dataService.createEmployeeDialog">
-    <app-add-employee></app-add-employee>
-  </ng-container>
-  <ng-container *ngIf="dataService.createQualificationDialog">
-    <app-add-qualification></app-add-qualification>
-  </ng-container>
-  <ng-container *ngIf="dataService.employeeDetails !== undefined">
-    <app-employee-details [employee]="dataService.employeeDetails"></app-employee-details>
-  </ng-container>
-  <!--
-  <app-employee-details [employee]="e"></app-employee-details>
-  <app-qualification-list></app-qualification-list>
-  <app-add-qualification></app-add-qualification>
-  -->
 </div>

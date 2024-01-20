@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Employee } from "../../rest-objects/employee";
-import { EmployeeInitialsComponent } from "../employee-initials/employee-initials.component";
-import { EmployeeCardComponent } from "../employee-card/employee-card.component";
+import { EmployeeInitialsComponent } from "../parts/employee-initials/employee-initials.component";
+import { EmployeeCardComponent } from "../parts/employee-card/employee-card.component";
 import {RestService} from "../../services/rest-service";
 import {DefaultPopupComponent} from "../default-popup/default-popup.component";
 import {DataService} from "../../services/data-service";

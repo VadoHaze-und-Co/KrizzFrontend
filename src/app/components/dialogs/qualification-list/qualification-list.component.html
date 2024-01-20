@@ -10,30 +10,34 @@
       <div class="inner-list">
         <table>
           <tr class="list-row" *ngFor="let qualification of dataService.qualifications">
-            <td colspan="130px">
-              <ng-container *ngIf="dataService.qualificationEdit?.id == qualification.id; then editName else fixName">
-              </ng-container>
-              <div style="width: 130px">
-                <ng-template #editName>
+            <ng-container *ngIf="dataService.qualificationEdit?.id == qualification.id; then editing else fixName"/>
+
+            <ng-template #editing> <!-- EDITING -->
+              <td colspan="130px">
+                <div style="width: 130px">
                   <input class="edit-input" type="text" [(ngModel)]="dataService.qualificationEdit!.name">
-                </ng-template>
-                <ng-template #fixName>
-                  <div>{{qualification.skill}}</div>
-                </ng-template>
-              </div>
-            </td>
-            <td colspan="20px">
-              <ng-container *ngIf="dataService.qualificationEdit?.id == qualification.id; then editNameB else fixNameB">
-              </ng-container>
-              <div style="width: 20px;">
-                <ng-template #editNameB>
+                </div>
+              </td>
+              <td colspan="20px">
+                <div style="width: 20px;">
                   <span class="material-icons" style="font-size: 16px; cursor: pointer" (click)="restService.saveQualification()">save</span>
-                </ng-template>
-                <ng-template #fixNameB>
+                </div>
+              </td>
+            </ng-template>
+
+            <ng-template #fixName> <!-- FIX -->
+              <td colspan="130px">
+                <div style="width: 130px">
+                    <div>{{qualification.skill}}</div>
+                </div>
+              </td>
+              <td colspan="20px">
+                <div style="width: 20px;">
                   <span class="material-icons" style="font-size: 16px; cursor: pointer" (click)="restService.editQualification(qualification)">edit</span>
-                </ng-template>
-              </div>
-            </td>
+                </div>
+              </td>
+            </ng-template>
+
             <td style="; width: 20px;" colspan="20px">
               <div style="width: 20px;">
                 <span class="material-icons" style="font-size: 16px; cursor: pointer; color: red" (click)="restService.deleteQualification(qualification)">delete</span>
