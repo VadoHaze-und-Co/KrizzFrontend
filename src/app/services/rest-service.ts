@@ -90,8 +90,8 @@ export class RestService {
   }
 
   public async asyncRemoveQualificationFromEmployee(qualificationName: string, employeeId: number) {
-    let option = { headers: this.header, body: {skill: qualificationName} };
-    await firstValueFrom(this.http.delete('https://employee.szut.dev/employees/' + employeeId + '/qualifications', option));
+    await firstValueFrom(this.http.delete('https://employee.szut.dev/employees/' + employeeId + '/qualifications',
+      { headers: this.header, body: {skill: qualificationName} }));
   }
 
   // EMPLOYEE

@@ -27,7 +27,7 @@ export class FunctionService {
       return;
     }
     this.restService.addQualification(name);
-    this.dataService.qualificationAdd = this.dataService.qualificationAdd = "";
+    this.dataService.qualificationAdd = "";
   }
 
   public editQualification(qualification: Qualification) {
