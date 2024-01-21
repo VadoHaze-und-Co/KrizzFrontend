@@ -39,7 +39,6 @@ export class EmployeeFormComponent extends Dialog {
   styleUrl: './employee-form.component.css'
 })
 export class AddEmployeeComponent extends EmployeeFormComponent {
-  public override editing = false;
   public override employee = this.functionService.dataService.employeeAdd.clone();
 
   constructor(public override functionService: FunctionService) {
@@ -79,5 +78,10 @@ export class EditEmployeeComponent extends EmployeeFormComponent {
     this.functionService.dataService.employeeDetails = this.employee.clone();
     this.functionService.editEmployee();
     super.submit();
+  }
+
+  override close() {
+    super.close();
+    this.functionService.dataService.dialogs.push(EmployeeDetailsComponent);
   }
 }

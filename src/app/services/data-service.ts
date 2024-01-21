@@ -53,9 +53,9 @@ export class DataService {
     if (!this.clickInside) {
       this.qualificationAdd = "";
       this.dialogs = this.dialogs.filter(dialog => type != dialog);
-      this.clickInside = true;
-    } else
-    this.clickInside = false;
+    } else {
+      this.clickInside = false;
+    }
   }
 
   clickForeground() {
