@@ -1,0 +1,15 @@
+.space {
+  height: 20px;
+}
+
+.message-box {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-family: "Tahoma", sans-serif;
+  font-size: 16px;
+  border-radius: 15px;
+}

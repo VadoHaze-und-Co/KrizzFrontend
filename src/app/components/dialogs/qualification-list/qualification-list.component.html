@@ -1,21 +1,21 @@
 
-  <div class="qualification-list" (click)="functionService.restService.dataService.clickForeground()">
+  <div class="qualification-list" (click)="functionService.dataService.clickForeground()">
     <div class="close-button"><span class="material-icons" style="font-size: 24px; cursor: pointer" (click)="close()">close</span></div>
     <div class="head-line">
-      <input type="text" [(ngModel)]="functionService.restService.dataService.addQualificationText" placeholder="Neue Qualifikation" class="input">
+      <input type="text" [(ngModel)]="functionService.dataService.qualificationAdd" placeholder="Neue Qualifikation" class="input">
       <div class="add-button" (click)="functionService.addQualification()"><div style="cursor: pointer">+</div></div>
     </div>
     <div class="separator"><div class="separator-line"></div></div>
     <div class="outer-list">
       <div class="inner-list">
         <table>
-          <tr class="list-row" *ngFor="let qualification of functionService.restService.dataService.qualifications">
-            <ng-container *ngIf="functionService.restService.dataService.qualificationEdit?.id == qualification.id; then editing else fixName"/>
+          <tr class="list-row" *ngFor="let qualification of functionService.dataService.qualifications">
+            <ng-container *ngIf="functionService.dataService.qualificationEdit?.id == qualification.id; then editing else fixName"/>
 
             <ng-template #editing> <!-- EDITING -->
               <td colspan="130px">
                 <div style="width: 130px">
-                  <input class="edit-input" type="text" [(ngModel)]="functionService.restService.dataService.qualificationEdit!.name">
+                  <input class="edit-input" type="text" [(ngModel)]="functionService.dataService.qualificationEdit!.name">
                 </div>
               </td>
               <td colspan="20px">

@@ -10,11 +10,12 @@
     </button>
   </div> <!-- NAVBAR -->
   <ng-container *ngFor="let dialog of functionService.dataService.backgroundDialogs()">
-      <ng-container *ngComponentOutlet="dialog"></ng-container>
+    <ng-container *ngComponentOutlet="dialog" style="position: absolute"></ng-container>
   </ng-container>
   <ng-container *ngIf="functionService.dataService.foregroundDialog() !== undefined">
-    <div class="background" (click)="functionService.dataService.clickBackground(functionService.dataService.foregroundDialog()!)">
-    <ng-container *ngComponentOutlet="functionService.dataService.foregroundDialog()!"></ng-container>
+    <div class="background" (click)="functionService.dataService.clickBackground(functionService.dataService.foregroundDialog()!)" style="position: absolute">
+      <ng-container *ngComponentOutlet="functionService.dataService.foregroundDialog()!" style="position: absolute"></ng-container>
     </div>
   </ng-container>
+  <app-message-box style="position: fixed; pointer-events: none"></app-message-box>
 </div>

@@ -15,6 +15,7 @@ export class QualificationListComponent extends Dialog {
 
   constructor(public override functionService: FunctionService) {
     super(functionService);
+    this.functionService.dataService.qualificationEdit = undefined;
     functionService.restService.loadQualifications();
   }
 }

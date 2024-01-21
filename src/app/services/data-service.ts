@@ -2,23 +2,26 @@ import {Employee} from "../rest-objects/employee";
 import {Injectable, Type} from "@angular/core";
 import {Qualification} from "../rest-objects/qualification";
 import {Dialog} from "../components/dialogs/dialog";
+import {MessageBox} from "../components/parts/message-box/message-box";
 
 @Injectable({providedIn: "root"})
 export class DataService {
 
+  // Running data
   public employees: Employee[] = [];
   public qualifications: Qualification[] = [];
   public dialogs: Type<Dialog>[] = [];
+  public static messageBoxes: MessageBox[] = [];
 
   // Qualification
   public qualificationEdit: {name: string, id: number} | undefined;
-  public addQualificationText = "";
+  public qualificationAdd = "";
 
   // Employees
-  public creatingEmployeeS = new Employee(-1, "Testname", "Aaron", "Street", "12434", "Brementown", "+2145342659");
-  public employeeDetails = this.creatingEmployeeS;
-  public creatingEmployee = this.creatingEmployeeS;
-  public editingEmployee = this.creatingEmployeeS;
+  public static EMPLOYEE_EXAMPLE = new Employee(-1, "Testname", "Aaron", "Street", "12434", "Brementown", "+2145342659");
+  public employeeDetails = DataService.EMPLOYEE_EXAMPLE;
+  public employeeAdd = DataService.EMPLOYEE_EXAMPLE;
+  public employeeEdit = DataService.EMPLOYEE_EXAMPLE;
 
   public selectedQualifications() {
     let qualifications: Qualification[] = [];
@@ -48,7 +51,7 @@ export class DataService {
   clickInside = false;
   clickBackground(type: Type<Dialog>) {
     if (!this.clickInside) {
-      this.addQualificationText = "";
+      this.qualificationAdd = "";
       this.dialogs = this.dialogs.filter(dialog => type != dialog);
       this.clickInside = true;
     } else
@@ -57,5 +60,14 @@ export class DataService {
 
   clickForeground() {
     this.clickInside = true;
+  }
+
+  public goodListWidth() {
+    let cardWidth= 170;
+    return ((this.screenWidth / cardWidth) | 0) * cardWidth;
+  }
+
+  public get screenWidth() {
+    return window.innerWidth;
   }
 }

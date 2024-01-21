@@ -5,34 +5,39 @@ import {EmployeeQualification} from "../rest-objects/employee-qualification";
 import {DataService} from "./data-service";
 import {Token} from "../rest-objects/token";
 import {CreateEmployee} from "../rest-objects/create-employee";
+import {catchError, EMPTY, firstValueFrom} from "rxjs";
 
 export class RestService {
-  bearer = "";
   header: HttpHeaders | undefined;
 
   constructor(private http: HttpClient, public dataService: DataService) {
-    this.loadToken(() => {
+    this.loadToken().then(() => {
       this.loadQualifications();
       this.loadEmployees();
     });
   }
 
-  private loadToken(run: () => void) {
-    this.http.post<Token>('http://authproxy.szut.dev',
+  private async loadToken() {
+    let token = await firstValueFrom(this.http.post<Token>('http://authproxy.szut.dev',
       `grant_type=password&client_id=employee-management-service&username=user&password=test`,
       {headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')}
-    ).subscribe(token => {
-      this.bearer = token.access_token!;
-      this.header = new HttpHeaders()
-        .set('Content-Type', 'application/json')
-        .set('Authorization', 'Bearer ' + this.bearer);
-      run();
-    });
+    ));
+    this.header = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', 'Bearer ' + token.access_token!);
   }
 
-  private httpRequest(url: string, method: string, func: (data: any) => void, body?: any) {
+  private async httpRequest(url: string, method: string, func: (data: any) => void, body?: any) {
+    if (this.header === undefined) {
+      await this.loadToken();
+    }
     let option = { headers: this.header, body: body };
-    this.http.request(method, url, option).subscribe(data => func(data));
+    this.http.request(method, url, option)
+      .pipe(catchError(error => {
+        this.header = undefined;
+        this.httpRequest(url, method, func, body);
+        return EMPTY;
+      })).subscribe(data => func(data));
   }
 
   // LOAD
@@ -84,23 +89,21 @@ export class RestService {
       {skill: name});
   }
 
-  public removeQualificationFromEmployee(qualificationName: string, employeeId: number, func?: () => void) {
-    this.httpRequest('https://employee.szut.dev/employees/' + employeeId + '/qualifications', 'DELETE',
-      () => {}, {skill: qualificationName});
+  public async asyncRemoveQualificationFromEmployee(qualificationName: string, employeeId: number) {
+    let option = { headers: this.header, body: {skill: qualificationName} };
+    await firstValueFrom(this.http.delete('https://employee.szut.dev/employees/' + employeeId + '/qualifications', option));
   }
 
   // EMPLOYEE
 
-  public createEmployee() {
+  public createEmployee(createEmployee: CreateEmployee) {
     this.httpRequest('https://employee.szut.dev/employees/', 'POST',
-      data => this.loadEmployees(),
-      new CreateEmployee(this.dataService.creatingEmployee, this.dataService.selectedQualifications()));
+      data => this.loadEmployees(), createEmployee);
   }
 
-  public editEmployee() {
-    this.httpRequest('https://employee.szut.dev/employees/' + this.dataService.editingEmployee.id!, 'PUT',
-        data => this.loadEmployees(),
-      new CreateEmployee(this.dataService.editingEmployee, this.dataService.selectedQualifications()));
+  public editEmployee(createEmployee: CreateEmployee) {
+    this.httpRequest('https://employee.szut.dev/employees/' + this.dataService.employeeEdit.id!, 'PUT',
+        data => this.loadEmployees(), createEmployee);
   }
 
   public deleteEmployee(id: number) {

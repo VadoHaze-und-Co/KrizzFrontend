@@ -16,9 +16,4 @@ export class EmployeeListComponent {
 
   constructor(public functionService: FunctionService) {
   }
-
-  getGoodWidth() {
-    let cardWidth= 170;
-    return ((window.innerWidth / cardWidth) | 0) * cardWidth;
-  }
 }

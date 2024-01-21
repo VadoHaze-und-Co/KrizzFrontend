@@ -8,11 +8,12 @@ import {EmployeeDetailsComponent} from "./components/dialogs/employee-details/em
 import {Component} from "@angular/core";
 import {AddEmployeeComponent} from "./components/dialogs/add-employee/employee-form.component";
 import {FunctionService} from "./services/function-service";
+import {MessageBoxComponent} from "./components/parts/message-box/message-box.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, EmployeeListComponent, FunctionService, QualificationCardComponent, QualificationListComponent, AddQualificationComponent, EmployeeDetailsComponent],
+  imports: [CommonModule, EmployeeListComponent, FunctionService, QualificationCardComponent, QualificationListComponent, AddQualificationComponent, EmployeeDetailsComponent, MessageBoxComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

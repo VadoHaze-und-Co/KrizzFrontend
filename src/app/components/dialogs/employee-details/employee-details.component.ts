@@ -24,16 +24,16 @@ export class EmployeeDetailsComponent extends Dialog {
   }
 
   public get employee() {
-    return this.functionService.restService.dataService.employeeDetails!;
+    return this.functionService.dataService.employeeDetails!;
   }
 
   public edit() {
-    this.functionService.restService.dataService.editingEmployee = this.employee!;
-    this.functionService.restService.dataService.dialogs.push(EditEmployeeComponent);
+    this.functionService.dataService.employeeEdit = this.employee!;
+    this.functionService.dataService.dialogs.push(EditEmployeeComponent);
   }
 
   public delete() {
-    this.functionService.restService.deleteEmployee(this.employee!.id!);
+    this.functionService.deleteEmployee(this.employee!.id!);
     this.close();
   }
 }
