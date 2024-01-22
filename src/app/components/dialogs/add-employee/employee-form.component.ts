@@ -21,7 +21,7 @@ export class EmployeeFormComponent extends Dialog {
   public editing = false;
   public employee!: Employee;
 
-  constructor(public override functionService: FunctionService) {
+  constructor(functionService: FunctionService) {
     super(functionService);
   }
 
@@ -41,10 +41,6 @@ export class EmployeeFormComponent extends Dialog {
 export class AddEmployeeComponent extends EmployeeFormComponent {
   public override employee = this.functionService.dataService.employeeAdd.clone();
 
-  constructor(public override functionService: FunctionService) {
-    super(functionService);
-  }
-
   public override submit() {
     this.functionService.dataService.employeeAdd = DataService.EMPLOYEE_EXAMPLE.clone();
     this.functionService.addEmployee();
@@ -62,10 +58,6 @@ export class AddEmployeeComponent extends EmployeeFormComponent {
 export class EditEmployeeComponent extends EmployeeFormComponent {
   public override editing = true;
   public override employee = this.functionService.dataService.employeeEdit.clone();
-
-  constructor(public override functionService: FunctionService) {
-    super(functionService);
-  }
 
   public override submit() {
     this.employee.skills = this.functionService.dataService.selectedQualifications().map(q => q.skill!);

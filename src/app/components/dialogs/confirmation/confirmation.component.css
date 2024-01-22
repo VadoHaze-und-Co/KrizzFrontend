@@ -1,0 +1,57 @@
+.close-button {
+  position: fixed;
+  right: 5px;
+  top: 2px;
+}
+
+.outer-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 240px;
+  height: 75px;
+  background-color: white;
+  border-radius: 20px;
+  user-select: none;
+}
+
+.head-line {
+  position: relative;
+  text-align: center;
+  top: 5px;
+  height: 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: "Tahoma", sans-serif;
+}
+
+.buttons {
+  margin-top: 20px;
+  position: relative;
+  width: 220px;
+  height: 20px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.button {
+  position: relative;
+  cursor: pointer;
+  float: left;
+  width: 100px;
+  background-color: darkgray;
+  text-align: center;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
+.button:hover {
+  background-color: gray;
+}
+
+.button-text {
+  font-family: "Tahoma", sans-serif;
+  font-size: 16px;
+  margin-top: 2px;
+}

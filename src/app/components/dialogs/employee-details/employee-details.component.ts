@@ -15,7 +15,7 @@ import {FunctionService} from "../../../services/function-service";
 })
 export class EmployeeDetailsComponent extends Dialog {
 
-  constructor(public override functionService: FunctionService) {
+  constructor(functionService: FunctionService) {
     super(functionService);
     setTimeout(() => {
       while (this.employee === undefined) {}
@@ -33,7 +33,15 @@ export class EmployeeDetailsComponent extends Dialog {
   }
 
   public delete() {
-    this.functionService.deleteEmployee(this.employee!.id!);
-    this.close();
+    this.functionService.dataService.confirmationConfirm = {
+      title: "Mitarbeiter löschen?",
+      yes: () => {
+        this.functionService.deleteEmployee(this.employee!.id!);
+        this.close();
+      },
+      no: () => {
+        this.functionService.dataService.dialogs.push(EmployeeDetailsComponent);
+      }
+    }
   }
 }

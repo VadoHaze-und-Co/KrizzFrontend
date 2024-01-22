@@ -3,6 +3,7 @@ import {Injectable, Type} from "@angular/core";
 import {Qualification} from "../rest-objects/qualification";
 import {Dialog} from "../components/dialogs/dialog";
 import {MessageBox} from "../components/parts/message-box/message-box";
+import {ConfirmationComponent} from "../components/dialogs/confirmation/confirmation.component";
 
 @Injectable({providedIn: "root"})
 export class DataService {
@@ -12,6 +13,7 @@ export class DataService {
   public qualifications: Qualification[] = [];
   public dialogs: Type<Dialog>[] = [];
   public static messageBoxes: MessageBox[] = [];
+  private _confirmationConfirm: {title: string, yes: (() => void), no: (() => void)} | undefined;
 
   // Qualification
   public qualificationEdit: {name: string, id: number} | undefined;
@@ -69,5 +71,16 @@ export class DataService {
 
   public get screenWidth() {
     return window.innerWidth;
+  }
+
+  public get confirmationConfirm() {
+    return this._confirmationConfirm;
+  }
+
+  public set confirmationConfirm(confirmationConfirm: {title: string, yes: (() => void), no: (() => void)} | undefined) {
+    this._confirmationConfirm = confirmationConfirm;
+    if (confirmationConfirm !== undefined) {
+      this.dialogs.push(ConfirmationComponent);
+    }
   }
 }

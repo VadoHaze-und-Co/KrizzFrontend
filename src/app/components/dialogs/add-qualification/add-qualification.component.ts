@@ -13,7 +13,7 @@ import {FunctionService} from "../../../services/function-service";
 })
 export class AddQualificationComponent extends Dialog {
 
-  constructor(public override functionService: FunctionService) {
+  constructor(functionService: FunctionService) {
     super(functionService);
   }
 
