@@ -1,5 +1,5 @@
 import {Employee} from "../rest-objects/employee";
-import {Injectable, Type} from "@angular/core";
+import {Injectable, reflectComponentType, Type} from "@angular/core";
 import {Qualification} from "../rest-objects/qualification";
 import {Dialog} from "../components/dialogs/dialog";
 import {MessageBox} from "../components/parts/message-box/message-box";
@@ -12,6 +12,7 @@ export class DataService {
   public employees: Employee[] = [];
   public qualifications: Qualification[] = [];
   public dialogs: Type<Dialog>[] = [];
+  public dialogInstances: {type: Type<Dialog>, dialog: Dialog}[] = [];
   public static messageBoxes: MessageBox[] = [];
   private _confirmationConfirm: {title: string, yes: (() => void), no: (() => void)} | undefined;
 
@@ -51,13 +52,14 @@ export class DataService {
   }
 
   clickInside = false;
-  clickBackground(type: Type<Dialog>) {
+  clickBackground() {
     if (!this.clickInside) {
       this.qualificationAdd = "";
-      this.dialogs = this.dialogs.filter(dialog => type != dialog);
+      console.log("data")
+      this.dialogInstances[this.dialogInstances.length - 1].dialog.close();
     } else {
-      this.clickInside = false;
     }
+    this.clickInside = false;
   }
 
   clickForeground() {

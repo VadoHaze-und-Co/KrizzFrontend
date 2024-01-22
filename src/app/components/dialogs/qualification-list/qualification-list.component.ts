@@ -21,15 +21,15 @@ export class QualificationListComponent extends Dialog {
   }
 
   public delete(qualification: Qualification) {
-    this.functionService.dataService.confirmationConfirm = {
+    this.functionService.openConfirmation({
       title: "Qualifikation löschen?",
       yes: () => {
         this.functionService.deleteQualification(qualification)
-        this.functionService.dataService.dialogs.push(QualificationListComponent);
+        this.functionService.openDialog(QualificationListComponent);
       },
       no: () => {
-        this.functionService.dataService.dialogs.push(QualificationListComponent);
+        this.functionService.openDialog(QualificationListComponent);
       }
-    }
+    });
   }
 }

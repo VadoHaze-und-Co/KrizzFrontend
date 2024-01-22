@@ -9,11 +9,12 @@ import {Component} from "@angular/core";
 import {AddEmployeeComponent} from "./components/dialogs/add-employee/employee-form.component";
 import {FunctionService} from "./services/function-service";
 import {MessageBoxComponent} from "./components/parts/message-box/message-box.component";
+import {RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, EmployeeListComponent, FunctionService, QualificationCardComponent, QualificationListComponent, AddQualificationComponent, EmployeeDetailsComponent, MessageBoxComponent],
+  imports: [CommonModule, EmployeeListComponent, FunctionService, QualificationCardComponent, QualificationListComponent, AddQualificationComponent, EmployeeDetailsComponent, MessageBoxComponent, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

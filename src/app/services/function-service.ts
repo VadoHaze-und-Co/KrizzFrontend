@@ -1,11 +1,13 @@
 import {Qualification} from "../rest-objects/qualification";
 import {DataService} from "./data-service";
 import {RestService} from "./rest-service";
-import {Injectable, NgModule} from "@angular/core";
+import {Injectable, NgModule, Type} from "@angular/core";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {Employee} from "../rest-objects/employee";
 import {MessageBox} from "../components/parts/message-box/message-box";
 import {CreateEmployee} from "../rest-objects/create-employee";
+import {Dialog} from "../components/dialogs/dialog";
+import {ConfirmationComponent} from "../components/dialogs/confirmation/confirmation.component";
 
 @NgModule({
   imports: [HttpClientModule],
@@ -108,5 +110,14 @@ export class FunctionService {
       return false;
     }
     return true;
+  }
+
+  public openDialog(dialog: Type<Dialog>) {
+    console.log("OPENC")
+    this.dataService.dialogs.push(dialog);
+  }
+
+  public openConfirmation(confirmationConfirm: {title: string, yes: (() => void), no: (() => void)} | undefined) {
+    this.dataService.confirmationConfirm = confirmationConfirm;
   }
 }

@@ -4,6 +4,7 @@ import {EmployeeInitialsComponent} from "../employee-initials/employee-initials.
 import {Employee} from "../../../rest-objects/employee";
 import {DataService} from "../../../services/data-service";
 import {EmployeeDetailsComponent} from "../../dialogs/employee-details/employee-details.component";
+import {FunctionService} from "../../../services/function-service";
 
 @Component({
   selector: 'app-employee-card',
@@ -16,11 +17,11 @@ export class EmployeeCardComponent {
 
   @Input() public employee: Employee | undefined;
 
-  constructor(public dataService: DataService) {
+  constructor(public functionService: FunctionService) {
   }
 
   public click() {
-    this.dataService.employeeDetails = this.employee!;
-    this.dataService.dialogs.push(EmployeeDetailsComponent);
+    this.functionService.dataService.employeeDetails = this.employee!;
+    this.functionService.openDialog(EmployeeDetailsComponent);
   }
 }

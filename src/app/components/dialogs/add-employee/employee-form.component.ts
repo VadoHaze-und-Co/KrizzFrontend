@@ -66,7 +66,7 @@ export class EditEmployeeComponent extends EmployeeFormComponent {
       this.employee.lastName = this.functionService.dataService.employeeEdit.lastName;
     }
     this.functionService.dataService.employeeEdit = this.employee;
-    this.functionService.dataService.dialogs.push(EmployeeDetailsComponent);
+    this.functionService.openDialog(EmployeeDetailsComponent);
     this.functionService.dataService.employeeDetails = this.employee.clone();
     this.functionService.editEmployee();
     super.submit();
@@ -74,6 +74,6 @@ export class EditEmployeeComponent extends EmployeeFormComponent {
 
   override close() {
     super.close();
-    this.functionService.dataService.dialogs.push(EmployeeDetailsComponent);
+    this.functionService.openDialog(EmployeeDetailsComponent);
   }
 }

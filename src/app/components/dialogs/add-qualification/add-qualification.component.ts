@@ -18,8 +18,11 @@ export class AddQualificationComponent extends Dialog {
   }
 
   public submit() {
-    this.functionService.addQualification();
-    this.close();
-    this.functionService.restService.loadQualifications();
+    this.functionService.openConfirmation({
+      title: "L", yes: () => {}, no: () => {}
+    });
+    // this.functionService.addQualification();
+    // this.close();
+    // this.functionService.restService.loadQualifications();
   }
 }

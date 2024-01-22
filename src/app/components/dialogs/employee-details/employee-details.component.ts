@@ -29,19 +29,19 @@ export class EmployeeDetailsComponent extends Dialog {
 
   public edit() {
     this.functionService.dataService.employeeEdit = this.employee!;
-    this.functionService.dataService.dialogs.push(EditEmployeeComponent);
+    this.functionService.openDialog(EditEmployeeComponent);
   }
 
   public delete() {
-    this.functionService.dataService.confirmationConfirm = {
+    this.functionService.openConfirmation({
       title: "Mitarbeiter löschen?",
       yes: () => {
         this.functionService.deleteEmployee(this.employee!.id!);
         this.close();
       },
       no: () => {
-        this.functionService.dataService.dialogs.push(EmployeeDetailsComponent);
+        this.functionService.openDialog(EmployeeDetailsComponent);
       }
-    }
+    });
   }
 }

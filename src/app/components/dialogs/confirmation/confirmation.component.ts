@@ -23,15 +23,20 @@ export class ConfirmationComponent extends Dialog {
     this.close();
     if (defined) {
       if (yes) {
-        setTimeout(() => yef());
+        setTimeout(() => {
+          yef();
+          this.functionService.dataService.confirmationConfirm = undefined;
+        });
       } else {
-        setTimeout(() => nof());
+        setTimeout(() => {
+          nof();
+          this.functionService.dataService.confirmationConfirm = undefined;
+        });
       }
     }
   }
 
   override close() {
     super.close();
-    this.functionService.dataService.confirmationConfirm = undefined;
   }
 }
