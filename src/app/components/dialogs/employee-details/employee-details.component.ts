@@ -17,10 +17,7 @@ export class EmployeeDetailsComponent extends Dialog {
 
   constructor(functionService: FunctionService) {
     super(functionService);
-    setTimeout(() => {
-      while (this.employee === undefined) {}
-      functionService.restService.loadQualificationsForEmployee(this.employee!);
-    });
+    functionService.restService.loadQualificationsForEmployee(this.employee!);
   }
 
   public get employee() {
@@ -33,6 +30,7 @@ export class EmployeeDetailsComponent extends Dialog {
   }
 
   public delete() {
+    this.functionService.dataService.employees = this.functionService.dataService.employees.filter(e => e.id != this.employee.id);
     this.functionService.openConfirmation({
       title: "Mitarbeiter löschen?",
       yes: () => {

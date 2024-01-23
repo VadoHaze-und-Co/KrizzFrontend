@@ -1,5 +1,5 @@
 import {Employee} from "../rest-objects/employee";
-import {Injectable, reflectComponentType, Type} from "@angular/core";
+import {Injectable, Type} from "@angular/core";
 import {Qualification} from "../rest-objects/qualification";
 import {Dialog} from "../components/dialogs/dialog";
 import {MessageBox} from "../components/parts/message-box/message-box";
@@ -12,19 +12,16 @@ export class DataService {
   public employees: Employee[] = [];
   public qualifications: Qualification[] = [];
   public dialogs: Type<Dialog>[] = [];
-  public dialogInstances: {type: Type<Dialog>, dialog: Dialog}[] = [];
-  public static messageBoxes: MessageBox[] = [];
+  public messageBoxes: MessageBox[] = [];
   private _confirmationConfirm: {title: string, yes: (() => void), no: (() => void)} | undefined;
 
   // Qualification
+  public qualificationAdd: string = "";
   public qualificationEdit: {name: string, id: number} | undefined;
-  public qualificationAdd = "";
 
   // Employees
-  public static EMPLOYEE_EXAMPLE = new Employee(-1, "Testname", "Aaron", "Street", "12434", "Brementown", "+2145342659");
-  public employeeDetails = DataService.EMPLOYEE_EXAMPLE;
-  public employeeAdd = DataService.EMPLOYEE_EXAMPLE;
-  public employeeEdit = DataService.EMPLOYEE_EXAMPLE;
+  public employeeDetails = new Employee();
+  public employeeEdit = new Employee();
 
   public selectedQualifications() {
     let qualifications: Qualification[] = [];
@@ -54,10 +51,7 @@ export class DataService {
   clickInside = false;
   clickBackground() {
     if (!this.clickInside) {
-      this.qualificationAdd = "";
-      console.log("data")
-      this.dialogInstances[this.dialogInstances.length - 1].dialog.close();
-    } else {
+      this.dialogs.pop();
     }
     this.clickInside = false;
   }

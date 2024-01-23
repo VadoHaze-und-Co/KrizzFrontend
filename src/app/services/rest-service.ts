@@ -34,8 +34,10 @@ export class RestService {
     let option = { headers: this.header, body: body };
     this.http.request(method, url, option)
       .pipe(catchError(error => {
-        this.header = undefined;
-        this.httpRequest(url, method, func, body);
+        if (error.status == 401) {
+          this.header = undefined;
+          this.httpRequest(url, method, func, body);
+        }
         return EMPTY;
       })).subscribe(data => func(data));
   }
@@ -60,6 +62,9 @@ export class RestService {
   }
 
   public loadQualificationsForEmployee(employee: Employee, func?: () => void) {
+    if (!this.dataService.employees.map(e=>e.id).includes(employee.id)) {
+      return;
+    }
     this.httpRequest('https://employee.szut.dev/employees/' + employee.id + '/qualifications', 'GET', data => {
       employee.skills = (data as EmployeeQualification)
         .skillSet?.map(skill => skill.skill)
@@ -108,6 +113,9 @@ export class RestService {
 
   public deleteEmployee(id: number) {
     this.httpRequest('https://employee.szut.dev/employees/' + id, 'DELETE',
-        data => this.loadEmployees());
+        data => {
+          this.dataService.employeeDetails = new Employee();
+          this.loadEmployees()
+        });
   }
 }

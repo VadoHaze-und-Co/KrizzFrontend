@@ -39,12 +39,17 @@ export class EmployeeFormComponent extends Dialog {
   styleUrl: './employee-form.component.css'
 })
 export class AddEmployeeComponent extends EmployeeFormComponent {
-  public override employee = this.functionService.dataService.employeeAdd.clone();
+
+  constructor(public override functionService: FunctionService) {
+    super(functionService);
+    this.employee = new Employee();
+  }
 
   public override submit() {
-    this.functionService.dataService.employeeAdd = DataService.EMPLOYEE_EXAMPLE.clone();
-    this.functionService.addEmployee();
-    super.submit();
+    if (this.functionService.employeeValid(this.employee)) {
+      this.functionService.addEmployee(this.employee);
+      super.submit();
+    }
   }
 }
 
@@ -57,19 +62,21 @@ export class AddEmployeeComponent extends EmployeeFormComponent {
 })
 export class EditEmployeeComponent extends EmployeeFormComponent {
   public override editing = true;
-  public override employee = this.functionService.dataService.employeeEdit.clone();
+
+  constructor(public override functionService: FunctionService) {
+    super(functionService);
+    this.employee = this.functionService.dataService.employeeEdit.clone();
+  }
 
   public override submit() {
     this.employee.skills = this.functionService.dataService.selectedQualifications().map(q => q.skill!);
-    if (!this.functionService.employeeValid(this.employee)) {
-      this.employee.firstName = this.functionService.dataService.employeeEdit.firstName;
-      this.employee.lastName = this.functionService.dataService.employeeEdit.lastName;
-    }
     this.functionService.dataService.employeeEdit = this.employee;
-    this.functionService.openDialog(EmployeeDetailsComponent);
-    this.functionService.dataService.employeeDetails = this.employee.clone();
-    this.functionService.editEmployee();
-    super.submit();
+    if (this.functionService.employeeValid(this.employee)) {
+      this.functionService.editEmployee(this.employee);
+      this.functionService.openDialog(EmployeeDetailsComponent);
+      this.functionService.dataService.employeeDetails = this.employee.clone();
+      super.submit();
+    }
   }
 
   override close() {

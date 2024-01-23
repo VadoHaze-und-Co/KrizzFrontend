@@ -63,16 +63,15 @@ export class FunctionService {
 
   // Employee
 
-  public addEmployee() {
-    if (!this.employeeValid(this.dataService.employeeAdd)) {
+  public addEmployee(employee: Employee) {
+    if (!this.employeeValid(employee)) {
       return;
     }
-    this.restService.createEmployee(new CreateEmployee(this.dataService.employeeAdd, this.dataService.selectedQualifications()));
+    this.restService.createEmployee(new CreateEmployee(employee, this.dataService.selectedQualifications()));
   }
 
-  public editEmployee() {
-    this.restService.editEmployee(new CreateEmployee(this.dataService.employeeEdit, this.dataService.selectedQualifications()));
-    return true;
+  public editEmployee(employee: Employee) {
+    this.restService.editEmployee(new CreateEmployee(employee, this.dataService.selectedQualifications()));
   }
 
   public deleteEmployee(id: number) {
@@ -81,9 +80,9 @@ export class FunctionService {
 
   // Validator
 
-  private empty(name: string) {
-    if (name.length == 0) {
-      DataService.messageBoxes.push(new MessageBox("#ff0000", "Der Name darf nicht leer sein"))
+  private empty(name?: string, field?: string) {
+    if (name === undefined || name.length == 0) {
+      this.showMessageBox((field === undefined ? "Das Feld" : field) + " darf nicht leer sein", "#ff0000")
       return true;
     }
     return false;
@@ -94,30 +93,49 @@ export class FunctionService {
       return false;
     }
     if (this.dataService.qualifications.filter(q => q.skill!.toLowerCase() == name.toLowerCase()).length >= 1) {
-      DataService.messageBoxes.push(new MessageBox("#ff0000", "Diese Qualifikation existiert bereits"))
+      this.showMessageBox("Diese Qualifikation existiert bereits", "#ff0000")
       return false;
     }
     return true;
   }
 
   public employeeValid(employee: Employee) {
-    let name = employee.employeeFullName(-1);
-    if (this.empty(name)) {
+    if (this.empty(employee.lastName, "Der Name")
+      || this.empty(employee.firstName, "Der Name")
+      || this.empty(employee.postcode, "Die Postleitzahl")
+      || this.empty(employee.phone, "Die Telefonnummer")
+      || this.empty(employee.street, "Die Straße")
+      || this.empty(employee.city, "Die Stadt")) {
       return false;
     }
+    if (employee.postcode.length != 5) {
+      this.showMessageBox("Die Postleitzahl muss fünf Zeichen lang sein man", "#ff0000")
+      return false;
+    }
+    let name = employee.employeeFullName(-1);
     if (this.dataService.employees.filter(q => q.employeeFullName(-1).toLowerCase() == name.toLowerCase() && q.id != employee.id).length >= 1) {
-      DataService.messageBoxes.push(new MessageBox("#ff0000", "Dieser Mitarbeiter existiert bereits"))
+      this.showMessageBox("Dieser Mitarbeiter existiert bereits", "#ff0000")
       return false;
     }
     return true;
   }
 
+  // Utils
+
   public openDialog(dialog: Type<Dialog>) {
-    console.log("OPENC")
-    this.dataService.dialogs.push(dialog);
+    if (this.dataService.dialogs.map(d => d.name).includes(dialog.name)) {
+      return;
+    }
+    setTimeout(() => this.dataService.dialogs.push(dialog));
   }
 
   public openConfirmation(confirmationConfirm: {title: string, yes: (() => void), no: (() => void)} | undefined) {
-    this.dataService.confirmationConfirm = confirmationConfirm;
+    setTimeout(() => this.dataService.confirmationConfirm = confirmationConfirm);
+  }
+
+  public showMessageBox(message: string, color: string) {
+    let box = new MessageBox(color, message);
+    this.dataService.messageBoxes.push(box);
+    setTimeout(() => this.dataService.messageBoxes = this.dataService.messageBoxes.filter(messageBox => messageBox != box), 2300);
   }
 }

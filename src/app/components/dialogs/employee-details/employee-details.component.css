@@ -82,11 +82,16 @@
 
 .buttons {
   position: relative;
+  transform: translate(-50%, 0);
+  left: 50%;
+  width: 260px;
   top: 160px;
 }
 
 .button {
   position: relative;
   margin: 5px;
+  width: 24px;
   cursor: pointer;
+  font-size: 24px;
 }

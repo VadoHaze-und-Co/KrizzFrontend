@@ -1,13 +1,13 @@
 export class Employee {
   public skills: string[] = [];
 
-  constructor(public id?: number,
-              public lastName?: string,
-              public firstName?: string,
-              public street?: string,
-              public postcode?: string,
-              public city?: string,
-              public phone?: string) {
+  constructor(public id: number = -1,
+              public lastName: string = "",
+              public firstName: string = "",
+              public street: string = "",
+              public postcode: string = "",
+              public city: string = "",
+              public phone: string = "") {
   }
 
   public employeeFullName(len?: number): string {

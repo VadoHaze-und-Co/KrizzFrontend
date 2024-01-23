@@ -18,6 +18,6 @@ export class EmployeeInitialsComponent {
     if (this.employee === undefined) {
       return "";
     }
-    return (this.employee.firstName?.charAt(0)! + this.employee.lastName?.charAt(0)!).toUpperCase();
+    return (this.employee.firstName.charAt(0)! + this.employee.lastName.charAt(0)!).toUpperCase();
   }
 }

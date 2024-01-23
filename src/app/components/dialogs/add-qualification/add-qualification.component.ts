@@ -15,14 +15,16 @@ export class AddQualificationComponent extends Dialog {
 
   constructor(functionService: FunctionService) {
     super(functionService);
+    this.functionService.dataService.qualificationAdd = "";
   }
 
   public submit() {
-    this.functionService.openConfirmation({
-      title: "L", yes: () => {}, no: () => {}
-    });
-    // this.functionService.addQualification();
-    // this.close();
-    // this.functionService.restService.loadQualifications();
+    this.functionService.addQualification();
+    this.close();
+    this.functionService.restService.loadQualifications();
+  }
+
+  override close() {
+    super.close();
   }
 }
