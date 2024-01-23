@@ -16,8 +16,9 @@ import {QualificationListComponent} from "../components/dialogs/qualification-li
   imports: [HttpClientModule],
   providers: [HttpClientModule]
 })
-@Injectable({providedIn: "root"})
+@Injectable({ providedIn: "root" })
 export class FunctionService {
+
   public restService: RestService;
 
   constructor(http: HttpClient, private dataService: DataService) {
@@ -26,8 +27,12 @@ export class FunctionService {
 
   // Qualification
 
-  public addQualification(name: string) {
+  public addQualification(name: string, select?: boolean) {
     this.restService.addQualification(name);
+    if (select !== undefined && select) {
+      this.dataService.employeeAdd.skills.push(name);
+      this.dataService.employeeEdit.skills.push(name);
+    }
   }
 
   public editQualification(qualification: Qualification) {
@@ -70,16 +75,8 @@ export class FunctionService {
 
   // Validator
 
-  private empty(name?: string, field?: string) {
-    if (name === undefined || name.length == 0) {
-      this.showMessageBox((field === undefined ? "Das Feld" : field) + " darf nicht leer sein", "#ff0000")
-      return true;
-    }
-    return false;
-  }
-
   public qualificationValid(name: string) {
-    if (this.empty(name)) {
+    if (this.empty(name, "Der Name")) {
       return false;
     }
     if (this.dataService.qualifications.filter(q => q.skill!.toLowerCase() == name.toLowerCase()).length >= 1) {
@@ -110,7 +107,15 @@ export class FunctionService {
     return true;
   }
 
-  // Pop Up
+  private empty(name?: string, field?: string) {
+    if (name === undefined || name.length == 0) {
+      this.showMessageBox((field === undefined ? "Das Feld" : field) + " darf nicht leer sein", "#ff0000")
+      return true;
+    }
+    return false;
+  }
+
+  // Dialog
 
   public openQualificationListDialog() {
     this.openDialog(QualificationListComponent);

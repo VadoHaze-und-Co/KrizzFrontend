@@ -1,8 +1,8 @@
 <ng-container *ngFor="let message of dataService.messageBoxes">
   <div class="space"></div>
   <div [style.width]="dataService.screenWidth + 'px'">
-    <div class="message-box" [style.border]="message.color + 'aa solid 2px'"
-         [style.background-color]="message.color + '77'" [style.width]="dataService.screenWidth - 60 + 'px'">
+    <div [style.background-color]="message.color + '77'" [style.border]="message.color + 'aa solid 2px'"
+         [style.width]="dataService.screenWidth - 60 + 'px'" class="message-box">
       {{ message.message }}
     </div>
   </div>

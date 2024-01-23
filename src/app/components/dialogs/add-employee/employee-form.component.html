@@ -1,4 +1,4 @@
-<div class="qualification-list" (click)="dataService.clickForeground()">
+<div (click)="dataService.clickForeground()" class="qualification-list">
   <ng-container *ngIf="editing; then editing2 else creating2">
   </ng-container>
   <ng-template #editing2>
@@ -7,50 +7,50 @@
   <ng-template #creating2>
     <div class="head-line">Mitarbeiter hinzufügen</div>
   </ng-template>
-  <div class="close-button"><span class="material-icons" style="font-size: 24px; cursor: pointer" (click)="close()">close</span>
+  <div class="close-button"><span (click)="close()" class="material-icons" style="font-size: 24px; cursor: pointer">close</span>
   </div>
   <div style="height: 20px"></div>
-  <div style="" class="text-field centered"><input [(ngModel)]="employee.firstName" (input)="type()" type="text"
-                                                   class="input"
-                                                   placeholder="Vorname"></div>
+  <div class="text-field centered" style=""><input (input)="type()" [(ngModel)]="employee.firstName" class="input"
+                                                   placeholder="Vorname"
+                                                   type="text"></div>
   <div style="height: 10px"></div>
-  <div style="" class="text-field centered"><input [(ngModel)]="employee.lastName" (input)="type()" type="text"
-                                                   class="input"
-                                                   placeholder="Nachname"></div>
+  <div class="text-field centered" style=""><input (input)="type()" [(ngModel)]="employee.lastName" class="input"
+                                                   placeholder="Nachname"
+                                                   type="text"></div>
   <div style="height: 10px"></div>
-  <div style="" class="text-field centered"><input [(ngModel)]="employee.street" (input)="type()" type="text"
-                                                   class="input"
-                                                   placeholder="Straße"></div>
+  <div class="text-field centered" style=""><input (input)="type()" [(ngModel)]="employee.street" class="input"
+                                                   placeholder="Straße"
+                                                   type="text"></div>
   <div style="height: 10px"></div>
-  <div style="" class="text-field centered"><input [(ngModel)]="employee.city" (input)="type()" type="text"
-                                                   class="input"
-                                                   placeholder="Stadt"></div>
+  <div class="text-field centered" style=""><input (input)="type()" [(ngModel)]="employee.city" class="input"
+                                                   placeholder="Stadt"
+                                                   type="text"></div>
   <div style="height: 10px"></div>
-  <div style="" class="text-field centered"><input [(ngModel)]="employee.postcode" (input)="type()" type="text"
-                                                   class="input"
-                                                   placeholder="PLZ"></div>
+  <div class="text-field centered" style=""><input (input)="type()" [(ngModel)]="employee.postcode" class="input"
+                                                   placeholder="PLZ"
+                                                   type="text"></div>
   <div style="height: 10px"></div>
-  <div style="" class="text-field centered"><input [(ngModel)]="employee.phone" (input)="type()" type="text"
-                                                   class="input"
-                                                   placeholder="Telefonnummer"></div>
+  <div class="text-field centered" style=""><input (input)="type()" [(ngModel)]="employee.phone" class="input"
+                                                   placeholder="Telefonnummer"
+                                                   type="text"></div>
   <div style="height: 10px"></div>
   <div class="separator">
     <div class="separator-line"></div>
   </div>
-  <app-qualification-card style="position: relative" [selectable]="true" [employee]="employee"
-                          (input)="type()"></app-qualification-card>
+  <app-qualification-card (input)="type()" [employee]="employee" [selectable]="true"
+                          style="position: relative"></app-qualification-card>
   <div style="height: 15px"></div>
 
   <ng-container *ngIf="editing; then edit else create">
   </ng-container>
   <ng-template #edit>
     <div class="add-button">
-      <div class="add-button-text" (click)="submit()">Speichern</div>
+      <div (click)="submit()" class="add-button-text">Speichern</div>
     </div>
   </ng-template>
   <ng-template #create>
     <div class="add-button">
-      <div class="add-button-text" (click)="submit()">Erstellen</div>
+      <div (click)="submit()" class="add-button-text">Erstellen</div>
     </div>
   </ng-template>
 </div>

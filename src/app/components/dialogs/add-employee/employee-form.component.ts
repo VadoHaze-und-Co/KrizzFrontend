@@ -61,7 +61,7 @@ export class AddEmployeeComponent extends EmployeeFormComponent {
 
   override close() {
     super.close();
-    this.employee = new Employee();
+    this.dataService.employeeAdd = new Employee();
   }
 }
 

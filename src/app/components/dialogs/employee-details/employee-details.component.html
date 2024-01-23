@@ -1,9 +1,9 @@
-<div class="outer-container" (click)="dataService.clickForeground()">
-  <div class="close-button"><span class="material-icons" style="font-size: 24px; cursor: pointer" (click)="close()">close</span>
+<div (click)="dataService.clickForeground()" class="outer-container">
+  <div class="close-button"><span (click)="close()" class="material-icons" style="font-size: 24px; cursor: pointer">close</span>
   </div>
   <div>
-    <app-employee-initials class="initials" [employee]="dataService.employeeDetails"
-                           [big]="true"></app-employee-initials>
+    <app-employee-initials [big]="true" [employee]="dataService.employeeDetails"
+                           class="initials"></app-employee-initials>
   </div>
   <div class="name-text">
     <div>{{ dataService.employeeDetails.employeeFullName(-1) }}</div>
@@ -35,7 +35,7 @@
   </div>
   <app-qualification-card class="qualification-card"></app-qualification-card>
   <div class="buttons">
-    <span class="button material-icons" (click)="delete()" style="color: red;">delete</span>
-    <span class="button material-icons" (click)="edit()" style="left: 195px">edit</span>
+    <span (click)="delete()" class="button material-icons" style="color: red;">delete</span>
+    <span (click)="edit()" class="button material-icons" style="left: 195px">edit</span>
   </div>
 </div>

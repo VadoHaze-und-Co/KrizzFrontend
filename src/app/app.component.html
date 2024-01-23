@@ -1,5 +1,5 @@
 <div style="width: 100%; height: 100%">
-  <app-employee-list class="employee-list" [style.height]="(window.innerHeight - 130) + 'px'"></app-employee-list>
+  <app-employee-list [style.height]="(window.innerHeight - 130) + 'px'" class="employee-list"></app-employee-list>
   <div class="search-bar" style=""></div> <!-- SEARCH -->
   <div class="nav-bar">
     <button (click)="functionService.openQualificationListDialog()">
@@ -13,7 +13,7 @@
     <ng-container *ngComponentOutlet="dialog" style="position: absolute"></ng-container>
   </ng-container>
   <ng-container *ngIf="dataService.foregroundDialog() !== undefined">
-    <div class="background" (click)="dataService.clickBackground()" style="position: absolute">
+    <div (click)="dataService.clickBackground()" class="background" style="position: absolute">
       <router-outlet *ngComponentOutlet="dataService.foregroundDialog()!" style="position: absolute"></router-outlet>
     </div>
   </ng-container>

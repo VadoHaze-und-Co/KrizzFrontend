@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {EmployeeListComponent} from "./components/employee-list/employee-list.component";
 import {QualificationCardComponent} from "./components/parts/qualification-card/qualification-card.component";
 import {Employee} from "./rest-objects/employee";
@@ -22,13 +22,11 @@ import {DataService} from "./services/data-service";
 export class AppComponent {
   title = 'Employee Service';
   protected readonly window = window;
-
-  constructor(public dataService: DataService, public functionService: FunctionService) {
-  }
-
   protected readonly Employee = Employee;
-
   protected readonly AddQualificationComponent = AddQualificationComponent;
   protected readonly QualificationListComponent = QualificationListComponent;
   protected readonly AddEmployeeComponent = AddEmployeeComponent;
+
+  constructor(public dataService: DataService, public functionService: FunctionService) {
+  }
 }

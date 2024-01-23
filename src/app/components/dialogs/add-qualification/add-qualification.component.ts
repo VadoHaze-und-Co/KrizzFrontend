@@ -24,7 +24,7 @@ export class AddQualificationComponent extends Dialog {
     if (!this.functionService.qualificationValid(this.qualification)) {
       return;
     }
-    this.functionService.addQualification(this.qualification);
+    this.functionService.addQualification(this.qualification, true);
     this.close();
     this.functionService.restService.loadQualifications();
   }
