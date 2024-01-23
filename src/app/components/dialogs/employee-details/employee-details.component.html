@@ -1,27 +1,38 @@
-<div class="outer-container" (click)="functionService.dataService.clickForeground()">
-  <div class="close-button"><span class="material-icons" style="font-size: 24px; cursor: pointer" (click)="close()">close</span></div>
-  <div><app-employee-initials class="initials" [employee]="functionService.dataService.employeeDetails" [big]="true"></app-employee-initials></div>
-  <div class="name-text"><div>{{functionService.dataService.employeeDetails.employeeFullName(-1)}}</div></div>
-  <div class="separator" style="top: 160px"><div class="separator-line"></div></div>
+<div class="outer-container" (click)="dataService.clickForeground()">
+  <div class="close-button"><span class="material-icons" style="font-size: 24px; cursor: pointer" (click)="close()">close</span>
+  </div>
+  <div>
+    <app-employee-initials class="initials" [employee]="dataService.employeeDetails"
+                           [big]="true"></app-employee-initials>
+  </div>
+  <div class="name-text">
+    <div>{{ dataService.employeeDetails.employeeFullName(-1) }}</div>
+  </div>
+  <div class="separator" style="top: 160px">
+    <div class="separator-line"></div>
+  </div>
   <div class="detail-infos">
     <div>
       <div class="info-field">ID</div>
-      <div class="info">{{functionService.dataService.employeeDetails.id}}</div>
+      <div class="info">{{ dataService.employeeDetails.id }}</div>
+      <!--      //TODO-->
     </div>
     <div>
       <div class="info-field">Str</div>
-      <div class="info">{{functionService.dataService.employeeDetails.street}}</div>
+      <div class="info">{{ dataService.employeeDetails.street }}</div>
     </div>
     <div>
       <div class="info-field">PLZ/City</div>
-      <div class="info">{{functionService.dataService.employeeDetails.postcode + ', ' + functionService.dataService.employeeDetails.city}}</div>
+      <div class="info">{{ dataService.employeeDetails.postcode + ', ' + dataService.employeeDetails.city }}</div>
     </div>
     <div>
       <div class="info-field">Phone</div>
-      <div class="info">{{functionService.dataService.employeeDetails.phone}}</div>
+      <div class="info">{{ dataService.employeeDetails.phone }}</div>
     </div>
   </div>
-  <div class="separator" style="top: 160px"><div class="separator-line"></div></div>
+  <div class="separator" style="top: 160px">
+    <div class="separator-line"></div>
+  </div>
   <app-qualification-card class="qualification-card"></app-qualification-card>
   <div class="buttons">
     <span class="button material-icons" (click)="delete()" style="color: red;">delete</span>

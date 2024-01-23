@@ -2,19 +2,19 @@
   <app-employee-list class="employee-list" [style.height]="(window.innerHeight - 130) + 'px'"></app-employee-list>
   <div class="search-bar" style=""></div> <!-- SEARCH -->
   <div class="nav-bar">
-    <button (click)="functionService.openDialog(QualificationListComponent)">
+    <button (click)="functionService.openQualificationListDialog()">
       list
     </button>
-    <button (click)="functionService.openDialog(AddEmployeeComponent)" style="float: right; position: relative">
+    <button (click)="functionService.openAddEmployeeDialog()" style="float: right; position: relative">
       add
     </button>
   </div> <!-- NAVBAR -->
-  <ng-container *ngFor="let dialog of functionService.dataService.backgroundDialogs()">
+  <ng-container *ngFor="let dialog of dataService.backgroundDialogs()">
     <ng-container *ngComponentOutlet="dialog" style="position: absolute"></ng-container>
   </ng-container>
-  <ng-container *ngIf="functionService.dataService.foregroundDialog() !== undefined">
-    <div class="background" (click)="functionService.dataService.clickBackground()" style="position: absolute">
-      <router-outlet *ngComponentOutlet="functionService.dataService.foregroundDialog()!" style="position: absolute"></router-outlet>
+  <ng-container *ngIf="dataService.foregroundDialog() !== undefined">
+    <div class="background" (click)="dataService.clickBackground()" style="position: absolute">
+      <router-outlet *ngComponentOutlet="dataService.foregroundDialog()!" style="position: absolute"></router-outlet>
     </div>
   </ng-container>
   <app-message-box style="position: fixed; pointer-events: none"></app-message-box>

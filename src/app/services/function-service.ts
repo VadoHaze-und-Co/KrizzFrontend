@@ -7,41 +7,32 @@ import {Employee} from "../rest-objects/employee";
 import {MessageBox} from "../components/parts/message-box/message-box";
 import {CreateEmployee} from "../rest-objects/create-employee";
 import {Dialog} from "../components/dialogs/dialog";
-import {ConfirmationComponent} from "../components/dialogs/confirmation/confirmation.component";
+import {EmployeeDetailsComponent} from "../components/dialogs/employee-details/employee-details.component";
+import {AddQualificationComponent} from "../components/dialogs/add-qualification/add-qualification.component";
+import {AddEmployeeComponent, EditEmployeeComponent} from "../components/dialogs/add-employee/employee-form.component";
+import {QualificationListComponent} from "../components/dialogs/qualification-list/qualification-list.component";
 
 @NgModule({
   imports: [HttpClientModule],
   providers: [HttpClientModule]
 })
-@Injectable({ providedIn: "root" })
+@Injectable({providedIn: "root"})
 export class FunctionService {
   public restService: RestService;
 
-  constructor(http: HttpClient, public dataService: DataService) {
+  constructor(http: HttpClient, private dataService: DataService) {
     this.restService = new RestService(http, this.dataService);
   }
 
   // Qualification
 
-  public addQualification() {
-    let name = this.dataService.qualificationAdd;
-    if (!this.qualificationValid(name)) {
-      return;
-    }
+  public addQualification(name: string) {
     this.restService.addQualification(name);
-    this.dataService.qualificationAdd = "";
   }
 
   public editQualification(qualification: Qualification) {
-    if (this.dataService.qualificationEdit !== undefined) {
-      this.dataService.qualificationEdit = undefined;
-    }
-    this.dataService.qualificationEdit = {name: qualification.skill!, id: qualification.id!};
-  }
-
-  public saveQualification() {
-    this.dataService.qualifications.filter(q => q.id == this.dataService.qualificationEdit?.id).forEach(q => {
-      let name = this.dataService.qualificationEdit!.name;
+    this.dataService.qualifications.filter(q => q.id == qualification.id).forEach(q => {
+      let name = qualification.skill;
       if (!this.qualificationValid(name)) {
         return;
       }
@@ -49,7 +40,6 @@ export class FunctionService {
         this.restService.editQualification(q.id!, name);
       }
     });
-    this.dataService.qualificationEdit = undefined;
   }
 
   public async deleteQualification(qualification: Qualification) {
@@ -88,7 +78,7 @@ export class FunctionService {
     return false;
   }
 
-  private qualificationValid(name: string) {
+  public qualificationValid(name: string) {
     if (this.empty(name)) {
       return false;
     }
@@ -120,16 +110,31 @@ export class FunctionService {
     return true;
   }
 
-  // Utils
+  // Pop Up
 
-  public openDialog(dialog: Type<Dialog>) {
-    if (this.dataService.dialogs.map(d => d.name).includes(dialog.name)) {
-      return;
-    }
-    setTimeout(() => this.dataService.dialogs.push(dialog));
+  public openQualificationListDialog() {
+    this.openDialog(QualificationListComponent);
   }
 
-  public openConfirmation(confirmationConfirm: {title: string, yes: (() => void), no: (() => void)} | undefined) {
+  public openAddQualificationDialog() {
+    this.openDialog(AddQualificationComponent);
+  }
+
+  public openAddEmployeeDialog() {
+    this.openDialog(AddEmployeeComponent);
+  }
+
+  public openEmployeeDetailsDialog(employee: Employee) {
+    this.dataService.employeeDetails = employee;
+    this.openDialog(EmployeeDetailsComponent);
+  }
+
+  public openEditEmployeeDialog(employee: Employee) {
+    this.dataService.employeeEdit = employee;
+    this.openDialog(EditEmployeeComponent);
+  }
+
+  public openConfirmation(confirmationConfirm: { title: string, info?: string, yes: (() => void), no?: (() => void) }) {
     setTimeout(() => this.dataService.confirmationConfirm = confirmationConfirm);
   }
 
@@ -137,5 +142,12 @@ export class FunctionService {
     let box = new MessageBox(color, message);
     this.dataService.messageBoxes.push(box);
     setTimeout(() => this.dataService.messageBoxes = this.dataService.messageBoxes.filter(messageBox => messageBox != box), 2300);
+  }
+
+  private openDialog(dialog: Type<Dialog>) {
+    if (this.dataService.dialogs.map(d => d.name).includes(dialog.name)) {
+      return;
+    }
+    setTimeout(() => this.dataService.dialogs.push(dialog));
   }
 }

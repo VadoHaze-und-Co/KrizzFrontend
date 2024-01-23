@@ -1,7 +1,6 @@
-<div class="outer-container" (click)="functionService.dataService.clickForeground()">
-<!--  <div class="close-button"><span class="material-icons" style="font-size: 24px; cursor: pointer" (click)="close()">close</span></div>-->
-  <div class="head-line">{{functionService.dataService.confirmationConfirm?.title}}</div>
-
+<div class="outer-container" (click)="dataService.clickForeground()" [style.height]="hasInfo() ? '85px' : '69px'">
+  <div class="head-line">{{ dataService.confirmationConfirm?.title }}</div>
+  <div class="info-text" *ngIf="hasInfo()">{{ dataService.confirmationConfirm?.info }}</div>
   <div class="buttons">
     <div class="button" style="margin-right: 20px">
       <div class="button-text" (click)="submit(false)">Nein</div>

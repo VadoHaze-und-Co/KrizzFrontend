@@ -1,6 +1,6 @@
 <div class="outerEmployeeContainer">
-  <div [style.width]="functionService.dataService.goodListWidth() + 'px'" class="innerEmployeeContainer">
-    <ng-container *ngFor="let employee of functionService.dataService.employees">
+  <div [style.width]="dataService.goodListWidth() + 'px'" class="innerEmployeeContainer">
+    <ng-container *ngFor="let employee of dataService.employees">
       <app-employee-card [employee]="employee"></app-employee-card>
     </ng-container>
   </div>

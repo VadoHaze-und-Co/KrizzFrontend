@@ -1,14 +1,16 @@
 <div class="outer-container">
   <div class="head-line">
     <div class="title" style="float: left">Qualifikationen</div>
-    <div *ngIf="selectable" class="title add-button" style="float: right" (click)="functionService.openDialog(AddQualificationComponent)">+</div>
+    <div *ngIf="selectable" class="title add-button" style="float: right"
+         (click)="functionService.openAddQualificationDialog()">+
+    </div>
   </div>
   <div class="qualification-list">
     <div class="inner-list">
       <ng-container *ngIf="selectable; then all else mine">
       </ng-container>
       <ng-template #all>
-        <div class="qualification" *ngFor="let qualification of functionService.dataService.qualifications">
+        <div class="qualification" *ngFor="let qualification of dataService.qualifications">
           <ng-container *ngIf="containsSkill(qualification); then selected else unselected"></ng-container>
           <ng-template #selected>
             <input type="checkbox" class="select-button" checked name="{{qualification.id}}">
@@ -16,12 +18,12 @@
           <ng-template #unselected>
             <input type="checkbox" class="select-button" name="{{qualification.id}}">
           </ng-template>
-          {{qualification.skill}}
+          {{ qualification.skill }}
         </div>
       </ng-template>
       <ng-template #mine>
-        <div class="qualification" *ngFor="let qualification of functionService.dataService.employeeDetails.skills">
-          {{qualification}}
+        <div class="qualification" *ngFor="let qualification of dataService.employeeDetails.skills">
+          {{ qualification }}
         </div>
       </ng-template>
     </div>

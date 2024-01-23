@@ -31,7 +31,7 @@ export class RestService {
     if (this.header === undefined) {
       await this.loadToken();
     }
-    let option = { headers: this.header, body: body };
+    let option = {headers: this.header, body: body};
     this.http.request(method, url, option)
       .pipe(catchError(error => {
         if (error.status == 401) {
@@ -62,7 +62,7 @@ export class RestService {
   }
 
   public loadQualificationsForEmployee(employee: Employee, func?: () => void) {
-    if (!this.dataService.employees.map(e=>e.id).includes(employee.id)) {
+    if (!this.dataService.employees.map(e => e.id).includes(employee.id)) {
       return;
     }
     this.httpRequest('https://employee.szut.dev/employees/' + employee.id + '/qualifications', 'GET', data => {
@@ -96,7 +96,7 @@ export class RestService {
 
   public async asyncRemoveQualificationFromEmployee(qualificationName: string, employeeId: number) {
     await firstValueFrom(this.http.delete('https://employee.szut.dev/employees/' + employeeId + '/qualifications',
-      { headers: this.header, body: {skill: qualificationName} }));
+      {headers: this.header, body: {skill: qualificationName}}));
   }
 
   // EMPLOYEE
@@ -108,14 +108,14 @@ export class RestService {
 
   public editEmployee(createEmployee: CreateEmployee) {
     this.httpRequest('https://employee.szut.dev/employees/' + this.dataService.employeeEdit.id!, 'PUT',
-        data => this.loadEmployees(), createEmployee);
+      data => this.loadEmployees(), createEmployee);
   }
 
   public deleteEmployee(id: number) {
     this.httpRequest('https://employee.szut.dev/employees/' + id, 'DELETE',
-        data => {
-          this.dataService.employeeDetails = new Employee();
-          this.loadEmployees()
-        });
+      data => {
+        this.dataService.employeeDetails = new Employee();
+        this.loadEmployees()
+      });
   }
 }

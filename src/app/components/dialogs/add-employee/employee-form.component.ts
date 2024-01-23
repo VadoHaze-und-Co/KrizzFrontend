@@ -1,11 +1,10 @@
-import {Component, Input} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {AddQualificationComponent} from "../add-qualification/add-qualification.component";
 import {FormsModule} from "@angular/forms";
 import {Dialog} from "../dialog";
 import {QualificationCardComponent} from "../../parts/qualification-card/qualification-card.component";
 import {Employee} from "../../../rest-objects/employee";
-import {EmployeeDetailsComponent} from "../employee-details/employee-details.component";
 import {FunctionService} from "../../../services/function-service";
 import {DataService} from "../../../services/data-service";
 
@@ -21,8 +20,11 @@ export class EmployeeFormComponent extends Dialog {
   public editing = false;
   public employee!: Employee;
 
-  constructor(functionService: FunctionService) {
-    super(functionService);
+  constructor(dataService: DataService, public functionService: FunctionService) {
+    super(dataService);
+  }
+
+  public type() {
   }
 
   public submit() {
@@ -40,9 +42,9 @@ export class EmployeeFormComponent extends Dialog {
 })
 export class AddEmployeeComponent extends EmployeeFormComponent {
 
-  constructor(public override functionService: FunctionService) {
-    super(functionService);
-    this.employee = new Employee();
+  constructor(dataService: DataService, functionService: FunctionService) {
+    super(dataService, functionService);
+    this.employee = this.dataService.employeeAdd;
   }
 
   public override submit() {
@@ -50,6 +52,16 @@ export class AddEmployeeComponent extends EmployeeFormComponent {
       this.functionService.addEmployee(this.employee);
       super.submit();
     }
+  }
+
+  override type() {
+    this.employee.skills = this.dataService.selectedQualifications().map(q => q.skill);
+    this.dataService.employeeAdd = this.employee;
+  }
+
+  override close() {
+    super.close();
+    this.employee = new Employee();
   }
 }
 
@@ -61,26 +73,20 @@ export class AddEmployeeComponent extends EmployeeFormComponent {
   styleUrl: './employee-form.component.css'
 })
 export class EditEmployeeComponent extends EmployeeFormComponent {
+
   public override editing = true;
 
-  constructor(public override functionService: FunctionService) {
-    super(functionService);
-    this.employee = this.functionService.dataService.employeeEdit.clone();
+  constructor(dataService: DataService, functionService: FunctionService) {
+    super(dataService, functionService);
+    this.employee = this.dataService.employeeEdit.clone();
   }
 
   public override submit() {
-    this.employee.skills = this.functionService.dataService.selectedQualifications().map(q => q.skill!);
-    this.functionService.dataService.employeeEdit = this.employee;
+    this.employee.skills = this.dataService.selectedQualifications().map(q => q.skill!);
     if (this.functionService.employeeValid(this.employee)) {
       this.functionService.editEmployee(this.employee);
-      this.functionService.openDialog(EmployeeDetailsComponent);
-      this.functionService.dataService.employeeDetails = this.employee.clone();
+      this.functionService.openEmployeeDetailsDialog(this.employee);
       super.submit();
     }
-  }
-
-  override close() {
-    super.close();
-    this.functionService.openDialog(EmployeeDetailsComponent);
   }
 }

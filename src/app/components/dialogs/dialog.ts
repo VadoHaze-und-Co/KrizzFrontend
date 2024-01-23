@@ -1,12 +1,11 @@
-import {FunctionService} from "../../services/function-service";
+import {DataService} from "../../services/data-service";
 
 export class Dialog {
 
-  constructor(public functionService: FunctionService) {
+  constructor(public dataService: DataService) {
   }
 
   public close() {
-    setTimeout(() => this.functionService.dataService.dialogs = this.functionService.dataService.dialogs.filter(type => !(this instanceof type)), 1);
+    setTimeout(() => this.dataService.dialogs = this.dataService.dialogs.filter(type => !(this instanceof type)), 1);
   }
 }
-

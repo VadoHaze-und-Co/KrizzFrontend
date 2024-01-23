@@ -10,6 +10,7 @@ import {AddEmployeeComponent} from "./components/dialogs/add-employee/employee-f
 import {FunctionService} from "./services/function-service";
 import {MessageBoxComponent} from "./components/parts/message-box/message-box.component";
 import {RouterOutlet} from "@angular/router";
+import {DataService} from "./services/data-service";
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,7 @@ export class AppComponent {
   title = 'Employee Service';
   protected readonly window = window;
 
-  constructor(public functionService: FunctionService) {
+  constructor(public dataService: DataService, public functionService: FunctionService) {
   }
 
   protected readonly Employee = Employee;

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DefaultPopupComponent } from './default-popup.component';
+import {DefaultPopupComponent} from './default-popup.component';
 
 describe('DefaultPopupComponent', () => {
   let component: DefaultPopupComponent;
@@ -10,8 +10,8 @@ describe('DefaultPopupComponent', () => {
     await TestBed.configureTestingModule({
       imports: [DefaultPopupComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(DefaultPopupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

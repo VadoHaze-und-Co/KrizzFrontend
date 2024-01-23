@@ -1,5 +1,5 @@
-import {Component, Inject, Input} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {Component, Input} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {Employee} from "../../../rest-objects/employee";
 
 @Component({

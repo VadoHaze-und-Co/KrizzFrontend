@@ -8,9 +8,8 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   width: 240px;
-  height: 75px;
   background-color: white;
   border-radius: 20px;
   user-select: none;
@@ -23,6 +22,20 @@
   height: 20px;
   border-radius: 10px;
   font-size: 16px;
+  font-family: "Tahoma", sans-serif;
+}
+
+.info-text {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: grey;
+  text-align: center;
+  top: 17px;
+  width: 235px;
+  height: 16px;
+  border-radius: 10px;
+  font-size: 12px;
   font-family: "Tahoma", sans-serif;
 }
 

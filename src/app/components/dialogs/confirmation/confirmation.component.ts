@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {Dialog} from "../dialog";
-import {FunctionService} from "../../../services/function-service";
+import {DataService} from "../../../services/data-service";
 
 @Component({
   selector: 'app-confirmation',
@@ -12,31 +12,23 @@ import {FunctionService} from "../../../services/function-service";
 })
 export class ConfirmationComponent extends Dialog {
 
-  constructor(functionService: FunctionService) {
-    super(functionService);
+  constructor(dataService: DataService) {
+    super(dataService);
   }
 
   public submit(yes: boolean) {
-    let defined = this.functionService.dataService.confirmationConfirm !== undefined;
-    let yef = this.functionService.dataService.confirmationConfirm!.yes;
-    let nof = this.functionService.dataService.confirmationConfirm!.no;
-    this.close();
-    if (defined) {
-      if (yes) {
-        setTimeout(() => {
-          yef();
-          this.functionService.dataService.confirmationConfirm = undefined;
-        });
-      } else {
-        setTimeout(() => {
-          nof();
-          this.functionService.dataService.confirmationConfirm = undefined;
-        });
-      }
+    if (this.dataService.confirmationConfirm === undefined) {
+      return;
     }
+    let run = yes ? this.dataService.confirmationConfirm!.yes : this.dataService.confirmationConfirm!.no;
+    if (run !== undefined) {
+      run();
+    }
+    this.dataService.confirmationConfirm = undefined;
+    this.close();
   }
 
-  override close() {
-    super.close();
+  public hasInfo() {
+    return this.dataService.confirmationConfirm?.info !== undefined;
   }
 }

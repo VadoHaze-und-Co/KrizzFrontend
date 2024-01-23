@@ -13,14 +13,11 @@ export class DataService {
   public qualifications: Qualification[] = [];
   public dialogs: Type<Dialog>[] = [];
   public messageBoxes: MessageBox[] = [];
-  private _confirmationConfirm: {title: string, yes: (() => void), no: (() => void)} | undefined;
-
-  // Qualification
-  public qualificationAdd: string = "";
-  public qualificationEdit: {name: string, id: number} | undefined;
+  private _confirmationConfirm: { title: string, info?: string, yes: (() => void), no?: (() => void) } | undefined;
 
   // Employees
   public employeeDetails = new Employee();
+  public employeeAdd = new Employee();
   public employeeEdit = new Employee();
 
   public selectedQualifications() {
@@ -49,6 +46,7 @@ export class DataService {
   }
 
   clickInside = false;
+
   clickBackground() {
     if (!this.clickInside) {
       this.dialogs.pop();
@@ -61,7 +59,7 @@ export class DataService {
   }
 
   public goodListWidth() {
-    let cardWidth= 170;
+    let cardWidth = 170;
     return ((this.screenWidth / cardWidth) | 0) * cardWidth;
   }
 
@@ -73,7 +71,12 @@ export class DataService {
     return this._confirmationConfirm;
   }
 
-  public set confirmationConfirm(confirmationConfirm: {title: string, yes: (() => void), no: (() => void)} | undefined) {
+  public set confirmationConfirm(confirmationConfirm: {
+    title: string,
+    info?: string
+    yes: (() => void),
+    no?: (() => void)
+  } | undefined) {
     this._confirmationConfirm = confirmationConfirm;
     if (confirmationConfirm !== undefined) {
       this.dialogs.push(ConfirmationComponent);

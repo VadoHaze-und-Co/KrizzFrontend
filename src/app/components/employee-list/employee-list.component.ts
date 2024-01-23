@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { EmployeeInitialsComponent } from "../parts/employee-initials/employee-initials.component";
-import { EmployeeCardComponent } from "../parts/employee-card/employee-card.component";
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {EmployeeInitialsComponent} from "../parts/employee-initials/employee-initials.component";
+import {EmployeeCardComponent} from "../parts/employee-card/employee-card.component";
 import {DefaultPopupComponent} from "../default-popup/default-popup.component";
-import {FunctionService} from "../../services/function-service";
+import {DataService} from "../../services/data-service";
 
 @Component({
   selector: 'app-employee-list',
@@ -14,6 +14,6 @@ import {FunctionService} from "../../services/function-service";
 })
 export class EmployeeListComponent {
 
-  constructor(public functionService: FunctionService) {
+  constructor(public dataService: DataService) {
   }
 }

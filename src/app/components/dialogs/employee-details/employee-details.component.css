@@ -2,7 +2,7 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   width: 260px;
   height: 520px;
   background-color: white;
@@ -38,6 +38,8 @@
 }
 
 .detail-infos {
+  font-family: "Tahoma", sans-serif;
+  font-size: 15px;
   width: 220px;
   position: relative;
   transform: translate(-50%, 0);

@@ -1,4 +1,6 @@
 <div class="card" (click)="click()">
-  <div class="initials" style="height: 50%"><app-employee-initials [employee]="this.employee!" [big]="false"></app-employee-initials></div>
+  <div class="initials" style="height: 50%">
+    <app-employee-initials [employee]="this.employee!" [big]="false"></app-employee-initials>
+  </div>
   <div class="text" style="height: 50%">{{ this.employee?.employeeFullName() }}</div>
 </div>
