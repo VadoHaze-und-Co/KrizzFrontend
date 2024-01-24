@@ -9,11 +9,8 @@
 }
 
 .initials {
-  position: relative;
   float: left;
   top: 10%;
-  left: 50%;
-  transform: translate(-50%, 0);
 }
 
 .text {
@@ -22,7 +19,6 @@
   width: 160px;
   top: 5%;
   font-size: 18px;
-  font-family: "Tahoma", sans-serif;
   text-align: center;
   color: white;
 }

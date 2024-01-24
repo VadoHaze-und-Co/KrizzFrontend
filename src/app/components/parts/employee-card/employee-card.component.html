@@ -1,6 +1,6 @@
 <div (click)="click()" class="card">
-  <div class="initials" style="height: 50%">
+  <div class="mid initials" style="height: 50%">
     <app-employee-initials [big]="false" [employee]="this.employee!"></app-employee-initials>
   </div>
-  <div class="text" style="height: 50%">{{ this.employee?.employeeFullName() }}</div>
+  <div class="text font" style="height: 50%">{{ this.employee?.employeeFullName() }}</div>
 </div>

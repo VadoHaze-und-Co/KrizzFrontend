@@ -1,49 +1,29 @@
-.outer-container {
-  user-select: none;
-  position: relative;
-  left: 50%;
-  transform: translate(-50%, 0);
+.container {
   width: 200px;
-  height: 120px;
 }
 
 .qualification-list {
-  height: 100px;
+  height: 120px;
   border-radius: 20px;
   background-color: lightgray;
 }
 
-.close-button {
-  position: fixed;
-  right: 5px;
-  top: 2px;
-}
-
 .title {
   font-size: 16px;
-  font-family: "Tahoma", sans-serif;
-}
-
-.add-button {
-  cursor: pointer;
 }
 
 .head-line {
-  height: 20px;
   width: 180px;
-  transform: translate(10px, 0);
 }
 
 .inner-list {
   width: 180px;
   height: 80px;
   transform: translate(10px, 10px);
-  overflow: hidden scroll;
 }
 
 .qualification {
   font-size: 14px;
-  font-family: "Tahoma", sans-serif;
 }
 
 .qualification:nth-child(odd) {

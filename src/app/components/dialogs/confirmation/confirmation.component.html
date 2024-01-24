@@ -1,12 +1,12 @@
-<div (click)="dataService.clickForeground()" [style.height]="hasInfo() ? '85px' : '69px'" class="outer-container">
-  <div class="head-line">{{ dataService.confirmationConfirm?.title }}</div>
-  <div *ngIf="hasInfo()" class="info-text">{{ dataService.confirmationConfirm?.info }}</div>
-  <div class="buttons">
-    <div class="button" style="margin-right: 20px">
-      <div (click)="submit(false)" class="button-text">Nein</div>
+<div (click)="dataService.clickForeground()" [style.height]="hasInfo() ? '85px' : '69px'" class="container mid-mid">
+  <div class="head-line mid font">{{ dataService.confirmationConfirm?.title }}</div>
+  <div *ngIf="hasInfo()" class="info-text mid font">{{ dataService.confirmationConfirm?.info }}</div>
+  <div class="buttons mid">
+    <div class="button ynButton" style="margin-right: 20px">
+      <div (click)="submit(false)" class="button-text font">Nein</div>
     </div>
-    <div class="button">
-      <div (click)="submit(true)" class="button-text">Ja</div>
+    <div class="button ynButton">
+      <div (click)="submit(true)" class="button-text font">Ja</div>
     </div>
   </div>
 </div>

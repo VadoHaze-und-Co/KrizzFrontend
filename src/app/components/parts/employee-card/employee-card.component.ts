@@ -9,7 +9,10 @@ import {FunctionService} from "../../../services/function-service";
   standalone: true,
   imports: [CommonModule, EmployeeInitialsComponent],
   templateUrl: './employee-card.component.html',
-  styleUrl: './employee-card.component.css'
+  styleUrls: [
+    './employee-card.component.css',
+    '/src/app/main.css'
+  ]
 })
 export class EmployeeCardComponent {
 

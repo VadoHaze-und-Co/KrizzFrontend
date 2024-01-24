@@ -15,21 +15,15 @@
 }
 
 .text {
-  user-select: none;
-  position: relative;
   color: white;
+  position: relative;
   float: left;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .text-small {
-  font-family: "Tahoma", sans-serif;
   font-size: 25px;
 }
 
 .text-big {
-  font-family: "Tahoma", sans-serif;
   font-size: 70px;
 }

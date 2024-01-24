@@ -13,7 +13,10 @@ import {DataService} from "../../../services/data-service";
   standalone: true,
   imports: [CommonModule, QualificationCardComponent, AddQualificationComponent, FormsModule],
   templateUrl: './employee-form.component.html',
-  styleUrl: './employee-form.component.css'
+  styleUrls: [
+    './employee-form.component.css',
+    '/src/app/main.css'
+  ]
 })
 export class EmployeeFormComponent extends Dialog {
 
@@ -31,6 +34,11 @@ export class EmployeeFormComponent extends Dialog {
     this.close();
     setTimeout(() => this.functionService.restService.loadEmployees(), 10);
   }
+
+  override close() {
+    super.close();
+    this.dataService.searchForQualification = "";
+  }
 }
 
 @Component({
@@ -38,7 +46,10 @@ export class EmployeeFormComponent extends Dialog {
   standalone: true,
   imports: [CommonModule, QualificationCardComponent, AddQualificationComponent, FormsModule],
   templateUrl: './employee-form.component.html',
-  styleUrl: './employee-form.component.css'
+  styleUrls: [
+    './employee-form.component.css',
+    '/src/app/main.css'
+  ]
 })
 export class AddEmployeeComponent extends EmployeeFormComponent {
 
@@ -70,7 +81,10 @@ export class AddEmployeeComponent extends EmployeeFormComponent {
   standalone: true,
   imports: [CommonModule, QualificationCardComponent, AddQualificationComponent, FormsModule],
   templateUrl: './employee-form.component.html',
-  styleUrl: './employee-form.component.css'
+  styleUrls: [
+    './employee-form.component.css',
+    '/src/app/main.css'
+  ]
 })
 export class EditEmployeeComponent extends EmployeeFormComponent {
 

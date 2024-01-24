@@ -1,28 +1,14 @@
-.qualification-list {
+.container {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   width: 260px;
   height: 400px;
   background-color: white;
   border-radius: 20px;
 }
 
-.close-button {
-  position: fixed;
-  right: 2px;
-  top: 2px;
-  user-select: none;
-}
-
 .head-line {
   position: relative;
-  left: 50%;
-  transform: translate(-50%, 0);
-  top: 20px;
   width: 210px;
-  height: 20px;
   background-color: lightgray;
   border-radius: 10px;
 }
@@ -34,13 +20,15 @@
   border: none;
   width: 185px;
   height: 20px;
-  font-family: "Tahoma", sans-serif;
   font-size: 16px;
   left: 5px;
 }
 
-.add-button {
-  user-select: none;
+.input:focus {
+  outline: none;
+}
+
+.add {
   background-color: transparent;
   text-align: right;
   position: relative;
@@ -48,37 +36,9 @@
   width: 15px;
   height: 22px;
   font-size: 16px;
-  font-family: "Tahoma", sans-serif;
-}
-
-.input:focus {
-  outline: none;
-}
-
-.separator {
-  position: relative;
-  left: 50%;
-  transform: translate(-50%, 0);
-  top: 22px;
-  height: 20px;
-  width: 220px;
-  background-color: transparent;
-}
-
-.separator-line {
-  height: 1px;
-  width: 180px;
-  position: relative;
-  left: 20px;
-  top: 9px;
-  background-color: darkslategray;
 }
 
 .outer-list {
-  position: relative;
-  left: 50%;
-  transform: translate(-50%, 0);
-  top: 20px;
   background-color: lightgray;
   border-radius: 20px;
   height: 320px;
@@ -92,7 +52,6 @@
   height: 300px;
   top: 10px;
   left: 10px;
-  overflow: scroll;
 }
 
 table {
@@ -103,7 +62,6 @@ table {
 .list-row {
   border: none;
   font-size: 16px;
-  font-family: "Tahoma", sans-serif;
   height: 20px;
 }
 
@@ -111,14 +69,8 @@ table {
   background-color: #00000022;
 }
 
-.icon {
-  font-size: 12px;
-  font-family: "Tahoma", sans-serif;
-}
-
 .edit-input {
   font-size: 16px;
-  font-family: "Tahoma", sans-serif;
   height: 15px;
   width: 125px;
   border: none;

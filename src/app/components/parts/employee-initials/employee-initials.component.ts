@@ -7,7 +7,10 @@ import {Employee} from "../../../rest-objects/employee";
   standalone: true,
   imports: [CommonModule],
   templateUrl: './employee-initials.component.html',
-  styleUrl: './employee-initials.component.css'
+  styleUrls: [
+    './employee-initials.component.css',
+    '/src/app/main.css'
+  ]
 })
 export class EmployeeInitialsComponent {
 

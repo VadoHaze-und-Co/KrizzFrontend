@@ -12,7 +12,10 @@ import {DataService} from "../../../services/data-service";
   standalone: true,
   imports: [CommonModule, EmployeeInitialsComponent, QualificationCardComponent, EmployeeFormComponent],
   templateUrl: './employee-details.component.html',
-  styleUrl: './employee-details.component.css'
+  styleUrls: [
+    './employee-details.component.css',
+    '/src/app/main.css'
+  ]
 })
 export class EmployeeDetailsComponent extends Dialog {
 

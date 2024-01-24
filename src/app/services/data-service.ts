@@ -4,7 +4,7 @@ import {Qualification} from "../rest-objects/qualification";
 import {Dialog} from "../components/dialogs/dialog";
 import {MessageBox} from "../components/parts/message-box/message-box";
 import {ConfirmationComponent} from "../components/dialogs/confirmation/confirmation.component";
-import {AddEmployeeComponent} from "../components/dialogs/add-employee/employee-form.component";
+import {AddEmployeeComponent, EditEmployeeComponent} from "../components/dialogs/add-employee/employee-form.component";
 
 @Injectable({providedIn: "root"})
 export class DataService {
@@ -14,6 +14,10 @@ export class DataService {
   public qualifications: Qualification[] = [];
   public dialogs: Type<Dialog>[] = [];
   public messageBoxes: MessageBox[] = [];
+
+  // Qualification
+  public searchForQualification = "";
+
   // Employees
   public employeeDetails = new Employee();
   public employeeAdd = new Employee();
@@ -70,8 +74,11 @@ export class DataService {
   clickBackground() {
     if (!this.clickInside) {
       let d = this.dialogs[this.dialogs.length - 1];
-      if (d.name == AddEmployeeComponent.name) {
-        this.employeeAdd = new Employee();
+      if (d.name == AddEmployeeComponent.name || d.name == EditEmployeeComponent.name) {
+        if (d.name == AddEmployeeComponent.name) {
+          this.employeeAdd = new Employee();
+        }
+        this.searchForQualification = "";
       }
       this.dialogs.pop();
     }
