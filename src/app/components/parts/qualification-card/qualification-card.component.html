@@ -8,27 +8,33 @@
   <div style="height: 3px"></div>
   <div class="qualification-list" [style.height]="height(false)">
     <div *ngIf="selectable">
-      <div class="input-text-field mid" style="top: 5px"><input class="input-field font" placeholder="Suche" type="text" [(ngModel)]="dataService.searchForQualification"></div>
+      <div class="input-text-field mid" style="top: 5px"><input class="input-field font" placeholder="Suche" type="text"
+                                                                (input)="type()" [(ngModel)]="dataService.searchForQualification"></div>
       <div class="separator-line" style="top: 4px"></div>
     </div>
     <div class="inner-list scroll">
+      <div class="line"></div>
       <ng-container *ngIf="selectable; then all else mine">
       </ng-container>
       <ng-template #all>
         <div *ngFor="let qualification of qualifications()" class="qualification font">
-          <ng-container *ngIf="containsSkill(qualification); then selected else unselected"></ng-container>
-          <ng-template #selected>
-            <input checked class="select-button" name="{{qualification.id}}" type="checkbox">
-          </ng-template>
-          <ng-template #unselected>
-            <input class="select-button" name="{{qualification.id}}" type="checkbox">
-          </ng-template>
-          {{ qualification.skill }}
+          <div id="{{qualification.skill.toLowerCase()}}">
+            <ng-container *ngIf="containsSkill(qualification); then selected else unselected"></ng-container>
+            <ng-template #selected>
+              <input checked class="select-button" name="{{qualification.id}}" type="checkbox">
+            </ng-template>
+            <ng-template #unselected>
+              <input class="select-button" name="{{qualification.id}}" type="checkbox">
+            </ng-template>
+            {{ qualification.skill }}
+            <div class="line"></div>
+          </div>
         </div>
       </ng-template>
       <ng-template #mine>
         <div *ngFor="let qualification of dataService.employeeDetails.skills" class="qualification font">
           {{ qualification }}
+          <div class="line"></div>
         </div>
       </ng-template>
     </div>

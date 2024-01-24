@@ -19,18 +19,40 @@ import {FormsModule} from "@angular/forms";
 export class QualificationCardComponent {
 
   @Input() public selectable: boolean = false;
-  @Input() public employee: Employee | undefined;
+  @Input() public editing = true;
+  public employee: Employee | undefined;
 
   constructor(public functionService: FunctionService, public dataService: DataService) {
     this.functionService.restService.loadQualifications();
+    setTimeout(() => {
+      console.log(this.editing)
+      if (this.editing) {
+        this.employee = dataService.employeeEdit;
+      } else {
+        this.employee = dataService.employeeAdd;
+      }
+    })
   }
 
   public containsSkill(qualification: Qualification) {
+    if (this.employee === undefined) {
+      return false;
+    }
     return this.employee?.skills.includes(qualification.skill!);
   }
 
+  public type() {
+    this.dataService.qualifications.forEach(q => document.getElementById(q.skill.toLowerCase())!.hidden = !q.skill.toLowerCase().includes(this.dataService.searchForQualification.toLowerCase()));
+  }
+
   public qualifications() {
-    return this.dataService.qualifications.filter(q => q.skill.toLowerCase().includes(this.dataService.searchForQualification.toLowerCase()));
+    return this.dataService.qualifications;
+    // if (this.employee !== undefined) {
+    //   console.log(this.employee!.skills)
+    //   this.dataService.employeeAdd.skills = this.employee!.skills;
+    //   this.dataService.employeeEdit.skills = this.employee!.skills;
+    // }
+    // return this.dataService.qualifications.filter(q => q.skill.toLowerCase().includes(this.dataService.searchForQualification.toLowerCase()));
   }
 
   public height(out: boolean) {

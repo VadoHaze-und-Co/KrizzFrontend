@@ -28,6 +28,7 @@ export class EmployeeFormComponent extends Dialog {
   }
 
   public type() {
+    this.employee.skills = this.dataService.selectedQualifications().map(q => q.skill);
   }
 
   public submit() {
@@ -66,7 +67,7 @@ export class AddEmployeeComponent extends EmployeeFormComponent {
   }
 
   override type() {
-    this.employee.skills = this.dataService.selectedQualifications().map(q => q.skill);
+    super.type();
     this.dataService.employeeAdd = this.employee;
   }
 
@@ -102,5 +103,10 @@ export class EditEmployeeComponent extends EmployeeFormComponent {
       this.functionService.openEmployeeDetailsDialog(this.employee);
       super.submit();
     }
+  }
+
+  override type() {
+    super.type();
+    this.dataService.employeeEdit = this.employee;
   }
 }

@@ -22,7 +22,6 @@ export class DataService {
   public employeeDetails = new Employee();
   public employeeAdd = new Employee();
   public employeeEdit = new Employee();
-  clickInside = false;
 
   private _confirmationConfirm: { title: string, info?: string, yes: (() => void), no?: (() => void) } | undefined;
 
@@ -71,6 +70,7 @@ export class DataService {
     return this.dialogs.length > 0 ? this.dialogs[this.dialogs.length - 1] : undefined;
   }
 
+  clickInside = false;
   clickBackground() {
     if (!this.clickInside) {
       let d = this.dialogs[this.dialogs.length - 1];
