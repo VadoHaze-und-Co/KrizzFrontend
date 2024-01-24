@@ -16,20 +16,18 @@ export class EmployeeInitialsComponent {
 
   public colors = [
     "#f29985",
+    "#923f98",
     "#487ba6",
-    "#7acb99",
     "#bd85a4",
     "#328fb1",
+    "#c44545",
     "#d6e286",
-    "#8d9df5",
-    "#bbd687",
-    "#6868dc",
-    "#9fcfe1",
     "#08b476",
     "#4177a6",
-    "#f27877",
+    "#3b7e56",
+    "#8d9df5",
+    "#6868dc",
     "#f17456",
-    "#f2c6a1",
     "#6d5e78",
   ];
 
