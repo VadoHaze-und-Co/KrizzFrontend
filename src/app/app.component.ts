@@ -11,17 +11,16 @@ import {FunctionService} from "./services/function-service";
 import {MessageBoxComponent} from "./components/parts/message-box/message-box.component";
 import {RouterOutlet} from "@angular/router";
 import {DataService} from "./services/data-service";
+import {NavbarComponent} from "./components/navbar/navbar.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, EmployeeListComponent, FunctionService, QualificationCardComponent, QualificationListComponent, AddQualificationComponent, EmployeeDetailsComponent, MessageBoxComponent, RouterOutlet],
+  imports: [CommonModule, EmployeeListComponent, FunctionService, QualificationCardComponent, QualificationListComponent, AddQualificationComponent, EmployeeDetailsComponent, MessageBoxComponent, RouterOutlet, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Employee Service';
-
-  constructor(public dataService: DataService, public functionService: FunctionService) {
+  constructor(public dataService: DataService) {
   }
 }

@@ -12,24 +12,35 @@
   font-size: 16px;
 }
 
+.name {
+  position: relative;
+  height: 20px;
+  font-size: 14px;
+}
+
 .head-line {
   width: 180px;
 }
 
 .inner-list {
   width: 180px;
-  height: 80px;
-  transform: translate(10px, 10px);
-}
-
-.qualification {
-  font-size: 14px;
+  height: 106px;
+  transform: translate(10px, -1px);
 }
 
 .line {
-  top: -1px;
+  position: relative;
   height: 1px;
   background-color: #00000022;
+}
+
+.search-field {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background-color: #00000022;
+  width: 200px;
+  height: 30px;
+  position: relative;
 }
 
 .select-button {

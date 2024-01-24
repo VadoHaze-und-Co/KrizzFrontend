@@ -21,7 +21,7 @@ export class EmployeeDetailsComponent extends Dialog {
 
   constructor(dataService: DataService, public functionService: FunctionService) {
     super(dataService);
-    functionService.restService.loadQualificationsForEmployee(this.employee!);
+    setTimeout(() => functionService.restService.loadQualificationsForEmployee(this.employee!), 1000)
   }
 
   public get employee() {

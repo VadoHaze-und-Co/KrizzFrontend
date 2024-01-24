@@ -39,8 +39,7 @@
   </div>
   <app-qualification-card (input)="type()" [editing]="editing" [selectable]="true"
                           style="position: relative"></app-qualification-card>
-  <div style="height: 15px"></div>
-
+  <div style="height: 3px"></div>
   <ng-container *ngIf="editing; then edit else create">
   </ng-container>
   <ng-template #edit>

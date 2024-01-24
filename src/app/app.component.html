@@ -9,6 +9,7 @@
 <!--      add-->
 <!--    </button>-->
 <!--  </div> &lt;!&ndash; NAVBAR &ndash;&gt;-->
+  <app-navbar class="nav-bar"></app-navbar>
   <ng-container *ngFor="let dialog of dataService.backgroundDialogs()">
     <ng-container *ngComponentOutlet="dialog" style="position: absolute"></ng-container>
   </ng-container>

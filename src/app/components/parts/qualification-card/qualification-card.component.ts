@@ -25,7 +25,6 @@ export class QualificationCardComponent {
   constructor(public functionService: FunctionService, public dataService: DataService) {
     this.functionService.restService.loadQualifications();
     setTimeout(() => {
-      console.log(this.editing)
       if (this.editing) {
         this.employee = dataService.employeeEdit;
       } else {
@@ -46,7 +45,13 @@ export class QualificationCardComponent {
   }
 
   public height(out: boolean) {
-    let h = out ? 120 : 100;
+    let h = 125;
+    if (out) {
+      h += 20;
+      if (this.selectable) {
+        h += 10;
+      }
+    }
     if (this.selectable) {
       h += 20;
     }
