@@ -10,7 +10,7 @@
     <div *ngIf="selectable" class="search-field">
       <div class="mid" style="top: 8px; height: 22px"><input class="input-field font" placeholder="Suche" type="text"
                                                                 (input)="type()" [(ngModel)]="dataService.searchForQualification"></div>
-      <span class="material-icons close" (click)="dataService.searchForQualification = ''">close</span>
+      <span class="material-icons close button" (click)="emptySearch()">close</span>
       <div class="separator-line" style="top: 7px; width: 100%;"></div>
     </div>
     <div *ngIf="!selectable" style="height: 10px">

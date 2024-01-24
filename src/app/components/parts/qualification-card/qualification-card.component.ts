@@ -44,6 +44,11 @@ export class QualificationCardComponent {
     this.dataService.qualifications.forEach(q => document.getElementById(q.skill.toLowerCase())!.hidden = !q.skill.toLowerCase().includes(this.dataService.searchForQualification.toLowerCase()));
   }
 
+  public emptySearch() {
+    this.dataService.searchForQualification = ''
+    this.type();
+  }
+
   public height(out: boolean) {
     let h = 125;
     if (out) {

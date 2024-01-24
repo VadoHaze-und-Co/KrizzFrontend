@@ -8,7 +8,7 @@
       <div class="table scroll font">
         <div class="line"></div>
         <div *ngIf="employees().length == 0"><div class="info-field2">Kein Mitarbeiter besitzt diese Qualifikation</div></div>
-      <div *ngFor="let employee of employees()">
+      <div *ngFor="let employee of employees()" class="button">
         <div class="t-row" (click)="functionService.openEmployeeDetailsDialog(employee)">
           <div class="t-col initials"><app-employee-initials class="initials-component" [employee]="employee" [size]="0"></app-employee-initials></div>
           <div class="t-col name-text">{{employee.employeeFullName(29)}}</div>

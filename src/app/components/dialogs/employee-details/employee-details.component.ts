@@ -33,10 +33,11 @@ export class EmployeeDetailsComponent extends Dialog {
   }
 
   public delete() {
-    this.dataService.employees = this.dataService.employees.filter(e => e.id != this.employee.id);
+    let id = this.employee.id;
     this.functionService.openConfirmation({
       title: "Mitarbeiter löschen?",
       yes: () => {
+        this.dataService.employees = this.dataService.employees.filter(e => e.id != id);
         this.functionService.deleteEmployee(this.employee!.id!);
         this.close();
       }

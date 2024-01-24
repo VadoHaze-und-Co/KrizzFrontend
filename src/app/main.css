@@ -1,7 +1,7 @@
 .close-button {
   position: fixed;
   right: 2px;
-  top: 2px;
+  top: 1px;
 }
 
 .mid {
@@ -18,6 +18,20 @@
 
 .scroll {
   overflow: hidden auto;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #00000033;
 }
 
 .separator {
