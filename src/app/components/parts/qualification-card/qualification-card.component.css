@@ -24,8 +24,8 @@
 
 .inner-list {
   width: 180px;
-  height: 106px;
-  transform: translate(10px, -1px);
+  height: 105px;
+  transform: translate(10px, 0);
 }
 
 .line {
@@ -41,6 +41,14 @@
   width: 200px;
   height: 30px;
   position: relative;
+}
+
+.close {
+  position: fixed;
+  top: 29px;
+  right: 3px;
+  font-size: 20px;
+  color: #00000055;
 }
 
 .select-button {

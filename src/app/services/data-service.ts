@@ -17,6 +17,7 @@ export class DataService {
 
   // Qualification
   public searchForQualification = "";
+  public watchingQualification: Qualification | undefined;
 
   // Employees
   public employeeDetails = new Employee();

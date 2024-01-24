@@ -1,9 +1,17 @@
 .container {
   position: absolute;
   width: 260px;
-  height: 400px;
+  height: 415px;
   background-color: white;
   border-radius: 20px;
+}
+
+.title {
+  text-align: center;
+  position: fixed;
+  width: 260px;
+  height: 20px;
+  font-size: 20px;
 }
 
 .head-line {
@@ -41,7 +49,7 @@
 .outer-list {
   background-color: lightgray;
   border-radius: 20px;
-  height: 320px;
+  height: 329px;
   width: 220px;
 }
 
@@ -49,7 +57,7 @@
   user-select: none;
   position: relative;
   width: 200px;
-  height: 300px;
+  height: 309px;
   top: 10px;
   left: 10px;
 }
@@ -60,13 +68,13 @@ table {
 }
 
 .list-row {
-  border: none;
+  border-bottom: #00000022 solid 1px;
   font-size: 16px;
-  height: 20px;
+  height: 19px;
 }
 
-.list-row:nth-child(odd) {
-  background-color: #00000022;
+.list-row:nth-child(1) {
+  border-top: #00000022 solid 1px;
 }
 
 .edit-input {

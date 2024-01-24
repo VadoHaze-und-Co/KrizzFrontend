@@ -15,7 +15,7 @@ import {Employee} from "../../../rest-objects/employee";
 export class EmployeeInitialsComponent {
 
   @Input() employee: Employee | undefined;
-  @Input() big: boolean = false;
+  @Input() size: number = 1;
 
   public initials(): string {
     if (this.employee === undefined) {

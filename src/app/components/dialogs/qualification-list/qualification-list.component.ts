@@ -42,11 +42,13 @@ export class QualificationListComponent extends Dialog {
   }
 
   public save() {
-    this.functionService.editQualification(this.qualificationEdit!);
+    if (this.functionService.editQualification(this.qualificationEdit!)) {
+      setTimeout(() => this.qualificationEdit = undefined, 10);
+    }
   }
 
   public delete(qualification: Qualification) {
-    let count = this.dataService.employees.filter(e => e.skills.includes(qualification.skill)).length;
+    let count = this.dataService.employees.filter(e => e.id != -1 && e.skills.includes(qualification.skill)).length;
     this.functionService.openConfirmation({
       title: "Qualifikation löschen?",
       info: count + " Mitarbeiter haben diese Qualifikation",

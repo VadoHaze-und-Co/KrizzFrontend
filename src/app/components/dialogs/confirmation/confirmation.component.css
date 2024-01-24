@@ -1,9 +1,3 @@
-.close-button {
-  position: fixed;
-  right: 5px;
-  top: 2px;
-}
-
 .container {
   position: absolute;
   width: 240px;

@@ -4,9 +4,9 @@
   display: inline-block;
 }
 
-.big {
-  height: 130px;
-  width: 130px;
+.mini {
+  height: 25px;
+  width: 25px;
 }
 
 .small {
@@ -14,10 +14,19 @@
   width: 50px;
 }
 
+.big {
+  height: 130px;
+  width: 130px;
+}
+
 .text {
   color: white;
   position: relative;
   float: left;
+}
+
+.text-mini {
+  font-size: 14px;
 }
 
 .text-small {

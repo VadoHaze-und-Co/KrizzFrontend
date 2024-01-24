@@ -14,7 +14,7 @@
   bottom: 64px;
   width: 1px;
   position: relative;
-  background-color: darkslategray;
+  background-color: #00000077;
   height: 55px;
   transform: translate(0, 70px);
 }

@@ -1,0 +1,75 @@
+.container {
+  position: absolute;
+  width: 340px;
+  height: 310px;
+  background-color: white;
+  border-radius: 20px;
+  user-select: none;
+}
+
+.outer-list {
+  background-color: #00000022;
+  width: 320px;
+  border-radius: 20px;
+  height: 261px;
+}
+
+.info-field {
+  position: fixed;
+  transform: translate(10px, 2px);
+  font-size: 15px;
+  color: darkgray;
+}
+
+.info-field2 {
+  position: fixed;
+  width: 300px;
+  transform: translate(0, 2px);
+  text-align: center;
+  font-size: 10px;
+  color: darkgray;
+}
+
+.t-row {
+  height: 29px;
+  border-bottom: #00000022 solid 1px;
+}
+
+.line {
+  background-color: #00000022;
+  position: relative;
+  height: 1px;
+  width: 320px;
+}
+
+.head-line {
+  margin-top: 12px;
+  width: 180px;
+  margin-bottom: 8px;
+}
+
+.table {
+  transform: translate(10px, 10px);
+  width: 300px;
+  height: 241px;
+}
+
+.name-text {
+  top: 6px;
+  font-size: 15px;
+  width: 270px;
+  height: 19px;
+  position: relative;
+  float: left;
+}
+
+.initials {
+  width: 30px;
+  height: 30px;
+  float: left;
+}
+
+.initials-component {
+  position: relative;
+  top: 2px;
+}

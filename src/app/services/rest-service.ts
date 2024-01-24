@@ -46,6 +46,7 @@ export class RestService {
   public loadQualifications() {
     this.httpRequest('https://employee.szut.dev/qualifications', 'GET', data => {
       this.dataService.qualifications = (data as Qualification[])
+        .map(q => new Qualification(q.skill, q.id))
         .filter(q => q.skill !== undefined)
         .sort((a, b) => a.skill!.localeCompare(b.skill!)!);
     });
@@ -80,7 +81,10 @@ export class RestService {
 
   public editQualification(id: number, name: string) {
     this.httpRequest('https://employee.szut.dev/qualifications/' + id, 'PUT',
-      () => this.loadQualifications(),
+      () => {
+        this.loadQualifications();
+        this.dataService.employees.forEach(e => this.loadQualificationsForEmployee(e));
+      },
       {skill: name});
   }
 

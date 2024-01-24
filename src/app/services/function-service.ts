@@ -11,6 +11,9 @@ import {EmployeeDetailsComponent} from "../components/dialogs/employee-details/e
 import {AddQualificationComponent} from "../components/dialogs/add-qualification/add-qualification.component";
 import {AddEmployeeComponent, EditEmployeeComponent} from "../components/dialogs/add-employee/employee-form.component";
 import {QualificationListComponent} from "../components/dialogs/qualification-list/qualification-list.component";
+import {
+  EmployeeQualificationListComponent
+} from "../components/dialogs/employee-qualification-list/employee-qualification-list.component";
 
 @NgModule({
   imports: [HttpClientModule],
@@ -36,15 +39,15 @@ export class FunctionService {
   }
 
   public editQualification(qualification: Qualification) {
-    this.dataService.qualifications.filter(q => q.id == qualification.id).forEach(q => {
-      let name = qualification.skill;
-      if (!this.qualificationValid(name)) {
-        return;
-      }
-      if (name != q.skill) {
-        this.restService.editQualification(q.id!, name);
-      }
-    });
+    let name = qualification.skill;
+    if (!this.qualificationValid(name, qualification.id)) {
+      return false;
+    }
+    let q = this.dataService.qualifications.find(q => q.id == qualification.id)!;
+    if (name != q.skill) {
+      this.restService.editQualification(q.id!, name);
+    }
+    return true;
   }
 
   public async deleteQualification(qualification: Qualification) {
@@ -75,11 +78,11 @@ export class FunctionService {
 
   // Validator
 
-  public qualificationValid(name: string) {
+  public qualificationValid(name: string, id?: number) {
     if (this.empty(name, "Der Name")) {
       return false;
     }
-    if (this.dataService.qualifications.filter(q => q.skill!.toLowerCase() == name.toLowerCase()).length >= 1) {
+    if (this.dataService.qualifications.filter(q => q.skill!.toLowerCase() == name.toLowerCase() && q.id != id).length >= 1) {
       this.showMessageBox("Diese Qualifikation existiert bereits", "#ff0000")
       return false;
     }
@@ -127,6 +130,11 @@ export class FunctionService {
 
   public openAddEmployeeDialog() {
     this.openDialog(AddEmployeeComponent);
+  }
+
+  public openQualificationEmployeeListDialog(qualification: Qualification) {
+    this.dataService.watchingQualification = qualification;
+    this.openDialog(EmployeeQualificationListComponent);
   }
 
   public openEmployeeDetailsDialog(employee: Employee) {
