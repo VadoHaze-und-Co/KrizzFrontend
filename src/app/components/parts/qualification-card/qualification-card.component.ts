@@ -45,16 +45,6 @@ export class QualificationCardComponent {
     this.dataService.qualifications.forEach(q => document.getElementById(q.skill.toLowerCase())!.hidden = !q.skill.toLowerCase().includes(this.dataService.searchForQualification.toLowerCase()));
   }
 
-  public qualifications() {
-    return this.dataService.qualifications;
-    // if (this.employee !== undefined) {
-    //   console.log(this.employee!.skills)
-    //   this.dataService.employeeAdd.skills = this.employee!.skills;
-    //   this.dataService.employeeEdit.skills = this.employee!.skills;
-    // }
-    // return this.dataService.qualifications.filter(q => q.skill.toLowerCase().includes(this.dataService.searchForQualification.toLowerCase()));
-  }
-
   public height(out: boolean) {
     let h = out ? 120 : 100;
     if (this.selectable) {

@@ -17,7 +17,7 @@
       <ng-container *ngIf="selectable; then all else mine">
       </ng-container>
       <ng-template #all>
-        <div *ngFor="let qualification of qualifications()" class="qualification font">
+        <div *ngFor="let qualification of dataService.qualifications" class="qualification font">
           <div id="{{qualification.skill.toLowerCase()}}">
             <ng-container *ngIf="containsSkill(qualification); then selected else unselected"></ng-container>
             <ng-template #selected>
