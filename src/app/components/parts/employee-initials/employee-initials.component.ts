@@ -45,7 +45,6 @@ export class EmployeeInitialsComponent {
 
   public get color() {
     let initials = (this.employee!.firstName.toLowerCase().charCodeAt(0)! + this.employee!.lastName.toLowerCase().charCodeAt(0)!) % this.colors.length;
-    console.log(initials)
     return this.colors[initials];
   }
 }
