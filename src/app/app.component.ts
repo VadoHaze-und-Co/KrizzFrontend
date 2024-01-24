@@ -21,11 +21,6 @@ import {DataService} from "./services/data-service";
 })
 export class AppComponent {
   title = 'Employee Service';
-  protected readonly window = window;
-  protected readonly Employee = Employee;
-  protected readonly AddQualificationComponent = AddQualificationComponent;
-  protected readonly QualificationListComponent = QualificationListComponent;
-  protected readonly AddEmployeeComponent = AddEmployeeComponent;
 
   constructor(public dataService: DataService, public functionService: FunctionService) {
   }

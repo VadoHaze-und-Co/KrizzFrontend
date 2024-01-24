@@ -45,6 +45,10 @@ export class DataService {
     return window.innerWidth;
   }
 
+  public get screenHeight() {
+    return window.innerHeight;
+  }
+
   public selectedQualifications() {
     let qualifications: Qualification[] = [];
     for (let i = 0; i < document.getElementsByClassName("select-button").length; i++) {
