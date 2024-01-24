@@ -24,14 +24,12 @@
 
 .qualification {
   font-size: 14px;
-
-  background-color: #00000022;
 }
 
 .line {
   top: -1px;
   height: 1px;
-  background-color: #00000044;
+  background-color: #00000022;
 }
 
 .select-button {
