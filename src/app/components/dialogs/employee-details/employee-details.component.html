@@ -1,36 +1,37 @@
-<div (click)="dataService.clickForeground()" class="outer-container">
+<div (click)="dataService.clickForeground()" class="container mid-mid">
   <div class="close-button"><span (click)="close()" class="material-icons" style="font-size: 24px; cursor: pointer">close</span>
   </div>
   <div>
-    <app-employee-initials [big]="true" [employee]="dataService.employeeDetails"
-                           class="initials"></app-employee-initials>
+    <app-employee-initials [size]="2" [employee]="dataService.employeeDetails"
+                           class="initials mid"></app-employee-initials>
   </div>
-  <div class="name-text">
+  <div class="name-text mid font scroll">
     <div>{{ dataService.employeeDetails.employeeFullName(-1) }}</div>
   </div>
-  <div class="separator" style="top: 160px">
+  <div style="height: 22px"></div>
+  <div class="separator mid">
     <div class="separator-line"></div>
   </div>
-  <div class="detail-infos">
+  <div class="detail-infos font mid">
     <div>
-      <div class="info-field">ID</div>
+      <div class="info-field font">ID</div>
       <div class="info">{{ dataService.employeeDetails.id }}</div>
       <!--      //TODO-->
     </div>
     <div>
-      <div class="info-field">Str</div>
+      <div class="info-field font">Str</div>
       <div class="info">{{ dataService.employeeDetails.street }}</div>
     </div>
     <div>
-      <div class="info-field">PLZ/City</div>
+      <div class="info-field font">PLZ/City</div>
       <div class="info">{{ dataService.employeeDetails.postcode + ', ' + dataService.employeeDetails.city }}</div>
     </div>
     <div>
-      <div class="info-field">Phone</div>
+      <div class="info-field font">Phone</div>
       <div class="info">{{ dataService.employeeDetails.phone }}</div>
     </div>
   </div>
-  <div class="separator" style="top: 160px">
+  <div class="separator mid">
     <div class="separator-line"></div>
   </div>
   <app-qualification-card class="qualification-card"></app-qualification-card>

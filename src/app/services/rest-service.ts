@@ -17,6 +17,23 @@ export class RestService {
     });
   }
 
+  private async httpRequest(url: string, method: string, func: (data: any) => void, body?: any) {
+    if (this.header === undefined) {
+      await this.loadToken();
+    }
+    let option = {headers: this.header, body: body};
+    this.http.request(method, url, option)
+      .pipe(catchError(error => {
+        if (error.status == 401) {
+          this.header = undefined;
+          this.httpRequest(url, method, func, body);
+        }
+        return EMPTY;
+      })).subscribe(data => func(data));
+  }
+
+  // LOAD
+
   public loadEmployees() {
     this.httpRequest('https://employee.szut.dev/employees', 'GET', data => {
       this.dataService.employees = (data as Employee[])
@@ -29,12 +46,11 @@ export class RestService {
   public loadQualifications() {
     this.httpRequest('https://employee.szut.dev/qualifications', 'GET', data => {
       this.dataService.qualifications = (data as Qualification[])
+        .map(q => new Qualification(q.skill, q.id))
         .filter(q => q.skill !== undefined)
         .sort((a, b) => a.skill!.localeCompare(b.skill!)!);
     });
   }
-
-  // LOAD
 
   public loadQualificationsForEmployee(employee: Employee, func?: () => void) {
     if (!this.dataService.employees.map(e => e.id).includes(employee.id)) {
@@ -50,6 +66,8 @@ export class RestService {
     })
   }
 
+  // QUALIFICATION
+
   public addQualification(name: string) {
     this.httpRequest('https://employee.szut.dev/qualifications', 'POST',
       data => this.loadQualifications(),
@@ -61,11 +79,12 @@ export class RestService {
       data => this.loadQualifications());
   }
 
-  // QUALIFICATION
-
   public editQualification(id: number, name: string) {
     this.httpRequest('https://employee.szut.dev/qualifications/' + id, 'PUT',
-      () => this.loadQualifications(),
+      () => {
+        this.loadQualifications();
+        this.dataService.employees.forEach(e => this.loadQualificationsForEmployee(e));
+      },
       {skill: name});
   }
 
@@ -73,6 +92,8 @@ export class RestService {
     await firstValueFrom(this.http.delete('https://employee.szut.dev/employees/' + employeeId + '/qualifications',
       {headers: this.header, body: {skill: qualificationName}}));
   }
+
+  // EMPLOYEE
 
   public createEmployee(createEmployee: CreateEmployee) {
     this.httpRequest('https://employee.szut.dev/employees/', 'POST',
@@ -83,8 +104,6 @@ export class RestService {
     this.httpRequest('https://employee.szut.dev/employees/' + this.dataService.employeeEdit.id!, 'PUT',
       data => this.loadEmployees(), createEmployee);
   }
-
-  // EMPLOYEE
 
   public deleteEmployee(id: number) {
     this.httpRequest('https://employee.szut.dev/employees/' + id, 'DELETE',
@@ -102,20 +121,5 @@ export class RestService {
     this.header = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Authorization', 'Bearer ' + token.access_token!);
-  }
-
-  private async httpRequest(url: string, method: string, func: (data: any) => void, body?: any) {
-    if (this.header === undefined) {
-      await this.loadToken();
-    }
-    let option = {headers: this.header, body: body};
-    this.http.request(method, url, option)
-      .pipe(catchError(error => {
-        if (error.status == 401) {
-          this.header = undefined;
-          this.httpRequest(url, method, func, body);
-        }
-        return EMPTY;
-      })).subscribe(data => func(data));
   }
 }

@@ -1,55 +1,54 @@
-<div (click)="dataService.clickForeground()" class="qualification-list">
+<div (click)="dataService.clickForeground()" class="container mid-mid">
   <ng-container *ngIf="editing; then editing2 else creating2">
   </ng-container>
   <ng-template #editing2>
-    <div class="head-line">Mitarbeiter bearbeiten</div>
+    <div class="head-line font">Mitarbeiter bearbeiten</div>
   </ng-template>
   <ng-template #creating2>
-    <div class="head-line">Mitarbeiter hinzufügen</div>
+    <div class="head-line font">Mitarbeiter hinzufügen</div>
   </ng-template>
   <div class="close-button"><span (click)="close()" class="material-icons" style="font-size: 24px; cursor: pointer">close</span>
   </div>
   <div style="height: 20px"></div>
-  <div class="text-field centered" style=""><input (input)="type()" [(ngModel)]="employee.firstName" class="input"
+  <div class="input-text-field centered mid"><input (input)="type()" [(ngModel)]="employee.firstName" class="input-field"
                                                    placeholder="Vorname"
                                                    type="text"></div>
   <div style="height: 10px"></div>
-  <div class="text-field centered" style=""><input (input)="type()" [(ngModel)]="employee.lastName" class="input"
+  <div class="input-text-field centered mid"><input (input)="type()" [(ngModel)]="employee.lastName" class="input-field"
                                                    placeholder="Nachname"
                                                    type="text"></div>
   <div style="height: 10px"></div>
-  <div class="text-field centered" style=""><input (input)="type()" [(ngModel)]="employee.street" class="input"
+  <div class="input-text-field centered mid"><input (input)="type()" [(ngModel)]="employee.street" class="input-field"
                                                    placeholder="Straße"
                                                    type="text"></div>
   <div style="height: 10px"></div>
-  <div class="text-field centered" style=""><input (input)="type()" [(ngModel)]="employee.city" class="input"
+  <div class="input-text-field centered mid"><input (input)="type()" [(ngModel)]="employee.city" class="input-field"
                                                    placeholder="Stadt"
                                                    type="text"></div>
   <div style="height: 10px"></div>
-  <div class="text-field centered" style=""><input (input)="type()" [(ngModel)]="employee.postcode" class="input"
+  <div class="input-text-field centered mid"><input (input)="type()" [(ngModel)]="employee.postcode" class="input-field"
                                                    placeholder="PLZ"
                                                    type="text"></div>
   <div style="height: 10px"></div>
-  <div class="text-field centered" style=""><input (input)="type()" [(ngModel)]="employee.phone" class="input"
+  <div class="input-text-field centered mid"><input (input)="type()" [(ngModel)]="employee.phone" class="input-field"
                                                    placeholder="Telefonnummer"
                                                    type="text"></div>
   <div style="height: 10px"></div>
   <div class="separator">
     <div class="separator-line"></div>
   </div>
-  <app-qualification-card (input)="type()" [employee]="employee" [selectable]="true"
+  <app-qualification-card (input)="type()" [editing]="editing" [selectable]="true"
                           style="position: relative"></app-qualification-card>
-  <div style="height: 15px"></div>
-
+  <div style="height: 3px"></div>
   <ng-container *ngIf="editing; then edit else create">
   </ng-container>
   <ng-template #edit>
-    <div class="add-button">
+    <div class="add-button mid font">
       <div (click)="submit()" class="add-button-text">Speichern</div>
     </div>
   </ng-template>
   <ng-template #create>
-    <div class="add-button">
+    <div class="add-button mid font">
       <div (click)="submit()" class="add-button-text">Erstellen</div>
     </div>
   </ng-template>

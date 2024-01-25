@@ -1,12 +1,11 @@
 .dot {
-  background-color: #6868dc;
   border-radius: 50%;
   display: inline-block;
 }
 
-.big {
-  height: 130px;
-  width: 130px;
+.mini {
+  height: 25px;
+  width: 25px;
 }
 
 .small {
@@ -14,22 +13,25 @@
   width: 50px;
 }
 
+.big {
+  height: 130px;
+  width: 130px;
+}
+
 .text {
-  user-select: none;
-  position: relative;
   color: white;
+  position: relative;
   float: left;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+}
+
+.text-mini {
+  font-size: 14px;
 }
 
 .text-small {
-  font-family: "Tahoma", sans-serif;
   font-size: 25px;
 }
 
 .text-big {
-  font-family: "Tahoma", sans-serif;
   font-size: 70px;
 }

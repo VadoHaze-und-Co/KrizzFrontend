@@ -1,0 +1,19 @@
+<div class="container mid-mid" (click)="this.dataService.clickForeground()">
+  <div class="close-button"><span (click)="close()" class="material-icons" style="font-size: 24px; cursor: pointer">close</span></div>
+  <div class="info-field">Qualifikation:</div>
+  <div class="head-line mid font">
+    {{dataService.watchingQualification?.skill}}
+  </div>
+  <div class="outer-list mid">
+      <div class="table scroll font">
+        <div class="line"></div>
+        <div *ngIf="employees().length == 0"><div class="info-field2">Kein Mitarbeiter besitzt diese Qualifikation</div></div>
+      <div *ngFor="let employee of employees()" class="button">
+        <div class="t-row" (click)="functionService.openEmployeeDetailsDialog(employee)">
+          <div class="t-col initials"><app-employee-initials class="initials-component" [employee]="employee" [size]="0"></app-employee-initials></div>
+          <div class="t-col name-text">{{employee.employeeFullName(29)}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

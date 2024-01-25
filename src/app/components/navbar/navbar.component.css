@@ -1,0 +1,26 @@
+.nav-button {
+  position: relative;
+  font-size: 65px;
+}
+
+.button-container {
+  width: 66px;
+  height: 65px;
+  position: relative;
+}
+
+.line-h {
+  float: left;
+  bottom: 64px;
+  width: 1px;
+  position: relative;
+  background-color: #00000077;
+  height: 55px;
+  transform: translate(0, 70px);
+}
+
+.line-w {
+  position: relative;
+  background-color: black;
+  height: 1px;
+}

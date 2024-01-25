@@ -8,7 +8,10 @@ import {DataService} from "../../../services/data-service";
   standalone: true,
   imports: [CommonModule],
   templateUrl: './confirmation.component.html',
-  styleUrl: './confirmation.component.css'
+  styleUrls: [
+    './confirmation.component.css',
+    '/src/app/main.css'
+  ]
 })
 export class ConfirmationComponent extends Dialog {
 

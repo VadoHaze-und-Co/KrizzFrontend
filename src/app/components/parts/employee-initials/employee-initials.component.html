@@ -1,3 +1,3 @@
-<div *ngIf="big; then bigBall else smallBall"></div>
-<ng-template #bigBall><span class="dot big"><div class="text text-big">{{ initials() }}</div></span></ng-template>
-<ng-template #smallBall><span class="dot small"><div class="text text-small">{{ initials() }}</div></span></ng-template>
+<div *ngIf="size == 0"><span [style.background-color]="color" class="dot mini"><div class="text font mid-mid text-mini">{{ initials() }}</div></span></div>
+<div *ngIf="size == 1"><span [style.background-color]="color" class="dot small"><div class="text font mid-mid text-small">{{ initials() }}</div></span></div>
+<div *ngIf="size == 2"><span [style.background-color]="color" class="dot big"><div class="text font mid-mid text-big">{{ initials() }}</div></span></div>

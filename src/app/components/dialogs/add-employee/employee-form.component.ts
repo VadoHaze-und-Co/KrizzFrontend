@@ -13,7 +13,10 @@ import {DataService} from "../../../services/data-service";
   standalone: true,
   imports: [CommonModule, QualificationCardComponent, AddQualificationComponent, FormsModule],
   templateUrl: './employee-form.component.html',
-  styleUrl: './employee-form.component.css'
+  styleUrls: [
+    './employee-form.component.css',
+    '/src/app/main.css'
+  ]
 })
 export class EmployeeFormComponent extends Dialog {
 
@@ -25,11 +28,17 @@ export class EmployeeFormComponent extends Dialog {
   }
 
   public type() {
+    this.employee.skills = this.dataService.selectedQualifications().map(q => q.skill);
   }
 
   public submit() {
     this.close();
     setTimeout(() => this.functionService.restService.loadEmployees(), 10);
+  }
+
+  override close() {
+    super.close();
+    this.dataService.searchForQualification = "";
   }
 }
 
@@ -38,7 +47,10 @@ export class EmployeeFormComponent extends Dialog {
   standalone: true,
   imports: [CommonModule, QualificationCardComponent, AddQualificationComponent, FormsModule],
   templateUrl: './employee-form.component.html',
-  styleUrl: './employee-form.component.css'
+  styleUrls: [
+    './employee-form.component.css',
+    '/src/app/main.css'
+  ]
 })
 export class AddEmployeeComponent extends EmployeeFormComponent {
 
@@ -55,7 +67,7 @@ export class AddEmployeeComponent extends EmployeeFormComponent {
   }
 
   override type() {
-    this.employee.skills = this.dataService.selectedQualifications().map(q => q.skill);
+    super.type();
     this.dataService.employeeAdd = this.employee;
   }
 
@@ -70,7 +82,10 @@ export class AddEmployeeComponent extends EmployeeFormComponent {
   standalone: true,
   imports: [CommonModule, QualificationCardComponent, AddQualificationComponent, FormsModule],
   templateUrl: './employee-form.component.html',
-  styleUrl: './employee-form.component.css'
+  styleUrls: [
+    './employee-form.component.css',
+    '/src/app/main.css'
+  ]
 })
 export class EditEmployeeComponent extends EmployeeFormComponent {
 
@@ -88,5 +103,10 @@ export class EditEmployeeComponent extends EmployeeFormComponent {
       this.functionService.openEmployeeDetailsDialog(this.employee);
       super.submit();
     }
+  }
+
+  override type() {
+    super.type();
+    this.dataService.employeeEdit = this.employee;
   }
 }

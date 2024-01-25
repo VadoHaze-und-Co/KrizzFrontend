@@ -1,73 +1,32 @@
-.outer-container {
+.container {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   width: 260px;
-  height: 520px;
+  height: 530px;
   background-color: white;
   border-radius: 20px;
   user-select: none;
 }
 
-.close-button {
-  position: fixed;
-  right: 2px;
-  top: 2px;
-}
-
 .initials {
   position: fixed;
-  left: 50%;
   top: 20px;
   float: left;
-  transform: translate(-50%, 0);
 }
 
 .name-text {
-  position: relative;
-  transform: translate(-50%, 0);
-  left: 50%;
-  overflow: hidden auto;
   text-align: center;
   width: 240px;
   height: 45px;
   font-size: 18px;
-  font-family: "Tahoma", sans-serif;
-  top: 160px;
+  top: 20px;
 }
 
 .detail-infos {
-  font-family: "Tahoma", sans-serif;
   font-size: 15px;
   width: 220px;
-  position: relative;
-  transform: translate(-50%, 0);
-  left: 50%;
-  top: 160px;
-}
-
-.separator {
-  position: relative;
-  left: 50%;
-  transform: translate(-50%, 0);
-  top: 22px;
-  height: 20px;
-  width: 220px;
-  background-color: transparent;
-}
-
-.separator-line {
-  height: 1px;
-  width: 180px;
-  position: relative;
-  left: 20px;
-  top: 9px;
-  background-color: darkslategray;
 }
 
 .info-field {
-  font-family: "Tahoma", sans-serif;
   font-size: 10px;
   color: darkgray;
 }
@@ -79,15 +38,12 @@
 
 .qualification-card {
   position: relative;
-  top: 160px;
 }
 
 .buttons {
-  position: relative;
-  transform: translate(-50%, 0);
-  left: 50%;
+  position: fixed;
+  bottom: 0;
   width: 260px;
-  top: 160px;
 }
 
 .button {

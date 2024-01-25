@@ -10,7 +10,10 @@ import {DataService} from "../../../services/data-service";
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './add-qualification.component.html',
-  styleUrl: './add-qualification.component.css'
+  styleUrls: [
+    './add-qualification.component.css',
+    '/src/app/main.css'
+  ]
 })
 export class AddQualificationComponent extends Dialog {
 

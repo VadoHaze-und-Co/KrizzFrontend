@@ -12,13 +12,16 @@ import {DataService} from "../../../services/data-service";
   standalone: true,
   imports: [CommonModule, EmployeeInitialsComponent, QualificationCardComponent, EmployeeFormComponent],
   templateUrl: './employee-details.component.html',
-  styleUrl: './employee-details.component.css'
+  styleUrls: [
+    './employee-details.component.css',
+    '/src/app/main.css'
+  ]
 })
 export class EmployeeDetailsComponent extends Dialog {
 
   constructor(dataService: DataService, public functionService: FunctionService) {
     super(dataService);
-    functionService.restService.loadQualificationsForEmployee(this.employee!);
+    setTimeout(() => functionService.restService.loadQualificationsForEmployee(this.employee!), 1000)
   }
 
   public get employee() {
@@ -30,10 +33,11 @@ export class EmployeeDetailsComponent extends Dialog {
   }
 
   public delete() {
-    this.dataService.employees = this.dataService.employees.filter(e => e.id != this.employee.id);
+    let id = this.employee.id;
     this.functionService.openConfirmation({
       title: "Mitarbeiter löschen?",
       yes: () => {
+        this.dataService.employees = this.dataService.employees.filter(e => e.id != id);
         this.functionService.deleteEmployee(this.employee!.id!);
         this.close();
       }

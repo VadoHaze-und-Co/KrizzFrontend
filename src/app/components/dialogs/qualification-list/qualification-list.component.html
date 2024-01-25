@@ -1,25 +1,26 @@
-<div (click)="dataService.clickForeground()" class="qualification-list">
-  <div class="close-button"><span (click)="close()" class="material-icons" style="font-size: 24px; cursor: pointer">close</span>
+<div (click)="dataService.clickForeground()" class="container mid-mid">
+  <div class="close-button button"><span (click)="close()" class="material-icons button" style="font-size: 24px">close</span>
   </div>
-  <div class="head-line">
-    <input [(ngModel)]="qualification" class="input" placeholder="Neue Qualifikation" type="text">
-    <div (click)="add()" class="add-button">
-      <div style="cursor: pointer">+</div>
-    </div>
+  <div class="title">Qualifikationsliste</div>
+  <div style="height: 10px"></div>
+  <div class="head-line mid" style="top: 20px">
+    <input [(ngModel)]="qualification" class="input font" placeholder="Neue Qualifikation" type="text">
+    <div (click)="add()" class="button add font">+</div>
   </div>
+  <div style="height: 20px"></div>
   <div class="separator">
     <div class="separator-line"></div>
   </div>
-  <div class="outer-list">
-    <div class="inner-list">
+  <div class="outer-list mid">
+    <div class="inner-list scroll">
       <table>
-        <tr *ngFor="let qualification of dataService.qualifications" class="list-row">
+        <tr *ngFor="let qualification of dataService.qualifications" class="list-row font">
           <ng-container *ngIf="qualificationEdit?.id == qualification.id; then editing else fixName"/>
 
           <ng-template #editing> <!-- EDITING -->
             <td colspan="130px">
               <div style="width: 130px">
-                <input [(ngModel)]="qualificationEdit!.skill" class="edit-input" type="text">
+                <input [(ngModel)]="qualificationEdit!.skill" class="edit-input font" type="text">
               </div>
             </td>
             <td colspan="20px">
@@ -30,8 +31,8 @@
           </ng-template>
 
           <ng-template #fixName> <!-- FIX -->
-            <td colspan="130px">
-              <div style="width: 130px">
+            <td colspan="130px" class="button">
+              <div style="width: 130px" (click)="functionService.openQualificationEmployeeListDialog(qualification)">
                 <div>{{ qualification.skill }}</div>
               </div>
             </td>

@@ -1,0 +1,112 @@
+.close-button {
+  position: fixed;
+  right: 2px;
+  top: 1px;
+}
+
+.mid {
+  position: relative;
+  transform: translate(-50%, 0);
+  left: 50%;
+}
+
+.mid-mid {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.scroll {
+  overflow: hidden auto;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #00000033;
+}
+
+.separator {
+  height: 20px;
+  width: 100%;
+  background-color: transparent;
+}
+
+.separator-line {
+  height: 1px;
+  width: 180px;
+  position: relative;
+  transform: translate(-50%, 0);
+  left: 50%;
+  top: 9px;
+  background-color: darkslategray;
+}
+
+.font {
+  font-family: "Tahoma", sans-serif;
+}
+
+.head-line {
+  position: relative;
+  text-align: center;
+  top: 5px;
+  height: 20px;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.input-field {
+  background-color: transparent;
+  position: relative;
+  float: left;
+  border: none;
+  width: 185px;
+  height: 20px;
+  font-family: "Tahoma", sans-serif;
+  font-size: 16px;
+  left: 5px;
+  bottom: 2px;
+}
+
+.input-text-field {
+  border-radius: 10px;
+  background-color: lightgray;
+  width: 200px;
+  height: 20px;
+}
+
+.button {
+  cursor: pointer;
+}
+
+.add-button {
+  cursor: pointer;
+  width: 100px;
+  height: 20px;
+  background-color: darkgray;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: 0.5s;
+}
+
+.add-button:hover {
+  background-color: gray;
+}
+
+.add-button-text {
+  font-size: 16px;
+  margin-top: 2px;
+}
+
+.input-field:focus {
+  outline: none;
+}

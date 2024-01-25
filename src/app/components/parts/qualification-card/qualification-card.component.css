@@ -1,53 +1,54 @@
-.outer-container {
-  user-select: none;
-  position: relative;
-  left: 50%;
-  transform: translate(-50%, 0);
+.container {
   width: 200px;
-  height: 120px;
 }
 
 .qualification-list {
-  height: 100px;
+  height: 120px;
   border-radius: 20px;
   background-color: lightgray;
 }
 
-.close-button {
-  position: fixed;
-  right: 5px;
-  top: 2px;
-}
-
 .title {
   font-size: 16px;
-  font-family: "Tahoma", sans-serif;
 }
 
-.add-button {
-  cursor: pointer;
+.name {
+  position: relative;
+  height: 20px;
+  font-size: 14px;
 }
 
 .head-line {
-  height: 20px;
   width: 180px;
-  transform: translate(10px, 0);
 }
 
 .inner-list {
   width: 180px;
-  height: 80px;
-  transform: translate(10px, 10px);
-  overflow: hidden scroll;
+  height: 105px;
+  transform: translate(10px, 0);
 }
 
-.qualification {
-  font-size: 14px;
-  font-family: "Tahoma", sans-serif;
-}
-
-.qualification:nth-child(odd) {
+.line {
+  position: relative;
+  height: 1px;
   background-color: #00000022;
+}
+
+.search-field {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background-color: #00000022;
+  width: 200px;
+  height: 30px;
+  position: relative;
+}
+
+.close {
+  position: fixed;
+  top: 29px;
+  right: 3px;
+  font-size: 20px;
+  color: #00000055;
 }
 
 .select-button {

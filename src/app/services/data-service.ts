@@ -4,7 +4,7 @@ import {Qualification} from "../rest-objects/qualification";
 import {Dialog} from "../components/dialogs/dialog";
 import {MessageBox} from "../components/parts/message-box/message-box";
 import {ConfirmationComponent} from "../components/dialogs/confirmation/confirmation.component";
-import {AddEmployeeComponent} from "../components/dialogs/add-employee/employee-form.component";
+import {AddEmployeeComponent, EditEmployeeComponent} from "../components/dialogs/add-employee/employee-form.component";
 
 @Injectable({providedIn: "root"})
 export class DataService {
@@ -14,11 +14,15 @@ export class DataService {
   public qualifications: Qualification[] = [];
   public dialogs: Type<Dialog>[] = [];
   public messageBoxes: MessageBox[] = [];
+
+  // Qualification
+  public searchForQualification = "";
+  public watchingQualification: Qualification | undefined;
+
   // Employees
   public employeeDetails = new Employee();
   public employeeAdd = new Employee();
   public employeeEdit = new Employee();
-  clickInside = false;
 
   private _confirmationConfirm: { title: string, info?: string, yes: (() => void), no?: (() => void) } | undefined;
 
@@ -40,6 +44,10 @@ export class DataService {
 
   public get screenWidth() {
     return window.innerWidth;
+  }
+
+  public get screenHeight() {
+    return window.innerHeight;
   }
 
   public selectedQualifications() {
@@ -67,11 +75,15 @@ export class DataService {
     return this.dialogs.length > 0 ? this.dialogs[this.dialogs.length - 1] : undefined;
   }
 
+  clickInside = false;
   clickBackground() {
     if (!this.clickInside) {
       let d = this.dialogs[this.dialogs.length - 1];
-      if (d.name == AddEmployeeComponent.name) {
-        this.employeeAdd = new Employee();
+      if (d.name == AddEmployeeComponent.name || d.name == EditEmployeeComponent.name) {
+        if (d.name == AddEmployeeComponent.name) {
+          this.employeeAdd = new Employee();
+        }
+        this.searchForQualification = "";
       }
       this.dialogs.pop();
     }
