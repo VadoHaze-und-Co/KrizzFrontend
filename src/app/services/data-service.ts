@@ -86,4 +86,11 @@ export class DataService {
     let cardWidth = 170;
     return ((this.screenWidth / cardWidth) | 0) * cardWidth;
   }
+
+  searchEmployeesByName(query: string){
+    this.employees = this.employees.filter(employee =>
+      employee.firstName.toLowerCase().includes(query.toLowerCase()) ||
+      employee.lastName.toLowerCase().includes(query.toLowerCase())
+    );
+  }
 }

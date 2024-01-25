@@ -1,0 +1,25 @@
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Positioniert Elemente am Anfang des Containers */
+  width: 80%;
+  margin-top: -50px; /* Verschiebt den Container nach oben */
+}
+
+input[type="text"] {
+  padding: 10px;
+  border: 1px solid gray; /* Fügt eine graue Umrandung hinzu */
+  border-radius: 20px;
+  display: inline-block;
+  width: 200%; /* Ändert die Breite der Suchleiste */
+}
+
+.user-cards{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px,1fr));
+  gap: .25rem;
+  margin-top: 1rem;
+}
+
+
+
