@@ -12,11 +12,12 @@ import {MessageBoxComponent} from "./components/parts/message-box/message-box.co
 import {RouterOutlet} from "@angular/router";
 import {DataService} from "./services/data-service";
 import {NavbarComponent} from "./components/navbar/navbar.component";
+import {LoginPageComponent} from "./components/login-page/login-page.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, EmployeeListComponent, FunctionService, QualificationCardComponent, QualificationListComponent, AddQualificationComponent, EmployeeDetailsComponent, MessageBoxComponent, RouterOutlet, NavbarComponent],
+  imports: [CommonModule, EmployeeListComponent, FunctionService, QualificationCardComponent, QualificationListComponent, AddQualificationComponent, EmployeeDetailsComponent, MessageBoxComponent, RouterOutlet, NavbarComponent, LoginPageComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

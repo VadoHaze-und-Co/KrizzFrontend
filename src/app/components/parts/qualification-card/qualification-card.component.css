@@ -4,7 +4,7 @@
 
 .qualification-list {
   height: 120px;
-  border-radius: 20px;
+  border-radius: 15px;
   background-color: lightgray;
 }
 
@@ -34,8 +34,8 @@
 }
 
 .search-field {
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
   background-color: #00000022;
   width: 200px;
   height: 30px;

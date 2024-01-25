@@ -8,25 +8,35 @@ import {CreateEmployee} from "../rest-objects/create-employee";
 import {catchError, EMPTY, firstValueFrom} from "rxjs";
 
 export class RestService {
-  header: HttpHeaders | undefined;
 
   constructor(private http: HttpClient, public dataService: DataService) {
-    this.loadToken().then(() => {
-      this.loadQualifications();
-      this.loadEmployees();
-    });
+    let token = localStorage.getItem("token");
+    if (token === null || token == "") {
+      return;
+    }
+    this.createHeader(token);
+  }
+
+  public loadToken(loginUsername: string, loginPassword: string) {
+    return this.http.post<Token>('http://authproxy.szut.dev',
+      `grant_type=password&client_id=employee-management-service&username=` + loginUsername + `&password=` + loginPassword,
+      {headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')});
+  }
+
+  public createHeader(token: string) {
+    this.dataService.header = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', 'Bearer ' + token);
+    this.loadQualifications();
+    this.loadEmployees();
   }
 
   private async httpRequest(url: string, method: string, func: (data: any) => void, body?: any) {
-    if (this.header === undefined) {
-      await this.loadToken();
-    }
-    let option = {headers: this.header, body: body};
+    let option = {headers: this.dataService.header, body: body};
     this.http.request(method, url, option)
       .pipe(catchError(error => {
         if (error.status == 401) {
-          this.header = undefined;
-          this.httpRequest(url, method, func, body);
+          this.dataService.header = undefined;
         }
         return EMPTY;
       })).subscribe(data => func(data));
@@ -90,7 +100,7 @@ export class RestService {
 
   public async asyncRemoveQualificationFromEmployee(qualificationName: string, employeeId: number) {
     await firstValueFrom(this.http.delete('https://employee.szut.dev/employees/' + employeeId + '/qualifications',
-      {headers: this.header, body: {skill: qualificationName}}));
+      {headers: this.dataService.header, body: {skill: qualificationName}}));
   }
 
   // EMPLOYEE
@@ -111,15 +121,5 @@ export class RestService {
         this.dataService.employeeDetails = new Employee();
         this.loadEmployees()
       });
-  }
-
-  private async loadToken() {
-    let token = await firstValueFrom(this.http.post<Token>('http://authproxy.szut.dev',
-      `grant_type=password&client_id=employee-management-service&username=user&password=test`,
-      {headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')}
-    ));
-    this.header = new HttpHeaders()
-      .set('Content-Type', 'application/json')
-      .set('Authorization', 'Bearer ' + token.access_token!);
   }
 }
