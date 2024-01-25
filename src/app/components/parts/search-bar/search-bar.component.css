@@ -8,7 +8,7 @@
 
 input[type="text"] {
   padding: 10px;
-  border: 1px solid gray; /* Fügt eine graue Umrandung hinzu */
+  border: grey solid 1px; /* Fügt eine graue Umrandung hinzu */
   border-radius: 20px;
   display: inline-block;
   width: 200%; /* Ändert die Breite der Suchleiste */
