@@ -1,7 +1,7 @@
 .container {
   position: absolute;
   width: 340px;
-  height: 310px;
+  height: 320px;
   background-color: white;
   border-radius: 20px;
   user-select: none;
@@ -11,7 +11,7 @@
   background-color: #00000022;
   width: 320px;
   border-radius: 20px;
-  height: 261px;
+  height: 271px;
 }
 
 .info-field {
@@ -31,8 +31,8 @@
 }
 
 .t-row {
-  height: 29px;
-  border-bottom: #00000022 solid 1px;
+  width: 300px;
+  height: fit-content;
 }
 
 .line {
@@ -51,25 +51,22 @@
 .table {
   transform: translate(10px, 10px);
   width: 300px;
-  height: 241px;
+  height: 251px;
 }
 
 .name-text {
-  top: 6px;
   font-size: 15px;
   width: 264px;
-  height: 19px;
   position: relative;
   float: left;
 }
 
 .initials {
-  width: 30px;
-  height: 30px;
-  float: left;
+  width: 25px;
+  height: 25px;
+  position: relative;
+  top: 2px;
 }
 
 .initials-component {
-  position: relative;
-  top: 2px;
 }

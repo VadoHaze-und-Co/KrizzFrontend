@@ -15,7 +15,7 @@
     </div>
     <div *ngIf="!selectable" style="height: 10px">
     </div>
-    <div class="inner-list scroll">
+    <div class="inner-list scroll" [style.height]="selectable ? '105px' : '106px'">
       <ng-container *ngIf="selectable; then all else mine">
       </ng-container>
       <ng-template #all>

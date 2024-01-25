@@ -1,7 +1,6 @@
 <div (click)="dataService.clickForeground()" class="container mid-mid">
-  <div class="close-button button"><span (click)="close()" class="material-icons button" style="font-size: 24px">close</span>
-  </div>
   <div class="title">Qualifikationsliste</div>
+  <div class="close-button button"><span (click)="close()" class="material-icons button" style="font-size: 24px">close</span></div>
   <div style="height: 10px"></div>
   <div class="head-line mid" style="top: 20px">
     <input [(ngModel)]="qualification" class="input font" placeholder="Neue Qualifikation" type="text">
@@ -44,7 +43,7 @@
             </td>
           </ng-template>
 
-          <td colspan="20px" style="; width: 20px;">
+          <td colspan="20px" style="width: 20px;">
             <div style="width: 20px;">
               <span (click)="delete(qualification)" class="material-icons"
                     style="font-size: 16px; cursor: pointer; color: red">delete</span>

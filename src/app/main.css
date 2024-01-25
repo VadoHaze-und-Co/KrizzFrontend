@@ -10,6 +10,12 @@
   left: 50%;
 }
 
+.mid-h {
+  position: relative;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
 .mid-mid {
   left: 50%;
   top: 50%;
