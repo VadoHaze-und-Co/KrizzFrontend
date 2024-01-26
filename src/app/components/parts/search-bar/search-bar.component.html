@@ -1,5 +1,11 @@
+<router-outlet></router-outlet>
 <section class="search">
-  <form>
-    <input type="search" placeholder="Search">
+  <form (ngSubmit)="search(test.value)"> <!-- search(test.value) wird die Funktion aufgerufen, wenn das Formular abgesendet wird) -->
+    <input type="text" placeholder="search" #test>
+    <input type="submit" style="display: none;">
   </form>
+  <ul>
+    <li *ngFor="let employee of searchResults">
+    </li>
+  </ul>
 </section>

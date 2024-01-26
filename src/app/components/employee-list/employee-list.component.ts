@@ -3,6 +3,8 @@ import {CommonModule} from '@angular/common';
 import {EmployeeInitialsComponent} from "../parts/employee-initials/employee-initials.component";
 import {EmployeeCardComponent} from "../parts/employee-card/employee-card.component";
 import {DataService} from "../../services/data-service";
+import {Employee} from "../../rest-objects/employee";
+import {query} from "@angular/animations";
 
 @Component({
   selector: 'app-employee-list',
@@ -15,7 +17,9 @@ import {DataService} from "../../services/data-service";
   ]
 })
 export class EmployeeListComponent {
+  searchResults: Employee[] = [];
 
   constructor(public dataService: DataService) {
+
   }
 }

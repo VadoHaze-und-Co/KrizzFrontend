@@ -1,14 +1,7 @@
 <div style="width: 100%; height: 100%">
   <app-employee-list [style.height]="(window.innerHeight - 130) + 'px'" class="employee-list"></app-employee-list>
-  <div class="search-bar" style=""></div> <!-- SEARCH -->
-  <div class="nav-bar">
-    <button (click)="functionService.openQualificationListDialog()">
-      list
-    </button>
-    <button (click)="functionService.openAddEmployeeDialog()" style="float: right; position: relative">
-      add
-    </button>
-  </div> <!-- NAVBAR -->
+  <app-search-bar class="search-bar"></app-search-bar>
+  <app-navbar class="nav-bar"></app-navbar>
   <ng-container *ngFor="let dialog of dataService.backgroundDialogs()">
     <ng-container *ngComponentOutlet="dialog" style="position: absolute"></ng-container>
   </ng-container>

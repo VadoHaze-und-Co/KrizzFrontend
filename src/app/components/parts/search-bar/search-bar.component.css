@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: flex-start; /* Positioniert Elemente am Anfang des Containers */
   width: 80%;
-  margin-top: -50px; /* Verschiebt den Container nach oben */
+  margin-top: 20px; /* Verschiebt den Container nach oben */
 }
 
 input[type="text"] {
@@ -19,6 +19,13 @@ input[type="text"] {
   grid-template-columns: repeat(auto-fill, minmax(150px,1fr));
   gap: .25rem;
   margin-top: 1rem;
+}
+.search-control{
+  flex: 1;
+  font-size: 1rem;
+  border: 0;
+  outline: none;
+  padding-left: 10px;
 }
 
 
