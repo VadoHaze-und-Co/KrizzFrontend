@@ -94,6 +94,7 @@ export class DataService {
     this.clickInside = true;
   }
 
+
   public goodListWidth() {
     let cardWidth = 170;
     return ((this.screenWidth / cardWidth) | 0) * cardWidth;
@@ -105,4 +106,8 @@ export class DataService {
       employee.lastName.toLowerCase().includes(query.toLowerCase())
     );
   }
+  allEmployeesGet() {
+
+  }
+
 }

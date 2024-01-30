@@ -14,6 +14,7 @@ import {DataService} from "./services/data-service";
 import {NavbarComponent} from "./components/navbar/navbar.component";
 import {SearchBarComponent} from "./components/parts/search-bar/search-bar.component";
 
+
 @Component({
   selector: 'app-root',
   standalone: true,

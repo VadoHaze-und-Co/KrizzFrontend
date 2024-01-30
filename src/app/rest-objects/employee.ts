@@ -28,4 +28,5 @@ export class Employee {
     e.skills = this.skills.map(q => q);
     return e;
   }
+  public list: any[] = [];
 }
