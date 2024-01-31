@@ -18,4 +18,8 @@ export class EmployeeListComponent {
 
   constructor(public dataService: DataService) {
   }
+
+  public list(){
+    return this.dataService.employees.filter(q => q.isVisible)
+  }
 }

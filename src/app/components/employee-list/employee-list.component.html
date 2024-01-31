@@ -1,6 +1,6 @@
 <div class="container scroll">
   <div [style.width]="dataService.goodListWidth() + 'px'" class="mid">
-    <ng-container *ngFor="let employee of dataService.employees">
+    <ng-container *ngFor="let employee of list()">
       <app-employee-card [employee]="employee"></app-employee-card>
     </ng-container>
   </div>
