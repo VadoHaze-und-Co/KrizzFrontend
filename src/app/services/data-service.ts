@@ -4,8 +4,9 @@ import {Qualification} from "../rest-objects/qualification";
 import {Dialog} from "../components/dialogs/dialog";
 import {MessageBox} from "../components/parts/message-box/message-box";
 import {ConfirmationComponent} from "../components/dialogs/confirmation/confirmation.component";
-import {AddEmployeeComponent, EditEmployeeComponent} from "../components/dialogs/add-employee/employee-form.component";
 import {HttpHeaders} from "@angular/common/http";
+import {AddEmployeeComponent} from "../components/dialogs/add-employee/add-employee.component";
+import {EditEmployeeComponent} from "../components/dialogs/edit-employee/edit-employee.component";
 
 @Injectable({providedIn: "root"})
 export class DataService {

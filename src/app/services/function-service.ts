@@ -9,11 +9,12 @@ import {CreateEmployee} from "../rest-objects/create-employee";
 import {Dialog} from "../components/dialogs/dialog";
 import {EmployeeDetailsComponent} from "../components/dialogs/employee-details/employee-details.component";
 import {AddQualificationComponent} from "../components/dialogs/add-qualification/add-qualification.component";
-import {AddEmployeeComponent, EditEmployeeComponent} from "../components/dialogs/add-employee/employee-form.component";
 import {QualificationListComponent} from "../components/dialogs/qualification-list/qualification-list.component";
 import {
   EmployeeQualificationListComponent
 } from "../components/dialogs/employee-qualification-list/employee-qualification-list.component";
+import {AddEmployeeComponent} from "../components/dialogs/add-employee/add-employee.component";
+import {EditEmployeeComponent} from "../components/dialogs/edit-employee/edit-employee.component";
 
 @NgModule({
   imports: [HttpClientModule],
@@ -161,6 +162,7 @@ export class FunctionService {
     if (this.dataService.dialogs.map(d => d.name).includes(dialog.name)) {
       return;
     }
+    console.log(dialog.name)
     setTimeout(() => this.dataService.dialogs.push(dialog));
   }
 }

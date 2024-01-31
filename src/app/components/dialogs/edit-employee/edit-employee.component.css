@@ -1,0 +1,12 @@
+.container {
+  position: absolute;
+  width: 260px;
+  height: 450px;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.centered {
+  width: 200px;
+  height: 20px;
+}

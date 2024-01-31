@@ -1,8 +1,8 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {QualificationCardComponent} from './qualification-card.component';
+import { QualificationCardComponent } from './qualification-card.component';
 
-describe('QualificationListComponent', () => {
+describe('QualificationCardComponent', () => {
   let component: QualificationCardComponent;
   let fixture: ComponentFixture<QualificationCardComponent>;
 
@@ -10,8 +10,8 @@ describe('QualificationListComponent', () => {
     await TestBed.configureTestingModule({
       imports: [QualificationCardComponent]
     })
-      .compileComponents();
-
+    .compileComponents();
+    
     fixture = TestBed.createComponent(QualificationCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

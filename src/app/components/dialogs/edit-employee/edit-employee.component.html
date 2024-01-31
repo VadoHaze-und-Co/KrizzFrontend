@@ -1,0 +1,41 @@
+<div (click)="dataService.clickForeground()" class="container mid-mid">
+  <div class="head-line font">Mitarbeiter bearbeiten</div>
+  <div class="close-button"><span (click)="close()" class="material-icons" style="font-size: 24px; cursor: pointer">close</span>
+  </div>
+  <div style="height: 20px"></div>
+  <div class="input-text-field centered mid"><input (input)="type()" [(ngModel)]="employee.firstName" class="input-field"
+                                                    placeholder="Vorname"
+                                                    type="text"></div>
+  <div style="height: 10px"></div>
+  <div class="input-text-field centered mid"><input (input)="type()" [(ngModel)]="employee.lastName" class="input-field"
+                                                    placeholder="Nachname"
+                                                    type="text"></div>
+  <div style="height: 10px"></div>
+  <div class="input-text-field centered mid"><input (input)="type()" [(ngModel)]="employee.street" class="input-field"
+                                                    placeholder="Straße"
+                                                    type="text"></div>
+  <div style="height: 10px"></div>
+  <div class="input-text-field centered mid"><input (input)="type()" [(ngModel)]="employee.city" class="input-field"
+                                                    placeholder="Stadt"
+                                                    type="text"></div>
+  <div style="height: 10px"></div>
+  <div class="input-text-field centered mid"><input (input)="type()" [(ngModel)]="employee.postcode" class="input-field"
+                                                    placeholder="PLZ"
+                                                    type="text"></div>
+  <div style="height: 10px"></div>
+  <div class="input-text-field centered mid"><input (input)="type()" [(ngModel)]="employee.phone" class="input-field"
+                                                    placeholder="Telefonnummer"
+                                                    type="text"></div>
+  <div style="height: 10px"></div>
+  <div class="separator">
+    <div class="separator-line"></div>
+  </div>
+  <app-qualification-card (input)="type()" [editing]="true" [selectable]="true" style="position: relative"></app-qualification-card>
+  <!--  <app-qualification-cards (input)="type()" [editing]="true" [selectable]="true"-->
+  <!--                          style="position: relative"></app-qualification-cards>-->
+  <div style="height: 3px"></div>
+
+  <div class="add-button mid font">
+    <div (click)="submit()" class="add-button-text">Speichern</div>
+  </div>
+</div>

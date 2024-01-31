@@ -1,15 +1,15 @@
 import {Component, Input} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {Qualification} from "../../../rest-objects/qualification";
+import { CommonModule } from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Employee} from "../../../rest-objects/employee";
 import {FunctionService} from "../../../services/function-service";
 import {DataService} from "../../../services/data-service";
-import {FormsModule} from "@angular/forms";
+import {Qualification} from "../../../rest-objects/qualification";
 
 @Component({
   selector: 'app-qualification-card',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './qualification-card.component.html',
   styleUrls: [
     './qualification-card.component.css',

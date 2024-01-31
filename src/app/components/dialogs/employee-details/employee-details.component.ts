@@ -1,16 +1,16 @@
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {EmployeeInitialsComponent} from "../../parts/employee-initials/employee-initials.component";
-import {QualificationCardComponent} from "../../parts/qualification-card/qualification-card.component";
 import {Dialog} from "../dialog";
-import {EmployeeFormComponent} from "../add-employee/employee-form.component";
 import {FunctionService} from "../../../services/function-service";
 import {DataService} from "../../../services/data-service";
+import {AddEmployeeComponent} from "../add-employee/add-employee.component";
+import {QualificationCardComponent} from "../../parts/qualification-card/qualification-card.component";
 
 @Component({
   selector: 'app-employee-details',
   standalone: true,
-  imports: [CommonModule, EmployeeInitialsComponent, QualificationCardComponent, EmployeeFormComponent],
+  imports: [CommonModule, EmployeeInitialsComponent, QualificationCardComponent, AddEmployeeComponent],
   templateUrl: './employee-details.component.html',
   styleUrls: [
     './employee-details.component.css',
@@ -29,7 +29,7 @@ export class EmployeeDetailsComponent extends Dialog {
   }
 
   public edit() {
-    this.functionService.openEditEmployeeDialog(this.employee!);
+    this.functionService.openEditEmployeeDialog(this.employee)
   }
 
   public delete() {
