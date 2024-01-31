@@ -23,7 +23,8 @@
 
 .detail-infos {
   font-size: 15px;
-  width: 220px;
+  width: 210px;
+  transform: translate(5px,0);
 }
 
 .info-field {

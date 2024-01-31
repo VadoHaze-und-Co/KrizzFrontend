@@ -42,7 +42,7 @@ export class EmployeeInitialsComponent {
   }
 
   public get color() {
-    let initials = (this.employee!.firstName.toLowerCase().charCodeAt(0)! + this.employee!.lastName.toLowerCase().charCodeAt(0)!) % this.colors.length;
+    let initials = ((this.employee!.firstName.toLowerCase().charCodeAt(0)! << 9) + this.employee!.lastName.toLowerCase().charCodeAt(0)!) % this.colors.length;
     return this.colors[initials];
   }
 }

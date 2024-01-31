@@ -15,7 +15,7 @@
     </div>
     <div *ngIf="!selectable" style="height: 10px">
     </div>
-    <div class="inner-list scroll">
+    <div class="inner-list scroll" [style.height]="selectable ? '105px' : '106px'">
       <ng-container *ngIf="selectable; then all else mine">
       </ng-container>
       <ng-template #all>
@@ -37,6 +37,7 @@
       </ng-template>
       <ng-template #mine>
         <div class="line"></div>
+        <div *ngIf="dataService.employeeDetails.skills.length == 0" class="info-field2 font">Keine Qualifikation</div>
         <div *ngFor="let qualification of dataService.employeeDetails.skills">
           <div class="name font">{{ qualification }}</div>
           <div class="line"></div>

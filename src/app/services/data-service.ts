@@ -5,9 +5,14 @@ import {Dialog} from "../components/dialogs/dialog";
 import {MessageBox} from "../components/parts/message-box/message-box";
 import {ConfirmationComponent} from "../components/dialogs/confirmation/confirmation.component";
 import {AddEmployeeComponent, EditEmployeeComponent} from "../components/dialogs/add-employee/employee-form.component";
+import {HttpHeaders} from "@angular/common/http";
 
 @Injectable({providedIn: "root"})
 export class DataService {
+
+  public header: HttpHeaders | undefined;
+  public loginUsername = "";
+  public loginPassword = "";
 
   // Running data
   public employees: Employee[] = [];
@@ -94,10 +99,14 @@ export class DataService {
     this.clickInside = true;
   }
 
-
   public goodListWidth() {
     let cardWidth = 170;
     return ((this.screenWidth / cardWidth) | 0) * cardWidth;
+  }
+
+  public logout() {
+    localStorage.setItem("token", "");
+    this.header = undefined;
   }
 
   searchEmployeesByName(query: string){

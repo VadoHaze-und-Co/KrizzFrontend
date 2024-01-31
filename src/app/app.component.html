@@ -1,14 +1,22 @@
-<div style="width: 100%; height: 100%">
-  <app-employee-list [style.height]="(window.innerHeight - 130) + 'px'" class="employee-list"></app-employee-list>
-  <app-search-bar class="search-bar"></app-search-bar>
-  <app-navbar class="nav-bar"></app-navbar>
-  <ng-container *ngFor="let dialog of dataService.backgroundDialogs()">
-    <ng-container *ngComponentOutlet="dialog" style="position: absolute"></ng-container>
-  </ng-container>
-  <ng-container *ngIf="dataService.foregroundDialog() !== undefined">
-    <div (click)="dataService.clickBackground()" class="background" style="position: absolute">
-      <router-outlet *ngComponentOutlet="dataService.foregroundDialog()!" style="position: absolute"></router-outlet>
-    </div>
-  </ng-container>
-  <app-message-box style="position: fixed; pointer-events: none"></app-message-box>
-</div>
+<ng-container *ngIf="dataService.header === undefined; then login else site"></ng-container>
+
+<ng-template #login>
+  <app-login-page></app-login-page>
+</ng-template>
+
+<ng-template #site>
+  <div style="width: 100%; height: 100%; user-select: none;">
+    <app-employee-list [style.height]="(dataService.screenHeight - 130) + 'px'" class="employee-list"></app-employee-list>
+    <div class="search-bar" style=""></div> <!-- SEARCH -->
+    <app-navbar class="nav-bar"></app-navbar>
+    <ng-container *ngFor="let dialog of dataService.backgroundDialogs()">
+      <ng-container *ngComponentOutlet="dialog" style="position: absolute"></ng-container>
+    </ng-container>
+    <ng-container *ngIf="dataService.foregroundDialog() !== undefined">
+      <div (click)="dataService.clickBackground()" class="background" style="position: absolute">
+        <router-outlet *ngComponentOutlet="dataService.foregroundDialog()!" style="position: absolute"></router-outlet>
+      </div>
+    </ng-container>
+    <app-message-box style="position: fixed; pointer-events: none"></app-message-box>
+  </div>
+</ng-template>

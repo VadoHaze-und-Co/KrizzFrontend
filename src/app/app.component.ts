@@ -12,24 +12,16 @@ import {MessageBoxComponent} from "./components/parts/message-box/message-box.co
 import {RouterOutlet} from "@angular/router";
 import {DataService} from "./services/data-service";
 import {NavbarComponent} from "./components/navbar/navbar.component";
-import {SearchBarComponent} from "./components/parts/search-bar/search-bar.component";
-
+import {LoginPageComponent} from "./components/login-page/login-page.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, EmployeeListComponent, FunctionService, QualificationCardComponent, QualificationListComponent, AddQualificationComponent, EmployeeDetailsComponent, MessageBoxComponent, RouterOutlet, NavbarComponent, SearchBarComponent],
+  imports: [CommonModule, EmployeeListComponent, FunctionService, QualificationCardComponent, QualificationListComponent, AddQualificationComponent, EmployeeDetailsComponent, MessageBoxComponent, RouterOutlet, NavbarComponent, LoginPageComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Employee Service';
-  protected readonly window = window;
-  protected readonly Employee = Employee;
-  protected readonly AddQualificationComponent = AddQualificationComponent;
-  protected readonly QualificationListComponent = QualificationListComponent;
-  protected readonly AddEmployeeComponent = AddEmployeeComponent;
-
-  constructor(public dataService: DataService, public functionService: FunctionService) {
+  constructor(public dataService: DataService) {
   }
 }
