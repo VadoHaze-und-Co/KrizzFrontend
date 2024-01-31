@@ -9,6 +9,18 @@
   height: 65px;
 }
 
+.default-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2; /* Setzen Sie den z-index auf einen Wert höher als andere Elemente */
+  background-color: rgba(255, 255, 255, 0.8); /* Hintergrundfarbe mit Opazität */
+  padding: 100%;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Schatten für den visuellen Effekt */
+}
+
 .nav-bar {
   width: 100%;
   height: 65px;

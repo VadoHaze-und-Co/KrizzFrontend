@@ -1,4 +1,4 @@
-import { Component, } from '@angular/core';
+import {Component, EventEmitter, Output,} from '@angular/core';
 
 import {DataService} from "../../../services/data-service";
 import {FormsModule} from "@angular/forms";
@@ -29,12 +29,28 @@ export class SearchBarComponent {
 
 
 
-  search(query: string): void {
+/*  search(query: string): void {
     console.log('TEST', query);
     this.dataService.employees = this.dataService.employees
       .filter((employee: Employee) =>
         employee.employeeFullName().toLowerCase().startsWith(query.toLowerCase()));
 
-    }
+    } */
+
+
+  searchTerm: string = '';
+
+  @Output() searchEvent = new EventEmitter<string>();
+
+
+
+  search(query: string): void {
+    console.log('TEST', query);
+    this.dataService.employees.forEach((employee: Employee) => {
+      const fullNameLowerCase = employee.employeeFullName().toLowerCase();
+      const isMatch = fullNameLowerCase.includes(query.toLowerCase());
+      employee.isVisible = isMatch;
+    });
+  }
 }
 

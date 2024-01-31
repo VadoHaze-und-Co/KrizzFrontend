@@ -1,5 +1,6 @@
 export class Employee {
   public skills: string[] = [];
+  isVisible: boolean = true;
 
   constructor(public id: number = -1,
               public lastName: string = "",

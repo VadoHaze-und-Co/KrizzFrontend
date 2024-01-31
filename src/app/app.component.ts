@@ -13,11 +13,12 @@ import {RouterOutlet} from "@angular/router";
 import {DataService} from "./services/data-service";
 import {NavbarComponent} from "./components/navbar/navbar.component";
 import {LoginPageComponent} from "./components/login-page/login-page.component";
+import {SearchBarComponent} from "./components/parts/search-bar/search-bar.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, EmployeeListComponent, FunctionService, QualificationCardComponent, QualificationListComponent, AddQualificationComponent, EmployeeDetailsComponent, MessageBoxComponent, RouterOutlet, NavbarComponent, LoginPageComponent],
+  imports: [CommonModule, EmployeeListComponent, FunctionService, QualificationCardComponent, QualificationListComponent, AddQualificationComponent, EmployeeDetailsComponent, MessageBoxComponent, RouterOutlet, NavbarComponent, LoginPageComponent, SearchBarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

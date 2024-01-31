@@ -109,14 +109,5 @@ export class DataService {
     this.header = undefined;
   }
 
-  searchEmployeesByName(query: string){
-    this.employees = this.employees.filter(employee =>
-      employee.firstName.toLowerCase().includes(query.toLowerCase()) ||
-      employee.lastName.toLowerCase().includes(query.toLowerCase())
-    );
-  }
-  allEmployeesGet() {
-
-  }
 
 }
