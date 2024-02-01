@@ -6,11 +6,12 @@ import {FunctionService} from "../../../services/function-service";
 import {Employee} from "../../../rest-objects/employee";
 import {Dialog} from "../dialog";
 import {QualificationCardComponent} from "../../parts/qualification-card/qualification-card.component";
+import {QualiCardComponent} from "../../parts/quali-card/quali-card.component";
 
 @Component({
   selector: 'app-add-employee',
   standalone: true,
-  imports: [CommonModule, QualificationCardComponent, FormsModule],
+  imports: [CommonModule, QualificationCardComponent, FormsModule, QualiCardComponent],
   templateUrl: './add-employee.component.html',
   styleUrls: [
     './add-employee.component.css',

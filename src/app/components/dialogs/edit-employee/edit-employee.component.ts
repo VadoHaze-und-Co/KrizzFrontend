@@ -6,11 +6,12 @@ import {Employee} from "../../../rest-objects/employee";
 import {DataService} from "../../../services/data-service";
 import {FunctionService} from "../../../services/function-service";
 import {FormsModule} from "@angular/forms";
+import {QualiCardComponent} from "../../parts/quali-card/quali-card.component";
 
 @Component({
   selector: 'app-edit-employee',
   standalone: true,
-  imports: [CommonModule, QualificationCardComponent, FormsModule],
+  imports: [CommonModule, QualificationCardComponent, FormsModule, QualiCardComponent],
   templateUrl: './edit-employee.component.html',
   styleUrls: [
     './edit-employee.component.css',
