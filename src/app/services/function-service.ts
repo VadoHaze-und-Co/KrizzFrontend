@@ -162,7 +162,6 @@ export class FunctionService {
     if (this.dataService.dialogs.map(d => d.name).includes(dialog.name)) {
       return;
     }
-    console.log(dialog.name)
     setTimeout(() => this.dataService.dialogs.push(dialog));
   }
 
