@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 
 import {DataService} from "../../../services/data-service";
 import {Employee} from "../../../rest-objects/employee";
+import {FunctionService} from "../../../services/function-service";
 
 @Component({
   selector: 'app-search-bar',
@@ -14,7 +15,7 @@ import {Employee} from "../../../rest-objects/employee";
   ]
 })
 export class SearchBarComponent {
-  constructor(public dataService: DataService) {
+  constructor(public dataService: DataService, public functionService: FunctionService) {
   }
 
   search(query: string): void {

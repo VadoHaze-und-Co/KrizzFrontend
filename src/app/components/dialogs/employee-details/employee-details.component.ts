@@ -5,13 +5,12 @@ import {Dialog} from "../dialog";
 import {FunctionService} from "../../../services/function-service";
 import {DataService} from "../../../services/data-service";
 import {AddEmployeeComponent} from "../add-employee/add-employee.component";
-import {QualificationCardComponent} from "../../parts/qualification-card/qualification-card.component";
 import {QualiCardComponent} from "../../parts/quali-card/quali-card.component";
 
 @Component({
   selector: 'app-employee-details',
   standalone: true,
-  imports: [CommonModule, EmployeeInitialsComponent, QualificationCardComponent, AddEmployeeComponent, QualiCardComponent],
+  imports: [CommonModule, EmployeeInitialsComponent, AddEmployeeComponent, QualiCardComponent],
   templateUrl: './employee-details.component.html',
   styleUrls: [
     './employee-details.component.css',

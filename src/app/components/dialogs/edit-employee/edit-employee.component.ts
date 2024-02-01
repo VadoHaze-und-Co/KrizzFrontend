@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {QualificationCardComponent} from "../../parts/qualification-card/qualification-card.component";
 import {Dialog} from "../dialog";
 import {Employee} from "../../../rest-objects/employee";
 import {DataService} from "../../../services/data-service";
@@ -11,7 +10,7 @@ import {QualiCardComponent} from "../../parts/quali-card/quali-card.component";
 @Component({
   selector: 'app-edit-employee',
   standalone: true,
-  imports: [CommonModule, QualificationCardComponent, FormsModule, QualiCardComponent],
+  imports: [CommonModule, FormsModule, QualiCardComponent],
   templateUrl: './edit-employee.component.html',
   styleUrls: [
     './edit-employee.component.css',

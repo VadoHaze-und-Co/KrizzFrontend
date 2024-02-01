@@ -165,4 +165,8 @@ export class FunctionService {
     console.log(dialog.name)
     setTimeout(() => this.dataService.dialogs.push(dialog));
   }
+
+  public logout() {
+
+  }
 }

@@ -104,9 +104,4 @@ export class DataService {
     let cardWidth = 170;
     return ((this.screenWidth / cardWidth) | 0) * cardWidth;
   }
-
-  public logout() {
-    localStorage.setItem("token", "");
-    this.header = undefined;
-  }
 }

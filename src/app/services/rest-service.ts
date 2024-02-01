@@ -3,32 +3,25 @@ import {Qualification} from "../rest-objects/qualification";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {EmployeeQualification} from "../rest-objects/employee-qualification";
 import {DataService} from "./data-service";
-import {Token} from "../rest-objects/token";
 import {CreateEmployee} from "../rest-objects/create-employee";
 import {catchError, EMPTY, firstValueFrom} from "rxjs";
 
 export class RestService {
 
   constructor(private http: HttpClient, public dataService: DataService) {
-    let token = localStorage.getItem("token");
-    if (token === null || token == "") {
-      return;
-    }
-    this.createHeader(token);
-  }
-
-  public loadToken(loginUsername: string, loginPassword: string) {
-    return this.http.post<Token>('http://authproxy.szut.dev',
-      `grant_type=password&client_id=employee-management-service&username=` + loginUsername + `&password=` + loginPassword,
-      {headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')});
-  }
-
-  public createHeader(token: string) {
     this.dataService.header = new HttpHeaders()
-      .set('Content-Type', 'application/json')
-      .set('Authorization', 'Bearer ' + token);
-    this.loadQualifications();
-    this.loadEmployees();
+      .set('Content-Type', 'application/json');
+    this.recursiveLoading();
+  }
+
+  public recursiveLoading() {
+    setTimeout(() => {
+      if (this.dataService.employees.length == 0) {
+        this.loadQualifications();
+        this.loadEmployees();
+      }
+      this.recursiveLoading();
+    }, 200);
   }
 
   private async httpRequest(url: string, method: string, func: (data: any) => void, body?: any) {
