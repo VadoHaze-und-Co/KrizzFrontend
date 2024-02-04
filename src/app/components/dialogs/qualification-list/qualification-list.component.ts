@@ -39,12 +39,14 @@ export class QualificationListComponent extends Dialog {
       this.qualificationEdit = undefined;
     }
     this.qualificationEdit = qualification.clone();
+    console.log(this.qualificationEdit)
   }
 
   public save() {
     if (this.functionService.editQualification(this.qualificationEdit!)) {
       setTimeout(() => this.qualificationEdit = undefined, 10);
     }
+    console.log(this.qualificationEdit)
   }
 
   public delete(qualification: Qualification) {

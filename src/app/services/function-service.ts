@@ -15,6 +15,7 @@ import {
 } from "../components/dialogs/employee-qualification-list/employee-qualification-list.component";
 import {AddEmployeeComponent} from "../components/dialogs/add-employee/add-employee.component";
 import {EditEmployeeComponent} from "../components/dialogs/edit-employee/edit-employee.component";
+import {AuthGuard} from "../keycloak/auth-guard";
 
 @NgModule({
   imports: [HttpClientModule],
@@ -25,7 +26,7 @@ export class FunctionService {
 
   public restService: RestService;
 
-  constructor(http: HttpClient, private dataService: DataService) {
+  constructor(http: HttpClient, private dataService: DataService, public guard: AuthGuard) {
     this.restService = new RestService(http, this.dataService);
   }
 
@@ -166,6 +167,6 @@ export class FunctionService {
   }
 
   public logout() {
-
+    this.guard.keycloak.logout();
   }
 }
